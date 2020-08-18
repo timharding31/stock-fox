@@ -1,0 +1,1 @@
+json.extract! stock, :name, :symbol, :price, :exchange, :marketcap, :ipo, :sector, :industry

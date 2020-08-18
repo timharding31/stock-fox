@@ -1,0 +1,1 @@
+json.extract! asset, :name, :symbol, :price

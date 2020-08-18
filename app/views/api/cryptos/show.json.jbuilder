@@ -1,0 +1,1 @@
+json.extract! @crypto, :name, :symbol, :price

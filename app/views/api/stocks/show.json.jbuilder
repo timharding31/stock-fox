@@ -1,0 +1,1 @@
+json.partial! 'api/stocks/stock_detail', stock: @stock
