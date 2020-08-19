@@ -90,41 +90,78 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/asset_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_WATCHLIST, RECEIVE_WATCHLIST_ERRORS, CLEAR_WATCHLIST_ERRORS, getWatchlist */
+/*! exports provided: RECEIVE_SINGLE_STOCK, RECEIVE_SINGLE_CRYPTO, getSingleStock, getSingleCrypto */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCHLIST", function() { return RECEIVE_WATCHLIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCHLIST_ERRORS", function() { return RECEIVE_WATCHLIST_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_WATCHLIST_ERRORS", function() { return CLEAR_WATCHLIST_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWatchlist", function() { return getWatchlist; });
-/* harmony import */ var _util_watchlist_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/watchlist_util */ "./frontend/util/watchlist_util.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_STOCK", function() { return RECEIVE_SINGLE_STOCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_CRYPTO", function() { return RECEIVE_SINGLE_CRYPTO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleStock", function() { return getSingleStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleCrypto", function() { return getSingleCrypto; });
+/* harmony import */ var _util_asset_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/asset_util */ "./frontend/util/asset_util.js");
 
-var RECEIVE_WATCHLIST = 'RECEIVE_WATCHLIST';
-var RECEIVE_WATCHLIST_ERRORS = 'RECEIVE_WATCHLIST_ERRORS';
-var CLEAR_WATCHLIST_ERRORS = 'CLEAR_WATCHLIST_ERRORS';
+var RECEIVE_SINGLE_STOCK = 'RECEIVE_SINGLE_STOCK';
+var RECEIVE_SINGLE_CRYPTO = 'RECEIVE_SINGLE_CRYPTO';
 
-var receiveWatchlist = function receiveWatchlist(watchlist) {
+var receiveSingleStock = function receiveSingleStock(stock) {
   return {
-    type: RECEIVE_WATCHLIST,
-    watchlist: watchlist
+    type: RECEIVE_SINGLE_STOCK,
+    stock: stock
   };
 };
 
-var receiveWatchlistErrors = function receiveWatchlistErrors(errors) {
+var receiveSingleCrypto = function receiveSingleCrypto(crypto) {
   return {
-    type: RECEIVE_WATCHLIST_ERRORS,
-    errors: errors
+    type: RECEIVE_SINGLE_CRYPTO,
+    crypto: crypto
   };
 };
 
-var getWatchlist = function getWatchlist() {
+var getSingleStock = function getSingleStock(symbol) {
   return function (dispatch) {
-    return Object(_util_watchlist_util__WEBPACK_IMPORTED_MODULE_0__["fetchWatchlist"])().then(function (watchlist) {
-      return dispatch(receiveWatchlist(watchlist));
-    }, function (err) {
-      return dispatch(receiveWatchlistErrors(err.responseJSON));
+    return Object(_util_asset_util__WEBPACK_IMPORTED_MODULE_0__["fetchSingleStock"])(symbol).then(function (stock) {
+      return dispatch(receiveSingleStock(stock));
+    });
+  };
+};
+var getSingleCrypto = function getSingleCrypto(symbol) {
+  return function (dispatch) {
+    return Object(_util_asset_util__WEBPACK_IMPORTED_MODULE_0__["fetchSingleCrypto"])(symbol).then(function (crypto) {
+      return dispatch(receiveSingleCrypto(crypto));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/news_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/news_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_STOCK_NEWS, getStockNews */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_NEWS", function() { return RECEIVE_STOCK_NEWS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStockNews", function() { return getStockNews; });
+/* harmony import */ var _util_finnhub_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/finnhub_api_util */ "./frontend/util/finnhub_api_util.js");
+
+var RECEIVE_STOCK_NEWS = 'RECEIVE_STOCK_NEWS';
+
+var receiveStockNews = function receiveStockNews(news) {
+  return {
+    type: RECEIVE_STOCK_NEWS,
+    news: news // array of news objects from API call
+
+  };
+};
+
+var getStockNews = function getStockNews(stock) {
+  return function (dispatch) {
+    return Object(_util_finnhub_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchStockNews"])(stock).then(function (news) {
+      return dispatch(receiveStockNews(news));
     });
   };
 };
@@ -216,6 +253,51 @@ var logoutUser = function logoutUser() {
   return function (dispatch) {
     return Object(_util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"])().then(function () {
       return dispatch(logoutCurrentUser());
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/watchlist_actions.js":
+/*!***********************************************!*\
+  !*** ./frontend/actions/watchlist_actions.js ***!
+  \***********************************************/
+/*! exports provided: RECEIVE_WATCHLIST, RECEIVE_WATCHLIST_ERRORS, CLEAR_WATCHLIST_ERRORS, getWatchlist */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCHLIST", function() { return RECEIVE_WATCHLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCHLIST_ERRORS", function() { return RECEIVE_WATCHLIST_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_WATCHLIST_ERRORS", function() { return CLEAR_WATCHLIST_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWatchlist", function() { return getWatchlist; });
+/* harmony import */ var _util_watchlist_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/watchlist_util */ "./frontend/util/watchlist_util.js");
+
+var RECEIVE_WATCHLIST = 'RECEIVE_WATCHLIST';
+var RECEIVE_WATCHLIST_ERRORS = 'RECEIVE_WATCHLIST_ERRORS';
+var CLEAR_WATCHLIST_ERRORS = 'CLEAR_WATCHLIST_ERRORS';
+
+var receiveWatchlist = function receiveWatchlist(watchlist) {
+  return {
+    type: RECEIVE_WATCHLIST,
+    watchlist: watchlist
+  };
+};
+
+var receiveWatchlistErrors = function receiveWatchlistErrors(errors) {
+  return {
+    type: RECEIVE_WATCHLIST_ERRORS,
+    errors: errors
+  };
+};
+
+var getWatchlist = function getWatchlist() {
+  return function (dispatch) {
+    return Object(_util_watchlist_util__WEBPACK_IMPORTED_MODULE_0__["fetchWatchlist"])().then(function (watchlist) {
+      return dispatch(receiveWatchlist(watchlist));
+    }, function (err) {
+      return dispatch(receiveWatchlistErrors(err.responseJSON));
     });
   };
 };
@@ -896,6 +978,112 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/reducers/entities/crypto_details_reducer.js":
+/*!**************************************************************!*\
+  !*** ./frontend/reducers/entities/crypto_details_reducer.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_data_handling_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/data_handling_util */ "./frontend/util/data_handling_util.js");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_WATCHLIST"]:
+      var watchedCryptos = action.watchlist.filter(function (asset) {
+        return asset.type === 'Crypto';
+      });
+      return Object.assign({}, state, Object(_util_data_handling_util__WEBPACK_IMPORTED_MODULE_0__["arrayToAssetObj"])(watchedCryptos));
+
+    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_CRYPTO"]:
+      return Object.assign({}, state, _defineProperty({}, action.crypto.symbol, action.crypto));
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/entities/news_reducer.js":
+/*!****************************************************!*\
+  !*** ./frontend/reducers/entities/news_reducer.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_news_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/news_actions */ "./frontend/actions/news_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_news_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_NEWS"]:
+      return action.news;
+    // case RECEIVE_COLLECTION_NEWS:
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/entities/stock_details_reducer.js":
+/*!*************************************************************!*\
+  !*** ./frontend/reducers/entities/stock_details_reducer.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_data_handling_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/data_handling_util */ "./frontend/util/data_handling_util.js");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_WATCHLIST"]:
+      var watchedStocks = action.watchlist.filter(function (asset) {
+        return asset.type === 'Stock';
+      });
+      return Object.assign({}, state, Object(_util_data_handling_util__WEBPACK_IMPORTED_MODULE_0__["arrayToAssetObj"])(watchedStocks));
+
+    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_STOCK"]:
+      return Object.assign({}, state, _defineProperty({}, action.stock.symbol, action.stock));
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities/users_reducer.js":
 /*!*****************************************************!*\
   !*** ./frontend/reducers/entities/users_reducer.js ***!
@@ -917,9 +1105,76 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return Object.assign({}, state, _defineProperty({}, action.user.id, action.user));
+    // case LOGOUT_CURRENT_USER:
+    //   return {};
 
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
-      return {};
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/entities/watchlist/watched_cryptos_reducer.js":
+/*!*************************************************************************!*\
+  !*** ./frontend/reducers/entities/watchlist/watched_cryptos_reducer.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST"]:
+      var watchedCryptos = action.watchlist.filter(function (asset) {
+        return asset.type === 'Crypto';
+      });
+      return watchedCryptos.map(function (crypto) {
+        return crypto.symbol;
+      });
+    // case LOGOUT_CURRENT_USER:
+    //   return [];
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/entities/watchlist/watched_stocks_reducer.js":
+/*!************************************************************************!*\
+  !*** ./frontend/reducers/entities/watchlist/watched_stocks_reducer.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST"]:
+      var watchedStocks = action.watchlist.filter(function (asset) {
+        return asset.type === 'Stock';
+      });
+      return watchedStocks.map(function (stock) {
+        return stock.symbol;
+      });
+    // case LOGOUT_CURRENT_USER:
+    //   return [];
 
     default:
       return state;
@@ -937,33 +1192,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-var arrayToObject = function arrayToObject(array) {
-  return array.reduce(function (obj, item) {
-    obj[item['symbol']] = item;
-    return obj;
-  }, {});
-};
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
+/* harmony import */ var _watchlist_watched_stocks_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./watchlist/watched_stocks_reducer */ "./frontend/reducers/entities/watchlist/watched_stocks_reducer.js");
+/* harmony import */ var _watchlist_watched_cryptos_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./watchlist/watched_cryptos_reducer */ "./frontend/reducers/entities/watchlist/watched_cryptos_reducer.js");
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST"]:
-      return Object.assign({}, state, arrayToObject(action.watchlist));
-
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["LOGOUT_CURRENT_USER"]:
-      return {};
-
-    default:
-      return state;
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  stocks: _watchlist_watched_stocks_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  crypto: _watchlist_watched_cryptos_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+}));
 
 /***/ }),
 
@@ -979,12 +1217,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 /* harmony import */ var _entities_users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities/users_reducer */ "./frontend/reducers/entities/users_reducer.js");
 /* harmony import */ var _entities_watchlist_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./entities/watchlist_reducer */ "./frontend/reducers/entities/watchlist_reducer.js");
+/* harmony import */ var _entities_news_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./entities/news_reducer */ "./frontend/reducers/entities/news_reducer.js");
+/* harmony import */ var _entities_stock_details_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entities/stock_details_reducer */ "./frontend/reducers/entities/stock_details_reducer.js");
+/* harmony import */ var _entities_crypto_details_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./entities/crypto_details_reducer */ "./frontend/reducers/entities/crypto_details_reducer.js");
+
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _entities_users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  watchlist: _entities_watchlist_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  watchlist: _entities_watchlist_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  stocks: _entities_stock_details_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
+  crypto: _entities_crypto_details_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
+  news: _entities_news_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1028,7 +1275,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -1036,10 +1283,10 @@ __webpack_require__.r(__webpack_exports__);
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST_ERRORS"]:
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST_ERRORS"]:
       return action.errors;
 
-    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_WATCHLIST_ERRORS"]:
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_WATCHLIST_ERRORS"]:
       return [];
 
     default:
@@ -1084,15 +1331,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+
+var AppReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
-}));
+});
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  if (action.type === _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["LOGOUT_CURRENT_USER"]) state = undefined;
+  return AppReducer(state, action);
+});
 
 /***/ }),
 
@@ -1122,9 +1377,8 @@ var _nullUser = Object.freeze({
       return {
         id: action.user.id
       };
-
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
-      return _nullUser;
+    // case LOGOUT_CURRENT_USER:
+    //   return _nullUser;
 
     default:
       return state;
@@ -1137,11 +1391,12 @@ var _nullUser = Object.freeze({
 /*!*******************************!*\
   !*** ./frontend/stockfox.jsx ***!
   \*******************************/
-/*! no exports provided */
+/*! exports provided: apiKey */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "apiKey", function() { return apiKey; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -1149,13 +1404,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store.js */ "./frontend/store/store.js");
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/session_api_util */ "./frontend/util/session_api_util.js");
-/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _util_finnhub_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/finnhub_api_util */ "./frontend/util/finnhub_api_util.js");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
  // window testing
+
+
 
 
 
@@ -1182,13 +1441,16 @@ document.addEventListener("DOMContentLoaded", function () {
     store: store
   }), root); // window testing
 
-  window.getWatchlist = _actions_asset_actions__WEBPACK_IMPORTED_MODULE_5__["getWatchlist"];
+  window.getWatchlist = _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_7__["getWatchlist"];
+  window.getSingleStock = _actions_asset_actions__WEBPACK_IMPORTED_MODULE_6__["getSingleStock"];
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["login"];
   window.signup = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["signup"];
   window.logout = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["logout"];
+  window.fetchStockNews = _util_finnhub_api_util__WEBPACK_IMPORTED_MODULE_5__["fetchStockNews"];
 });
+var apiKey = window.finnhubAPIKey;
 
 /***/ }),
 
@@ -1214,6 +1476,82 @@ __webpack_require__.r(__webpack_exports__);
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
 });
+
+/***/ }),
+
+/***/ "./frontend/util/asset_util.js":
+/*!*************************************!*\
+  !*** ./frontend/util/asset_util.js ***!
+  \*************************************/
+/*! exports provided: fetchSingleStock, fetchSingleCrypto */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSingleStock", function() { return fetchSingleStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSingleCrypto", function() { return fetchSingleCrypto; });
+var fetchSingleStock = function fetchSingleStock(symbol) {
+  return $.ajax({
+    url: "/api/stocks/".concat(symbol)
+  });
+};
+var fetchSingleCrypto = function fetchSingleCrypto(symbol) {
+  return $.ajax({
+    url: "/api/cryptos/".concat(symbol)
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/data_handling_util.js":
+/*!*********************************************!*\
+  !*** ./frontend/util/data_handling_util.js ***!
+  \*********************************************/
+/*! exports provided: arrayToAssetObj, formatDate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "arrayToAssetObj", function() { return arrayToAssetObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
+var arrayToAssetObj = function arrayToAssetObj(array) {
+  return array.reduce(function (obj, item) {
+    obj[item['symbol']] = item;
+    return obj;
+  }, {});
+};
+var formatDate = function formatDate(date) {
+  date = new Date(date);
+  var day = ('0' + date.getDate()).slice(-2);
+  var month = ('0' + (date.getMonth() + 1)).slice(-2);
+  var year = date.getFullYear();
+  return year + '-' + month + '-' + day;
+};
+
+/***/ }),
+
+/***/ "./frontend/util/finnhub_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/finnhub_api_util.js ***!
+  \*******************************************/
+/*! exports provided: fetchStockNews */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockNews", function() { return fetchStockNews; });
+/* harmony import */ var _stockfox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stockfox */ "./frontend/stockfox.jsx");
+/* harmony import */ var _data_handling_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data_handling_util */ "./frontend/util/data_handling_util.js");
+
+
+var curDate = new Date();
+var curDateStr = Object(_data_handling_util__WEBPACK_IMPORTED_MODULE_1__["formatDate"])(curDate);
+var prevDateStr = Object(_data_handling_util__WEBPACK_IMPORTED_MODULE_1__["formatDate"])(new Date(curDate.setMonth(curDate.getMonth() - 1)));
+var fetchStockNews = function fetchStockNews(stock) {
+  return $.ajax({
+    url: "https://finnhub.io/api/v1/company-news?symbol=".concat([stock.symbol], "&from=").concat(curDateStr, "&to=").concat(curDateStr, "&token=").concat(_stockfox__WEBPACK_IMPORTED_MODULE_0__["apiKey"])
+  });
+};
 
 /***/ }),
 

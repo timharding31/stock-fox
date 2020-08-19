@@ -1,18 +1,20 @@
-import { fetchWatchlist } from '../util/watchlist_util';
+import { fetchSingleStock, fetchSingleCrypto } from '../util/asset_util';
 
-export const RECEIVE_WATCHLIST = 'RECEIVE_WATCHLIST';
-export const RECEIVE_WATCHLIST_ERRORS = 'RECEIVE_WATCHLIST_ERRORS';
-export const CLEAR_WATCHLIST_ERRORS = 'CLEAR_WATCHLIST_ERRORS';
+export const RECEIVE_SINGLE_STOCK = 'RECEIVE_SINGLE_STOCK';
+export const RECEIVE_SINGLE_CRYPTO = 'RECEIVE_SINGLE_CRYPTO';
 
-const receiveWatchlist = watchlist => ({
-  type: RECEIVE_WATCHLIST,
-  watchlist
+const receiveSingleStock = stock => ({
+  type: RECEIVE_SINGLE_STOCK,
+  stock
 });
 
-const receiveWatchlistErrors = errors => ({
-  type: RECEIVE_WATCHLIST_ERRORS,
-  errors
-})
+const receiveSingleCrypto = crypto => ({
+  type: RECEIVE_SINGLE_CRYPTO,
+  crypto
+});
 
-export const getWatchlist = () => dispatch => fetchWatchlist()
-  .then(watchlist => dispatch(receiveWatchlist(watchlist)), err => dispatch(receiveWatchlistErrors(err.responseJSON)));
+export const getSingleStock = symbol => dispatch => fetchSingleStock(symbol)
+  .then(stock => dispatch(receiveSingleStock(stock)));
+
+export const getSingleCrypto = symbol => dispatch => fetchSingleCrypto(symbol)
+  .then(crypto => dispatch(receiveSingleCrypto(crypto)));

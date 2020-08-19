@@ -5,7 +5,9 @@ import configureStore from './store/store.js';
 
 // window testing
 import * as SessionApiUtil from './util/session_api_util';
-import { getWatchlist } from './actions/asset_actions';
+import * as FinnhubApiUtil from './util/finnhub_api_util';
+import { getSingleStock } from './actions/asset_actions';
+import { getWatchlist } from './actions/watchlist_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -26,9 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // window testing
   window.getWatchlist = getWatchlist;
+  window.getSingleStock = getSingleStock;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = SessionApiUtil.login;
   window.signup = SessionApiUtil.signup;
   window.logout = SessionApiUtil.logout;
+  window.fetchStockNews = FinnhubApiUtil.fetchStockNews;
 });
+
+export const apiKey = window.finnhubAPIKey;
