@@ -924,8 +924,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logoutUser"])());
-    },
-    fetch: fetch
+    }
   };
 };
 
@@ -1440,15 +1439,14 @@ document.addEventListener("DOMContentLoaded", function () {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root); // window testing
-
-  window.getWatchlist = _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_7__["getWatchlist"];
-  window.getSingleStock = _actions_asset_actions__WEBPACK_IMPORTED_MODULE_6__["getSingleStock"];
-  window.dispatch = store.dispatch;
-  window.getState = store.getState;
-  window.login = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["login"];
-  window.signup = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["signup"];
-  window.logout = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["logout"];
-  window.fetchStockNews = _util_finnhub_api_util__WEBPACK_IMPORTED_MODULE_5__["fetchStockNews"];
+  // window.getWatchlist = getWatchlist;
+  // window.getSingleStock = getSingleStock;
+  // window.dispatch = store.dispatch;
+  // window.getState = store.getState;
+  // window.login = SessionApiUtil.login;
+  // window.signup = SessionApiUtil.signup;
+  // window.logout = SessionApiUtil.logout;
+  // window.fetchStockNews = FinnhubApiUtil.fetchStockNews;
 });
 var apiKey = window.finnhubAPIKey;
 
