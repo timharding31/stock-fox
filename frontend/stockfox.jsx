@@ -27,14 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Root store={store} />, root);
 
   // window testing
-  // window.getWatchlist = getWatchlist;
-  // window.getSingleStock = getSingleStock;
-  // window.dispatch = store.dispatch;
-  // window.getState = store.getState;
-  // window.login = SessionApiUtil.login;
-  // window.signup = SessionApiUtil.signup;
-  // window.logout = SessionApiUtil.logout;
-  // window.fetchStockNews = FinnhubApiUtil.fetchStockNews;
+  window.getWatchlist = getWatchlist;
+  window.getSingleStock = getSingleStock;
+  window.dispatch = store.dispatch;
+  window.getState = store.getState;
+  window.login = SessionApiUtil.login;
+  window.signup = SessionApiUtil.signup;
+  window.logout = SessionApiUtil.logout;
+  window.fetchStockNews = FinnhubApiUtil.fetchStockNews;
 });
 
 export const apiKey = window.finnhubAPIKey;
