@@ -1,3 +1,1 @@
-@watchlist.each do |asset|
-  json.partial! 'api/watchlists/asset_summary', asset: asset
-end
+json.partial! 'api/watchlists/asset_summary', collection: @watchlist, as: :asset

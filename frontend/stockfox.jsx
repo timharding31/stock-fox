@@ -5,6 +5,7 @@ import configureStore from './store/store.js';
 
 // window testing
 import * as SessionApiUtil from './util/session_api_util';
+import { getWatchlist } from './actions/asset_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Root store={store} />, root);
 
   // window testing
+  window.getWatchlist = getWatchlist;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = SessionApiUtil.login;

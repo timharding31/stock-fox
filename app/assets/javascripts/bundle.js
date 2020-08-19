@@ -86,6 +86,51 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/asset_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/asset_actions.js ***!
+  \*******************************************/
+/*! exports provided: RECEIVE_WATCHLIST, RECEIVE_WATCHLIST_ERRORS, CLEAR_WATCHLIST_ERRORS, getWatchlist */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCHLIST", function() { return RECEIVE_WATCHLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WATCHLIST_ERRORS", function() { return RECEIVE_WATCHLIST_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_WATCHLIST_ERRORS", function() { return CLEAR_WATCHLIST_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWatchlist", function() { return getWatchlist; });
+/* harmony import */ var _util_watchlist_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/watchlist_util */ "./frontend/util/watchlist_util.js");
+
+var RECEIVE_WATCHLIST = 'RECEIVE_WATCHLIST';
+var RECEIVE_WATCHLIST_ERRORS = 'RECEIVE_WATCHLIST_ERRORS';
+var CLEAR_WATCHLIST_ERRORS = 'CLEAR_WATCHLIST_ERRORS';
+
+var receiveWatchlist = function receiveWatchlist(watchlist) {
+  return {
+    type: RECEIVE_WATCHLIST,
+    watchlist: watchlist
+  };
+};
+
+var receiveWatchlistErrors = function receiveWatchlistErrors(errors) {
+  return {
+    type: RECEIVE_WATCHLIST_ERRORS,
+    errors: errors
+  };
+};
+
+var getWatchlist = function getWatchlist() {
+  return function (dispatch) {
+    return Object(_util_watchlist_util__WEBPACK_IMPORTED_MODULE_0__["fetchWatchlist"])().then(function (watchlist) {
+      return dispatch(receiveWatchlist(watchlist));
+    }, function (err) {
+      return dispatch(receiveWatchlistErrors(err.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -329,6 +374,8 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var errors = this.props.errors.concat(this.state.errors);
       var errorsMsgs;
 
@@ -379,8 +426,11 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Need an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup"
       }, "Sign up to use StockFox")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
         id: "demo-login",
-        onClick: this.props.loginDemoUser
+        onClick: function onClick() {
+          return _this3.props.loginDemoUser();
+        }
       }, "Demo User")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_page_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
@@ -868,6 +918,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return Object.assign({}, state, _defineProperty({}, action.user.id, action.user));
 
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
+      return {};
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/entities/watchlist_reducer.js":
+/*!*********************************************************!*\
+  !*** ./frontend/reducers/entities/watchlist_reducer.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+var arrayToObject = function arrayToObject(array) {
+  return array.reduce(function (obj, item) {
+    obj[item['symbol']] = item;
+    return obj;
+  }, {});
+};
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST"]:
+      return Object.assign({}, state, arrayToObject(action.watchlist));
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["LOGOUT_CURRENT_USER"]:
+      return {};
+
     default:
       return state;
   }
@@ -886,10 +978,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 /* harmony import */ var _entities_users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities/users_reducer */ "./frontend/reducers/entities/users_reducer.js");
+/* harmony import */ var _entities_watchlist_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./entities/watchlist_reducer */ "./frontend/reducers/entities/watchlist_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _entities_users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _entities_users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  watchlist: _entities_watchlist_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -924,6 +1019,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/reducers/errors/watchlist_errors_reducer.js":
+/*!**************************************************************!*\
+  !*** ./frontend/reducers/errors/watchlist_errors_reducer.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WATCHLIST_ERRORS"]:
+      return action.errors;
+
+    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_WATCHLIST_ERRORS"]:
+      return [];
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
 /***/ "./frontend/reducers/errors_reducer.js":
 /*!*********************************************!*\
   !*** ./frontend/reducers/errors_reducer.js ***!
@@ -935,10 +1060,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 /* harmony import */ var _errors_login_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors/login_errors_reducer */ "./frontend/reducers/errors/login_errors_reducer.js");
+/* harmony import */ var _errors_watchlist_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors/watchlist_errors_reducer */ "./frontend/reducers/errors/watchlist_errors_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  login: _errors_login_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  login: _errors_login_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  watchlist: _errors_watchlist_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -1021,12 +1149,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store.js */ "./frontend/store/store.js");
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/session_api_util */ "./frontend/util/session_api_util.js");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/asset_actions */ "./frontend/actions/asset_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
  // window testing
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1052,6 +1182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     store: store
   }), root); // window testing
 
+  window.getWatchlist = _actions_asset_actions__WEBPACK_IMPORTED_MODULE_5__["getWatchlist"];
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__["login"];
@@ -1185,6 +1316,24 @@ var logout = function logout() {
   return $.ajax({
     method: 'DELETE',
     url: 'api/session'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/watchlist_util.js":
+/*!*****************************************!*\
+  !*** ./frontend/util/watchlist_util.js ***!
+  \*****************************************/
+/*! exports provided: fetchWatchlist */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchlist", function() { return fetchWatchlist; });
+var fetchWatchlist = function fetchWatchlist() {
+  return $.ajax({
+    url: '/api/watchlists'
   });
 };
 
