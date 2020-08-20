@@ -9,3 +9,11 @@ export const getSingleCrypto = symbol => (
     url: `/api/cryptos/${symbol}`
   })
 );
+
+export const patchStockPrice = (stock, price) => (
+  $.ajax({
+    url: `api/stocks/${stock.symbol}`,
+    method: 'PATCH',
+    data: { price }
+  })
+);

@@ -163,6 +163,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1WStockPrices", function() { return fetch1WStockPrices; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1DStockPrices", function() { return fetch1DStockPrices; });
 /* harmony import */ var _util_fmp_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/fmp_api_util */ "./frontend/util/fmp_api_util.js");
+/* harmony import */ var _util_asset_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/asset_util */ "./frontend/util/asset_util.js");
+
 
 var RECEIVE_STOCK_PRICES = 'RECEIVE_STOCK_PRICES';
 var CLEAR_STOCK_PRICES = 'CLEAR_STOCK_PRICES';
@@ -243,6 +245,8 @@ var fetch1WStockPrices = function fetch1WStockPrices(stock) {
 var fetch1DStockPrices = function fetch1DStockPrices(stock) {
   return function (dispatch) {
     return Object(_util_fmp_api_util__WEBPACK_IMPORTED_MODULE_0__["get1DStockPrices"])(stock).then(function (prices) {
+      var finalPrice = prices[0].close * 100;
+      Object(_util_asset_util__WEBPACK_IMPORTED_MODULE_1__["patchStockPrice"])(stock, finalPrice);
       return dispatch(receiveStockPrices(prices, '1D'));
     });
   };
@@ -1138,6 +1142,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/components/stock/news_story.jsx":
+/*!**************************************************!*\
+  !*** ./frontend/components/stock/news_story.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var date = _ref.date,
+      headline = _ref.headline,
+      source = _ref.source,
+      summary = _ref.summary,
+      image = _ref.image;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, source), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, (moment__WEBPACK_IMPORTED_MODULE_1___default()(date), fromNow())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, headline), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, summary), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: image
+  }));
+});
+
+/***/ }),
+
 /***/ "./frontend/components/stock/price_chart.jsx":
 /*!***************************************************!*\
   !*** ./frontend/components/stock/price_chart.jsx ***!
@@ -1150,7 +1182,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var _price_chart_tooltip__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./price_chart_tooltip */ "./frontend/components/stock/price_chart_tooltip.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1175,15 +1214,25 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var PriceChart = /*#__PURE__*/function (_React$Component) {
   _inherits(PriceChart, _React$Component);
 
   var _super = _createSuper(PriceChart);
 
-  function PriceChart() {
+  function PriceChart(props) {
+    var _this;
+
     _classCallCheck(this, PriceChart);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      price: _this.props.stock.price / 100
+    };
+    _this.baseState = _objectSpread({}, _this.state);
+    _this.handleMouseMove = _this.handleMouseMove.bind(_assertThisInitialized(_this));
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(PriceChart, [{
@@ -1194,54 +1243,100 @@ var PriceChart = /*#__PURE__*/function (_React$Component) {
           this.props.fetchStockPrices[this.props.range](this.props.stock);
         }
       }
+
+      if (this.props.stock != prevProps.stock) {
+        this.setState({
+          price: this.props.stock.price / 100
+        });
+      }
+    }
+  }, {
+    key: "handleMouseMove",
+    value: function handleMouseMove(_ref) {
+      var isTooltipActive = _ref.isTooltipActive,
+          activePayload = _ref.activePayload;
+
+      if (isTooltipActive) {
+        this.setState({
+          price: activePayload[0].payload.price.toFixed(2)
+        });
+      }
+    }
+  }, {
+    key: "handleMouseLeave",
+    value: function handleMouseLeave() {
+      this.setState(this.baseState);
     }
   }, {
     key: "render",
     value: function render() {
       if (!this.props.prices[this.props.range]) return null;
-      var data = this.props.prices[this.props.range];
-      var yDomain = [Math.min.apply(Math, data.map(function (obj) {
+      var priceData = this.props.prices[this.props.range];
+      var yDomain = [Math.min.apply(Math, priceData.map(function (obj) {
         return obj.price;
-      })), Math.max.apply(Math, data.map(function (obj) {
+      })), Math.max.apply(Math, priceData.map(function (obj) {
         return obj.price;
       }))];
-      var xDomain = [Math.min.apply(Math, data.map(function (obj) {
+      var xDomain = [Math.min.apply(Math, priceData.map(function (obj) {
         return obj.date;
-      })), Math.max.apply(Math, data.map(function (obj) {
+      })), Math.max.apply(Math, priceData.map(function (obj) {
         return obj.date;
       }))];
+      var offset = -60;
+
+      if (this.props.range === '1Y' || this.props.range === '5Y') {
+        offset += 10;
+      } else if (this.props.range === '1D') {
+        offset += 30;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "price-chart-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "price-chart-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.stock.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "price-chart"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["ResponsiveContainer"], {
+        width: "100%",
+        height: "100%"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-        width: 1000,
-        height: 400,
-        data: this.props.prices[this.props.range],
-        margin: {// top: 5, right: 30, left: 20, bottom: 5,
+        onMouseMove: this.handleMouseMove,
+        onMouseLeave: this.handleMouseLeave,
+        data: priceData,
+        margin: {
+          top: 5,
+          bottom: 5,
+          left: 0
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["CartesianGrid"], {
         vertical: false,
         horizontal: false
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
         dataKey: "date",
-        domain: xDomain
+        domain: xDomain,
+        axisLine: false
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         dataKey: "price",
         domain: yDomain,
         axisLine: false,
         tick: false
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
-        cursor: false,
-        coordinate: {
-          x: 100,
-          y: 140
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Legend"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_price_chart_tooltip__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          range: this.props.range
+        }),
+        position: {
+          y: -30
+        },
+        offset: offset,
+        cursor: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "monotone",
         dataKey: "price",
+        strokeWidth: "3",
         stroke: "#5bc43b",
         dot: false,
         isAnimationActive: true
-      })));
+      })))));
     }
   }]);
 
@@ -1249,6 +1344,46 @@ var PriceChart = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (PriceChart);
+
+/***/ }),
+
+/***/ "./frontend/components/stock/price_chart_tooltip.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/stock/price_chart_tooltip.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var active = _ref.active,
+      payload = _ref.payload,
+      range = _ref.range;
+  if (!active) return null;
+  var payloadDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(payload[0].payload.date);
+  var ttDate;
+
+  if (range === '1D') {
+    ttDate = payloadDate.format('LT');
+  } else if (['1Y', '5Y'].includes(range)) {
+    ttDate = payloadDate.format('MMM DD, YYYY');
+  } else {
+    ttDate = payloadDate.format('LT, MMM DD');
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "price-chart-tooltip"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "tooltip-time"
+  }, ttDate));
+});
 
 /***/ }),
 
@@ -1316,6 +1451,11 @@ var PriceChartWrapper = /*#__PURE__*/function (_React$Component) {
       this.setState({
         range: e.currentTarget.value
       });
+      var btnList = Array.from(document.getElementsByClassName('range-button'));
+      btnList.forEach(function (btn) {
+        if (Array.from(btn.classList).includes('selected')) btn.classList.remove('selected');
+      });
+      e.currentTarget.classList.add('selected');
     }
   }, {
     key: "componentWillUnmount",
@@ -1325,34 +1465,39 @@ var PriceChartWrapper = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "price-chart-component"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "price-chart-header"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_price_chart__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
         range: this.state.range
       }, this.props)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "range-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "range-button selected",
         onClick: this.updateRange,
         value: "1D"
       }, "1D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "range-button",
         onClick: this.updateRange,
         value: "1W"
       }, "1W"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "range-button",
         onClick: this.updateRange,
         value: "1M"
       }, "1M"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "range-button",
         onClick: this.updateRange,
         value: "3M"
       }, "3M"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "range-button",
         onClick: this.updateRange,
         value: "1Y"
       }, "1Y"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "range-button",
         onClick: this.updateRange,
         value: "5Y"
-      }, "5Y"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.updateRange,
-        value: "MAX"
-      }, "MAX")));
+      }, "5Y")));
     }
   }]);
 
@@ -1360,6 +1505,89 @@ var PriceChartWrapper = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (PriceChartWrapper);
+
+/***/ }),
+
+/***/ "./frontend/components/stock/stock_news.jsx":
+/*!**************************************************!*\
+  !*** ./frontend/components/stock/stock_news.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _news_story__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./news_story */ "./frontend/components/stock/news_story.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var StockNews = /*#__PURE__*/function (_React$Component) {
+  _inherits(StockNews, _React$Component);
+
+  var _super = _createSuper(StockNews);
+
+  function StockNews() {
+    _classCallCheck(this, StockNews);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(StockNews, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchStockNews(this.props.stock);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (typeof this.props.news !== 'Array' || this.props.news.length === 0) return null;
+      var newsStories = this.props.news.map(function (story) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_news_story__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: story.id,
+          date: new Date(story.datetime * 1000),
+          headline: story.headline,
+          source: story.source,
+          summary: story.summary,
+          image: story.image
+        });
+      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "newsfeed"
+      }, newsStories);
+    }
+  }]);
+
+  return StockNews;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (StockNews);
 
 /***/ }),
 
@@ -1376,6 +1604,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _stock_sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stock_sidebar */ "./frontend/components/stock/stock_sidebar.jsx");
 /* harmony import */ var _price_chart_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./price_chart_wrapper */ "./frontend/components/stock/price_chart_wrapper.jsx");
+/* harmony import */ var _stock_news__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stock_news */ "./frontend/components/stock/stock_news.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1410,6 +1639,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var StockShow = /*#__PURE__*/function (_React$Component) {
   _inherits(StockShow, _React$Component);
 
@@ -1432,6 +1662,7 @@ var StockShow = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       if (this.props.stock !== prevProps.stock) {
         this.props.fetchStockPrices['1D'](this.props.stock);
+        this.props.fetchStockNews(this.props.stock);
       }
     }
   }, {
@@ -1440,12 +1671,17 @@ var StockShow = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           stock = _this$props.stock,
           addStockToWatchlist = _this$props.addStockToWatchlist;
-      if (!this.props.stock || !this.props.watchlist) return null;
+      if (!this.props.stock || !this.props.watchlist || !this.props.news) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "stock-show-page"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "stock-show-page-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_price_chart_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], this.props)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_price_chart_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], this.props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_news__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        stock: this.props.stock,
+        news: this.props.news,
+        fetchStockNews: this.props.fetchStockNews,
+        fetchSingleStock: this.props.fetchSingleStock
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "stock-show-page-sidebar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_stock_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"], this.props)));
     }
@@ -2231,13 +2467,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************!*\
   !*** ./frontend/util/asset_util.js ***!
   \*************************************/
-/*! exports provided: getSingleStock, getSingleCrypto */
+/*! exports provided: getSingleStock, getSingleCrypto, patchStockPrice */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleStock", function() { return getSingleStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleCrypto", function() { return getSingleCrypto; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "patchStockPrice", function() { return patchStockPrice; });
 var getSingleStock = function getSingleStock(symbol) {
   return $.ajax({
     url: "/api/stocks/".concat(symbol)
@@ -2246,6 +2483,15 @@ var getSingleStock = function getSingleStock(symbol) {
 var getSingleCrypto = function getSingleCrypto(symbol) {
   return $.ajax({
     url: "/api/cryptos/".concat(symbol)
+  });
+};
+var patchStockPrice = function patchStockPrice(stock, price) {
+  return $.ajax({
+    url: "api/stocks/".concat(stock.symbol),
+    method: 'PATCH',
+    data: {
+      price: price
+    }
   });
 };
 
@@ -2401,7 +2647,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 var fiveYearsAgo = moment().subtract(5, 'years').format('YYYY-MM-DD');
 var oneYearAgo = moment().subtract(1, 'years').format('YYYY-MM-DD');
 var threeMonthsAgo = moment().subtract(3, 'months').format('YYYY-MM-DD');
-var oneMonthAgo = moment().subtract(1, 'years').format('YYYY-MM-DD');
+var oneMonthAgo = moment().subtract(1, 'months').format('YYYY-MM-DD');
 var oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
 var oneDayAgo = moment().subtract(1, 'days').format('YYYY-MM-DD');
 var getMaxStockPrices = function getMaxStockPrices(stock) {
@@ -2411,32 +2657,32 @@ var getMaxStockPrices = function getMaxStockPrices(stock) {
 };
 var get5YStockPrices = function get5YStockPrices(stock) {
   return $.ajax({
-    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat([stock.symbol], "?serietype=line?from=").concat(fiveYearsAgo, "&apikey=").concat(window.fmpAPIKey)
+    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat([stock.symbol], "?from=").concat(fiveYearsAgo, "?serietype=line&apikey=").concat(window.fmpAPIKey)
   });
 };
 var get1YStockPrices = function get1YStockPrices(stock) {
   return $.ajax({
-    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat([stock.symbol], "?serietype=line?from=").concat(oneYearAgo, "&apikey=").concat(window.fmpAPIKey)
+    url: "https://financialmodelingprep.com/api/v3/historical-price-full/".concat([stock.symbol], "?from=").concat(oneYearAgo, "?serietype=line&apikey=").concat(window.fmpAPIKey)
   });
 };
 var get3MStockPrices = function get3MStockPrices(stock) {
   return $.ajax({
-    url: "https://financialmodelingprep.com/api/v3/historical-chart/1hour/".concat([stock.symbol], "?serietype=line?from=").concat(threeMonthsAgo, "&apikey=").concat(window.fmpAPIKey)
+    url: "https://financialmodelingprep.com/api/v3/historical-chart/4hour/".concat([stock.symbol], "?from=").concat(threeMonthsAgo, "?serietype=line&apikey=").concat(window.fmpAPIKey)
   });
 };
 var get1MStockPrices = function get1MStockPrices(stock) {
   return $.ajax({
-    url: "https://financialmodelingprep.com/api/v3/historical-chart/1hour/".concat([stock.symbol], "?serietype=line?from=").concat(oneMonthAgo, "&apikey=").concat(window.fmpAPIKey)
+    url: "https://financialmodelingprep.com/api/v3/historical-chart/1hour/".concat([stock.symbol], "?from=").concat(oneMonthAgo, "?serietype=line&apikey=").concat(window.fmpAPIKey)
   });
 };
 var get1WStockPrices = function get1WStockPrices(stock) {
   return $.ajax({
-    url: "https://financialmodelingprep.com/api/v3/historical-chart/15min/".concat([stock.symbol], "?serietype=line?from=").concat(oneWeekAgo, "&apikey=").concat(window.fmpAPIKey)
+    url: "https://financialmodelingprep.com/api/v3/historical-chart/15min/".concat([stock.symbol], "?from=").concat(oneWeekAgo, "?serietype=line&apikey=").concat(window.fmpAPIKey)
   });
 };
 var get1DStockPrices = function get1DStockPrices(stock) {
   return $.ajax({
-    url: "https://financialmodelingprep.com/api/v3/historical-chart/5min/".concat([stock.symbol], "?serietype=line?from=").concat(oneDayAgo, "&apikey=").concat(window.fmpAPIKey)
+    url: "https://financialmodelingprep.com/api/v3/historical-chart/5min/".concat([stock.symbol], "?from=").concat(oneDayAgo, "?serietype=line&apikey=").concat(window.fmpAPIKey)
   });
 };
 

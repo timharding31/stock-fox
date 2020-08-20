@@ -6,6 +6,8 @@ import { getMaxStockPrices,
   get1WStockPrices,
   get1DStockPrices } from '../util/fmp_api_util';
 
+import { patchStockPrice } from '../util/asset_util';
+
 export const RECEIVE_STOCK_PRICES = 'RECEIVE_STOCK_PRICES';
 export const CLEAR_STOCK_PRICES = 'CLEAR_STOCK_PRICES';
 export const CLEAR_ALL_STOCK_PRICES = 'CLEAR_ALL_STOCK_PRICES';
@@ -52,4 +54,8 @@ export const fetch1WStockPrices = stock => dispatch => get1WStockPrices(stock)
   .then(prices => dispatch(receiveStockPrices(prices, '1W')));
 
 export const fetch1DStockPrices = stock => dispatch => get1DStockPrices(stock)
-  .then(prices => dispatch(receiveStockPrices(prices, '1D')));
+  .then(prices => {
+    const finalPrice = (prices[0].close * 100);
+    patchStockPrice(stock, finalPrice);
+    return dispatch(receiveStockPrices(prices, '1D'));
+  });

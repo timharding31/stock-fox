@@ -9,4 +9,10 @@ class Api::StocksController < ApplicationController
     end
   end
 
+  def update
+    @stock = Stock.find_by(symbol: params[:symbol])
+    @stock.update(price: params[:price])
+    render :show
+  end
+
 end
