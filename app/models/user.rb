@@ -32,6 +32,23 @@ class User < ApplicationRecord
     user
   end
 
+  def add_asset_to_watchlist(asset)
+    Watch.create!(user_id: self.id,
+      watchable_type: asset.class.name,
+      watchable_id: asset.id
+    )
+    self.watchlist
+  end
+
+  def remove_asset_from_watchlist(asset)
+    watch = Watch.find_by(user_id: self.id,
+      watchable_type: asset.class.name,
+      watchable_id: asset.id
+    )
+    watch.destroy!
+    self.watchlist
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

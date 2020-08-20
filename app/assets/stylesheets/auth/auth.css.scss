@@ -92,7 +92,7 @@ ul.auth-errors {
 }
 
 button#demo-login {
-  border: 2px solid silver;
+  border: 2px solid #5bc43b;
   background-color: whitesmoke;
   margin-top: auto;
   margin-left: auto;
@@ -100,12 +100,11 @@ button#demo-login {
   width: 80px;
   height: 36px;
   font-size: 12px;
-  color: black;
+  color: #5bc43b;
 }
 
 button#demo-login:hover {
   background-color: white;
-  border-color: #5bc43b;
   font-weight: bold;
 }
 

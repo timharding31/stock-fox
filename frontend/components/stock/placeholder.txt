@@ -1,0 +1,33 @@
+const mapDispatchToProps = dispatch => ({
+  fetchSingleStock: symbol => dispatch(fetchSingleStock(symbol)),
+  fetchStockNews: stock => dispatch(fetchStockNews(stock)),
+  fetchWatchlist: () => dispatch(fetchWatchlist()),
+  addToWatchlist: {
+    stock: stock => dispatch(addStockToWatchlist(stock)),
+    crypto: crypto => dispatch(addCryptoToWatchlist(crypto))
+  },
+  removeFromWatchlist: {
+    stock: stock => dispatch(removeStockFromWatchlist(stock)),
+    crypto: crypto => dispatch(removeCryptoFromWatchlist(crypto))
+  },
+  fetchPrices: {
+    stock: {
+      max: stock => dispatch(fetchMaxStockPrices(stock)),
+      fiveYear: stock => dispatch(fetch5YStockPrices(stock)),
+      oneYear: stock => dispatch(fetch1YStockPrices(stock)),
+      threeMonth: stock => dispatch(fetch3MStockPrices(stock)),
+      oneMonth: stock => dispatch(fetch1MStockPrices(stock)),
+      oneWeek: stock => dispatch(fetch1WStockPrices(stock)),
+      oneDay: stock => dispatch(fetch1DStockPrices(stock))
+    },
+    crypto: {
+      max: crypto => dispatch(fetchMaxCryptoPrices(crypto)),
+      fiveYear: crypto => dispatch(fetch5YCryptoPrices(crypto)),
+      oneYear: crypto => dispatch(fetch1YCryptoPrices(crypto)),
+      threeMonth: crypto => dispatch(fetch3MCryptoPrices(crypto)),
+      oneMonth: crypto => dispatch(fetch1MCryptoPrices(crypto)),
+      oneWeek: crypto => dispatch(fetch1WCryptoPrices(crypto)),
+      oneDay: crypto => dispatch(fetch1DCryptoPrices(crypto))
+    }
+  },
+});

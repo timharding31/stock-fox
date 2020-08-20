@@ -1,6 +1,6 @@
 import { RECEIVE_WATCHLIST } from '../../../actions/watchlist_actions';
 
-export default (state = [], action) => {
+export default (state = null, action) => {
   Object.freeze(state);
 
   switch (action.type) {

@@ -6,8 +6,18 @@ import configureStore from './store/store.js';
 // window testing
 import * as SessionApiUtil from './util/session_api_util';
 import * as FinnhubApiUtil from './util/finnhub_api_util';
-import { getSingleStock } from './actions/asset_actions';
-import { getWatchlist } from './actions/watchlist_actions';
+import * as FmpApiUtil from './util/fmp_api_util';
+import { fetchSingleStock } from './actions/asset_actions';
+import { fetchWatchlist } from './actions/watchlist_actions';
+import {
+  fetchMaxStockPrices,
+  fetch5YStockPrices,
+  fetch1YStockPrices,
+  fetch3MStockPrices,
+  fetch1MStockPrices,
+  fetch1WStockPrices,
+  fetch1DStockPrices
+} from './actions/chart_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -27,14 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Root store={store} />, root);
 
   // window testing
-  window.getWatchlist = getWatchlist;
-  window.getSingleStock = getSingleStock;
+  window.getWatchlist = fetchWatchlist;
+  window.getSingleStock = fetchSingleStock;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = SessionApiUtil.login;
   window.signup = SessionApiUtil.signup;
   window.logout = SessionApiUtil.logout;
-  window.fetchStockNews = FinnhubApiUtil.fetchStockNews;
+  window.getStockNews = FinnhubApiUtil.getStockNews;
+  window.fetchMaxStockPrices = fetchMaxStockPrices;
+  window.fetch5YStockPrices = fetch5YStockPrices;
+  window.fetch1YStockPrices = fetch1YStockPrices;
+  window.fetch3MStockPrices = fetch3MStockPrices;
+  window.fetch1MStockPrices = fetch1MStockPrices;
+  window.fetch1WStockPrices = fetch1WStockPrices;
+  window.fetch1DStockPrices = fetch1DStockPrices;
 });
-
-export const apiKey = window.finnhubAPIKey;

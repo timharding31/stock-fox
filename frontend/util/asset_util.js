@@ -1,10 +1,10 @@
-export const fetchSingleStock = symbol => (
+export const getSingleStock = symbol => (
   $.ajax({
     url: `/api/stocks/${symbol}`
   })
 );
 
-export const fetchSingleCrypto = symbol => (
+export const getSingleCrypto = symbol => (
   $.ajax({
     url: `/api/cryptos/${symbol}`
   })

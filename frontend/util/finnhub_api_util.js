@@ -1,14 +1,11 @@
-import { apiKey } from '../stockfox';
+const moment = require('moment');
 
-import { formatDate } from './data_handling_util';
+const curDate = moment().format('YYYY-MM-DD');
+const prevDate = moment().subtract(1, 'months').format('YYYY-MM-DD');
 
-const curDate = new Date();
-const curDateStr = formatDate(curDate);
-const prevDateStr = formatDate(new Date(curDate.setMonth(curDate.getMonth() - 1)));
-
-export const fetchStockNews = stock => (
+export const getStockNews = stock => (
   $.ajax({
-    url: `https://finnhub.io/api/v1/company-news?symbol=${[stock.symbol]}&from=${curDateStr}&to=${curDateStr}&token=${apiKey}`
+    url: `https://finnhub.io/api/v1/company-news?symbol=${[stock.symbol]}&from=${prevDate}&to=${curDate}&token=${window.finnhubAPIKey}`
   })
 
 );

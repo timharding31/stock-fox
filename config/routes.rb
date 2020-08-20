@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resources :stocks, :cryptos, param: :symbol, only: [] do 
       resources :watchlists, only: [:create]
     end
+    delete '/stocks/:stock_symbol/watchlists', to: 'watchlists#destroy'
+    delete '/cryptos/:crypto_symbol/watchlists', to: 'watchlists#destroy'
+
   end
 
 end

@@ -1,4 +1,5 @@
 import { signup, login, logout, demoLogin } from '../util/session_api_util';
+import { fetchWatchlist } from './watchlist_actions';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';

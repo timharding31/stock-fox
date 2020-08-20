@@ -1,4 +1,9 @@
-import { fetchWatchlist } from '../util/watchlist_util';
+import { getWatchlist,
+  postStockToWatchlist,
+  postCryptoToWatchlist,
+  deleteStockFromWatchlist,
+  deleteCryptoFromWatchlist,
+} from '../util/watchlist_util';
 
 export const RECEIVE_WATCHLIST = 'RECEIVE_WATCHLIST';
 export const RECEIVE_WATCHLIST_ERRORS = 'RECEIVE_WATCHLIST_ERRORS';
@@ -14,5 +19,15 @@ const receiveWatchlistErrors = errors => ({
   errors
 });
 
-export const getWatchlist = () => dispatch => fetchWatchlist()
+export const fetchWatchlist = () => dispatch => getWatchlist()
+  .then(watchlist => dispatch(receiveWatchlist(watchlist)), err => dispatch(receiveWatchlistErrors(err.responseJSON)));
+
+
+export const addStockToWatchlist = stock => dispatch => postStockToWatchlist(stock)
+  .then(watchlist => dispatch(receiveWatchlist(watchlist)), err => dispatch(receiveWatchlistErrors(err.responseJSON)));
+
+export const removeStockFromWatchlist = stock => dispatch => deleteStockFromWatchlist(stock)
+  .then(watchlist => dispatch(receiveWatchlist(watchlist)), err => dispatch(receiveWatchlistErrors(err.responseJSON)));
+
+export const addCryptoToWatchlist = crypto => dispatch => postCryptoToWatchlist(crypto)
   .then(watchlist => dispatch(receiveWatchlist(watchlist)), err => dispatch(receiveWatchlistErrors(err.responseJSON)));

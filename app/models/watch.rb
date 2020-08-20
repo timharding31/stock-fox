@@ -1,5 +1,7 @@
 class Watch < ApplicationRecord
 
+  validates :watchable_id, uniqueness: { scope: [:watchable_type, :user_id] }
+
   belongs_to :watchable,
     polymorphic: true
   
