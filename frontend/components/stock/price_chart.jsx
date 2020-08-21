@@ -2,12 +2,15 @@ import React from 'react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import numeral from 'numeral';
 import PriceChartTooltip from './price_chart_tooltip';
+
+const formatPrice = price => (typeof(price) === 'number') ? price.toFixed(2) : price;
 
 class PriceChart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { price: (this.props.stock.price / 100) };
+    this.state = { price: formatPrice(props.stock.price) };
     this.baseState = { ...this.state };
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -20,7 +23,7 @@ class PriceChart extends React.Component {
       }
     }
     if (this.props.stock != prevProps.stock) {
-      this.setState({ price: (this.props.stock.price / 100) });
+      this.setState({ price: this.props.stock.price });
     }
   }
 
@@ -31,19 +34,16 @@ class PriceChart extends React.Component {
   }
 
   handleMouseLeave() {
-    this.setState(this.baseState);
+    this.setState({ price: formatPrice(this.props.stock.price)});
   }
 
   render() {
-    if (!this.props.prices[this.props.range]) return null;
-    const priceData = this.props.prices[this.props.range];
+    const { prices, range } = this.props;
+    if (!prices[range]) return null;
+    const priceData = prices[range];
     const yDomain = [
       Math.min.apply(Math, priceData.map(obj => obj.price)),
       Math.max.apply(Math, priceData.map(obj => obj.price))
-    ]
-    const xDomain = [
-      Math.min.apply(Math, priceData.map(obj => obj.date)),
-      Math.max.apply(Math, priceData.map(obj => obj.date))
     ]
     let offset = -60;
     if (this.props.range === '1Y' || this.props.range === '5Y') {
@@ -63,10 +63,12 @@ class PriceChart extends React.Component {
               onMouseMove={this.handleMouseMove}
               onMouseLeave={this.handleMouseLeave}
               data={priceData}
-              margin={{ top: 5, bottom: 5, left: 0 }}
+              margin={{ top: 5, bottom: 5 }}
             >
               <CartesianGrid vertical={false} horizontal={false} />
-              <XAxis dataKey="date" domain={xDomain} axisLine={false}/>
+              <XAxis dataKey="date"
+                // domain={xDomain}
+                axisLine={false}/>
               <YAxis dataKey="price" domain={yDomain} axisLine={false} tick={false}/>
               <Tooltip
                 content={<PriceChartTooltip range={this.props.range} />}

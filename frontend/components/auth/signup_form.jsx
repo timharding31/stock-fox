@@ -44,7 +44,6 @@ class SignupForm extends React.Component {
       <div className="auth-page-container">
         <div className="auth-form-container">
           <div className="auth-form-header">
-            <Link id="auth-logo-link" to="/" />
             <h3>{this.props.formType}</h3>
           </div>
           <ul className="auth-errors">{errorsMsgs}</ul>

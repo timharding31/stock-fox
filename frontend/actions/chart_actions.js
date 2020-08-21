@@ -55,7 +55,7 @@ export const fetch1WStockPrices = stock => dispatch => get1WStockPrices(stock)
 
 export const fetch1DStockPrices = stock => dispatch => get1DStockPrices(stock)
   .then(prices => {
-    const finalPrice = (prices[0].close * 100);
+    const finalPrice = prices[0].close;
     patchStockPrice(stock, finalPrice);
     return dispatch(receiveStockPrices(prices, '1D'));
   });

@@ -1,33 +1,34 @@
 import React from 'react';
 
-class StockSideBar extends React.Component {
+class StockSidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.removeBtn = {
+    this.removeState = {
       text: 'Remove from Watchlist',
       action: props.removeStockFromWatchlist
     };
-    this.addBtn = {
+    this.addState = {
       text: 'Add to Watchlist',
       action: props.addStockToWatchlist
     };
 
-    this.state = { button: {} };
+    this.state = { button: null };
 
     this.handleButton = this.handleButton.bind(this);
   }
 
   checkButtonState() {
     if (this.props.watchlist.includes(this.props.stock.symbol)) {
-      this.setState({ button: this.removeBtn });
+      this.setState({ button: this.removeState });
     } else {
-      this.setState({ button: this.addBtn });
+      this.setState({ button: this.addState });
     }
   }
 
   componentDidMount() {
-    this.checkButtonState();
+    this.props.fetchSingleStock(this.props.stock.symbol);
+    this.props.fetchWatchlist();
   }
 
   componentDidUpdate(prevProps) {
@@ -42,7 +43,7 @@ class StockSideBar extends React.Component {
   }
 
   render() {
-    if (this.state.button === {}) return null;
+    if (!this.state.button) return null;
     return (
       <div className="stock-show-page-sidebar">
         <button onClick={this.handleButton}>{this.state.button.text}</button>
@@ -51,4 +52,4 @@ class StockSideBar extends React.Component {
   }
 }
 
-export default StockSideBar;
+export default StockSidebar;

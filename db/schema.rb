@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_222011) do
+ActiveRecord::Schema.define(version: 2020_08_21_043913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_222011) do
   create_table "cryptos", force: :cascade do |t|
     t.string "symbol", null: false
     t.string "name", null: false
-    t.integer "price", null: false
+    t.decimal "price", precision: 19, scale: 4, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["symbol"], name: "index_cryptos_on_symbol", unique: true
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_222011) do
     t.string "exchange", null: false
     t.string "symbol", null: false
     t.string "name", null: false
-    t.integer "price", null: false
+    t.decimal "price", precision: 19, scale: 4, null: false
     t.string "marketcap"
     t.string "ipo"
     t.string "sector"

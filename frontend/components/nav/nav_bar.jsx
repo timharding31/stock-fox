@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from '../search/searchbar';
+import SearchBar from '../header/search_bar';
 
 export default ({ loggedIn, currentUser, logout }) => {
   let authButtons = []; let navButtons = []; let searchBar = (<SearchBar />);

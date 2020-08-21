@@ -1,0 +1,115 @@
+.stock-show-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.price-chart-component {
+  width: 100%;
+  min-width: 500px;
+  min-height: 475px;
+  align-self: flex-start;
+  position: relative;
+}
+
+#price-chart-container {
+  width: 100%;
+  min-height: 400px;
+}
+
+.price-chart {
+  width: 90%;
+  height: 400px;
+  margin-left: -40px;
+}
+
+.price-chart-header > h3 {
+  font-size: 18px;
+}
+
+.price-chart-header > h3:last-child {
+  margin-bottom: -50px;
+}
+
+ul.range-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: absolute;
+  bottom: 0;
+  list-style: none;
+  border-bottom: 2px solid gainsboro;
+  width: 78%;
+  padding-bottom: 2px;
+  margin-left: 20px;
+}
+
+ul.range-options > li {
+  width: 50px;
+  height: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+ul.range-options > li:first-child {
+  margin-left: -30px;
+}
+
+ul.range-options > li > button {
+  background: none;
+  padding-bottom: 3px;
+  border: none;
+  outline: none;
+  width: 60%;
+  height: 120%;
+  cursor: pointer;
+}
+
+ul.range-options > li:hover {
+  background: whitesmoke;
+}
+
+ul.range-options > li > button.selected {
+  box-sizing: border-box;
+  border-bottom: 4px solid #5bc43b;
+}
+
+div[class^="profile-row-"] {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.company-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  width: 96%;
+}
+
+.profile-header {
+  width: 100%;
+  border-bottom: 2px solid black;
+}
+
+.company-profile {
+  border-bottom: 2px solid black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.single-profile-module {
+  display: flex;
+  flex-direction: column;
+  align-items: initial;
+  width: 25%;
+}
+
+.single-profile-module > p {
+  margin-top: 1px;
+}
+
+.company-profile strong, .company-profile p {
+  font-size: 11pt;
+}
+

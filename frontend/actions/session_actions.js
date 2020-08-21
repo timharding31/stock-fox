@@ -28,13 +28,19 @@ const clearSessionErrors = () => ({
 export const resetSessionErrors = () => dispatch => dispatch(clearSessionErrors());
 
 export const loginDemoUser = () => dispatch => demoLogin()
-  .then(user => dispatch(receiveCurrentUser(user)));
+  .then(user => {
+    fetchWatchlist()(dispatch)
+    return dispatch(receiveCurrentUser(user))
+  });
 
 export const signupUser = user => dispatch => signup(user)
   .then(user => (dispatch(receiveCurrentUser(user))), err => dispatch(receiveErrors(err.responseJSON)));
 
 export const loginUser = user => dispatch => login(user)
-  .then(user => dispatch(receiveCurrentUser(user)), err => dispatch(receiveErrors(err.responseJSON)));
+  .then(user => {
+    fetchWatchlist()(dispatch)
+    return dispatch(receiveCurrentUser(user))
+  }, err => dispatch(receiveErrors(err.responseJSON)));
 
 export const logoutUser = () => dispatch => logout()
   .then(() => dispatch(logoutCurrentUser()));

@@ -23,18 +23,16 @@ nasdaq = nasdaq.reject{ |obj| obj[:price].nil? }
 nyse.each do |stock|
   next if Stock.find_by(symbol: stock[:symbol])
   stock[:exchange] = 'NYSE'
-  stock[:price] = stock[:price] * 100
   Stock.create!(stock)
 end
 
 nasdaq.each do |stock|
   next if Stock.find_by(symbol: stock[:symbol])
   stock[:exchange] = 'NASDAQ'
-  stock[:price] = stock[:price] * 100
   Stock.create!(stock)
 end
 
-Crypto.create!(symbol: 'BTC', name: 'Bitcoin', price: 1182600)
+Crypto.create!(symbol: 'BTC', name: 'Bitcoin', price: 11826.00)
 
 User.create!(username: 'DemoUser', password: 'DemoPassword09182020', email: 'user@demo.com', first_name: 'Demo', last_name: 'User')
 

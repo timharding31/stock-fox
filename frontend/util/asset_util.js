@@ -24,7 +24,7 @@ export const patchStockInfo = (stock, detail) => (
     method: 'PATCH',
     data: {
       name: detail.companyName,
-      price: detail.price * 100,
+      price: detail.price,
       sector: detail.sector,
       industry: detail.industry
     }

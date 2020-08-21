@@ -2,8 +2,6 @@ import { fetchSingleStock, fetchStockDetail } from '../../actions/asset_actions'
 import { fetchStockNews } from '../../actions/news_actions';
 import { fetchWatchlist, addStockToWatchlist, removeStockFromWatchlist } from '../../actions/watchlist_actions';
 import {
-  fetchMaxStockPrices,
-  fetch5YStockPrices,
   fetch1YStockPrices,
   fetch3MStockPrices,
   fetch1MStockPrices,
@@ -30,8 +28,6 @@ const mapDispatchToProps = dispatch => ({
   removeStockFromWatchlist: stock => dispatch(removeStockFromWatchlist(stock)),
   deleteStockPrices: range => dispatch(deleteStockPrices(range)),
   fetchStockPrices: {
-    'MAX': stock => dispatch(fetchMaxStockPrices(stock)),
-    '5Y': stock => dispatch(fetch5YStockPrices(stock)),
     '1Y': stock => dispatch(fetch1YStockPrices(stock)),
     '3M': stock => dispatch(fetch3MStockPrices(stock)),
     '1M': stock => dispatch(fetch1MStockPrices(stock)),

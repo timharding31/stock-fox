@@ -1,0 +1,123 @@
+.header-logo-container > a,
+div[class^="header-"] {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+div[class^="header-"] a {
+  text-decoration: none;
+  color: black;
+}
+
+.header-content {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.header-links-container, 
+.search-bar-contiainer {
+  margin-left: 50px;
+}
+
+.header-auth-nav-container,
+.header-account-nav-container {
+  margin-left: auto;
+}
+
+.header-auth-nav-container *,
+.header-account-nav-container > h3 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.header-link {
+  padding-left: 20px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.header-link:hover {
+  color: #5bc43b;
+}
+
+.header-auth.button {
+  background-color: #5bc43b;
+  cursor: pointer;
+  outline: none;
+  border: 2px solid #5bc43b;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.header-auth.button:hover {
+  background-color: #51B034;
+  border-color: #51B034;
+}
+
+.account-dropdown {
+  display: none;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  position: absolute;
+  background-color: whitesmoke;
+  min-width: 120px;
+  height: 180px;
+  list-style: none;
+  top: 60px;
+  right: 5px;
+}
+.header-account-nav-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.account-dropdown > li {
+  height: 40%;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: default;
+}
+
+.account-dropdown > li:first-child {
+  padding-top: 20%;
+}
+
+.account-dropdown button {
+  background-color: #5bc43b;
+  cursor: pointer;
+  outline: none;
+  border: 2px solid #5bc43b;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.account-dropdown button:hover {
+  background-color: #51B034;
+  border-color: #51B034;
+}
+
+.account-dropdown-trigger {
+  padding: 10px 15px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 20px;
+}
+.header-account-nav-container:hover > .account-dropdown-trigger {
+  background-color: whitesmoke;
+  border: 2px solid whitesmoke;
+  border-radius: 20px;
+  color: #5bc43b;
+}
+
+.header-account-nav-container:hover > .account-dropdown {
+  display: block;
+}
