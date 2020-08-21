@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
-  after_save :create_default_watchlist
+  after_create :create_default_watchlist
   attr_reader :password
 
   has_many :watches
@@ -83,5 +83,5 @@ class User < ApplicationRecord
     Watch.create!(user_id: self.id, watchable_type: 'Crypto', watchable_id: btc.id)
 
   end
-  
+
 end
