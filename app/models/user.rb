@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
+  after_save :create_default_watchlist
   attr_reader :password
 
   has_many :watches
@@ -67,4 +68,20 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
   end
+
+  def create_default_watchlist
+
+    default_stocks = [ 'TWTR', 'TSLA', 'NFLX', 'FB', 'MSFT', 'DIS', 'GPRO',
+      'SBUX', 'F', 'BABA', 'BAC', 'FIT', 'GE', 'SNAP', 'AAPL']
+
+    default_stocks.each do |symbol|
+      asset = Stock.find_by(symbol: symbol)
+      Watch.create!(user_id: self.id, watchable_type: 'Stock', watchable_id: asset.id)
+    end
+
+    btc = Crypto.find_by(symbol: 'BTC')
+    Watch.create!(user_id: self.id, watchable_type: 'Crypto', watchable_id: btc.id)
+
+  end
+  
 end

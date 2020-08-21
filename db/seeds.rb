@@ -6,20 +6,35 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# CSV::Converters[:blank_to_nil] = lambda do |field|
-#   field && (field.empty? || field == 'n/a') ? nil : field
-# end
-# nyse = CSV.new(File.read('./stock_symbols/nyse.csv'), :headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil])
-# nyse = nyse.to_a.map {|row| row.to_hash.select{ |k, v| [:symbol, :name, :price, :marketcap, :ipo, :sector, :industry].include?(k) } }
+Stock.destroy_all ; Crypto.destroy_all ; User.destroy_all
 
-# nasdaq = CSV.new(File.read('./stock_symbols/nasdaq.csv'), :headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil])
-# nasdaq = nasdaq.to_a.map {|row| row.to_hash.select{ |k, v| [:symbol, :name, :price, :marketcap, :ipo, :sector, :industry].include?(k) } }
+CSV::Converters[:blank_to_nil] = lambda do |field|
+  field && (field.empty? || field == 'n/a') ? nil : field
+end
 
-# user = User.find_by(username: 'testusername')
+nyse = CSV.new(File.read('db/stock_seeds/nyse.csv'), :headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil])
+nyse = nyse.to_a.map {|row| row.to_hash.select{ |k, v| [:symbol, :name, :price, :marketcap, :ipo, :sector, :industry].include?(k) } }
+nyse = nyse.reject{ |obj| obj[:price].nil? }
 
-# Stock.destroy_all ; Crypto.destroy_all
-# stock = Stock.create!(exchange: 'NYSE', symbol: 'ABC', name: 'ABC Co.', price: 1000)
-# coin = Crypto.create!(symbol: 'XYZ', name: 'XYZ Coin', price: 10000)
+nasdaq = CSV.new(File.read('db/stock_seeds/nasdaq.csv'), :headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil])
+nasdaq = nasdaq.to_a.map {|row| row.to_hash.select{ |k, v| [:symbol, :name, :price, :marketcap, :ipo, :sector, :industry].include?(k) } }
+nasdaq = nasdaq.reject{ |obj| obj[:price].nil? }
 
-# watchone = Watch.create!(user_id: user.id, watchable_type: 'Stock', watchable_id: stock.id)
-# watchtwo = Watch.create!(user_id: user.id, watchable_type: 'Crypto', watchable_id: coin.id)
+nyse.each do |stock|
+  next if Stock.find_by(symbol: stock[:symbol])
+  stock[:exchange] = 'NYSE'
+  stock[:price] = stock[:price] * 100
+  Stock.create!(stock)
+end
+
+nasdaq.each do |stock|
+  next if Stock.find_by(symbol: stock[:symbol])
+  stock[:exchange] = 'NASDAQ'
+  stock[:price] = stock[:price] * 100
+  Stock.create!(stock)
+end
+
+Crypto.create!(symbol: 'BTC', name: 'Bitcoin', price: 1182600)
+
+User.create!(username: 'DemoUser', password: 'DemoPassword09182020', email: 'user@demo.com', first_name: 'Demo', last_name: 'User')
+
