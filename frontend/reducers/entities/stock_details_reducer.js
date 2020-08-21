@@ -2,6 +2,7 @@ import { arrayToAssetObj } from '../../util/data_handling_util';
 
 import { RECEIVE_SINGLE_STOCK, RECEIVE_STOCK_DETAILS } from '../../actions/asset_actions';
 import { RECEIVE_WATCHLIST } from '../../actions/watchlist_actions';
+import { RELOAD_ALL } from '../../actions/ui_actions';
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -15,6 +16,8 @@ export default (state = {}, action) => {
     case RECEIVE_STOCK_DETAILS:
       const newStockDetail = Object.assign({}, state[action.symbol], action.detail);
       return Object.assign({}, state, { [action.symbol]: newStockDetail });
+    case RELOAD_ALL:
+      return {};
     default:
       return state;
   }

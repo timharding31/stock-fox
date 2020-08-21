@@ -4,6 +4,7 @@ import {
 } from 'recharts';
 import numeral from 'numeral';
 import PriceChartTooltip from './price_chart_tooltip';
+import Loading from '../loading';
 
 const formatPrice = price => (typeof(price) === 'number') ? price.toFixed(2) : price;
 
@@ -16,6 +17,10 @@ class PriceChart extends React.Component {
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({ price: formatPrice(this.props.stock.price) });
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.range) {
       if (this.props.range !== prevProps.range) {
@@ -23,7 +28,7 @@ class PriceChart extends React.Component {
       }
     }
     if (this.props.stock != prevProps.stock) {
-      this.setState({ price: this.props.stock.price });
+      this.setState({ price: formatPrice(this.props.stock.price) });
     }
   }
 
@@ -38,6 +43,9 @@ class PriceChart extends React.Component {
   }
 
   render() {
+    if (this.props.loading.prices[this.props.range] || this.props.loading.singleStock) {
+      return (<Loading loading={this.props.loading.prices[this.props.range]} compName={"price-chart"} />);
+    };
     const { prices, range } = this.props;
     if (!prices[range]) return null;
     const priceData = prices[range];

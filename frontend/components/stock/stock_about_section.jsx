@@ -1,17 +1,24 @@
 import React from 'react';
 import numeral from 'numeral';
+import Loading from '../loading';
 
 class StockAboutSection extends React.Component {
 
   componentDidUpdate(prevProps) {
-    if (this.props.stock.ceo != prevProps.stock.ceo) {
+    if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
+      this.props.reload('stockDetails');
+      this.props.fetchStockDetail(this.props.stock);
+    }
+    if (this.props.loading) {
       this.props.fetchStockDetail(this.props.stock);
     }
   }
 
   render() {
+    if (this.props.loading || !this.props.stock.ceo) {
+      return (<Loading loading={this.props.loading} compName={"stock-detail"} />);
+    }
     const { stock } = this.props;
-    if (!stock.ceo) return null;
     return (
       <div className="company-profile">
         <div className="profile-header"><h3>About</h3></div>

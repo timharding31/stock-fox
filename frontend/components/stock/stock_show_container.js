@@ -9,17 +9,20 @@ import {
   fetch1DStockPrices,
   deleteStockPrices
 } from '../../actions/chart_actions';
+import { clearLoadingState } from '../../actions/ui_actions';
 import { connect } from 'react-redux';
 import StockShow from './stock_show';
 
-const mapStateToProps = ({ entities: { prices, watchlist, stocks, news } }, { match: { params } }) => ({
+const mapStateToProps = ({ entities: { prices, watchlist, stocks, news }, ui: { loading } }, { match: { params } }) => ({
   stock: Object.assign({}, stocks[params.symbol], { symbol: params.symbol }),
   watchlist: watchlist.stocks,
   prices,
-  news
+  news,
+  loading
 });
 
 const mapDispatchToProps = dispatch => ({
+  reload: component => dispatch(clearLoadingState(component)),
   fetchSingleStock: symbol => dispatch(fetchSingleStock(symbol)),
   fetchStockDetail: stock => dispatch(fetchStockDetail(stock)),
   fetchStockNews: stock => dispatch(fetchStockNews(stock)),

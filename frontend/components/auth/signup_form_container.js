@@ -2,7 +2,7 @@ import { signupUser, resetSessionErrors} from '../../actions/session_actions';
 import { connect } from 'react-redux';
 import SignupForm from './signup_form';
 
-const mapStateToProps = ({ errors: { login } }) => ({
+const mapStateToProps = ({ ui: { errors: { login } } }) => ({
   user: { email: '', username: '', password: '', firstName: '', lastName: '', confirmedPassword: ''},
   formType: 'Sign Up',
   errors: login,

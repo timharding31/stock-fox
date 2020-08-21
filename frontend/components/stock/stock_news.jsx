@@ -1,5 +1,6 @@
 import React from 'react';
 import NewsStory from './news_story';
+import Loading from '../loading';
 
 class StockNews extends React.Component {
   constructor(props) {
@@ -18,7 +19,10 @@ class StockNews extends React.Component {
   }
   
   render() {
-    const newsStories = this.props.news.map((story, idx) => (<li className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory key={story.id} {...story} idx={idx} /></li>));
+    if (this.props.loading) {
+      return (<Loading loading={this.props.loading} compName={"stock-news"} />);
+    }
+    const newsStories = this.props.news.map((story, idx) => (<li key={`li-${story.idx}`} className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory {...story} idx={idx} /></li>));
     return (
       <div className="news-feed-container">
         <div className="news-feed-header"><h3>Company News</h3></div>
