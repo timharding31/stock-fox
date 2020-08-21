@@ -1,0 +1,23 @@
+button.add-to-watchlist {
+  width: 80%;
+  align-self: center; 
+  color: #5bc43b; 
+  height: 36px;
+  border: 2px solid #5bc43b;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.add-to-watchlist:hover {
+  background-color: white;
+  font-weight: bold;
+  border-color: #51B034;
+  color: #51B034;
+}
+
+button.add-to-watchlist:focus {
+  outline: none;
+}

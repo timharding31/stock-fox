@@ -21,6 +21,7 @@ class StockNews extends React.Component {
     const newsStories = this.props.news.map((story, idx) => (<li className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory key={story.id} {...story} idx={idx} /></li>));
     return (
       <div className="news-feed-container">
+        <div className="news-feed-header"><h3>Company News</h3></div>
         <ul className="news-feed">{newsStories}</ul>
         <button className="news-feed-control" onClick={this.handleButton}>{this.state.button}</button>
       </div>)

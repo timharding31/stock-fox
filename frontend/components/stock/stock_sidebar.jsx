@@ -46,7 +46,7 @@ class StockSidebar extends React.Component {
     if (!this.state.button) return null;
     return (
       <div className="stock-show-page-sidebar">
-        <button onClick={this.handleButton}>{this.state.button.text}</button>
+        <button class="add-to-watchlist" onClick={this.handleButton}>{this.state.button.text}</button>
       </div>
     )
   }

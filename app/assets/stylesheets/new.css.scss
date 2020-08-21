@@ -2,18 +2,19 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  float: left;
+  align-items: stretch;
 }
 
 .news-story > a {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .news-feed {
   list-style: none;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .news-feed * {
@@ -25,15 +26,22 @@
   background: whitesmoke;
 }
 
+.news-story-img {
+  width: 20%;
+  margin-left: auto;
+  align-self: center;
+}
+
 .news-story-img > img {
   margin-left: auto;
+  width: 100%;
 }
 
 .news-story-text {
   display: flex;
   flex-direction: column;
   align-items: initial;
-  width: 60%;
+  width: 80%;
 }
 
 .news-story > a {
@@ -54,7 +62,6 @@
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  // width: 25%;
   margin-bottom: 0px;
 }
 
@@ -65,5 +72,34 @@
 
 .news-story.hidden {
   display: none;
+}
+
+button.news-feed-control {
+  width: 80%;
+  align-self: center; 
+  color: #5bc43b; 
+  height: 36px;
+  border: 2px solid #5bc43b;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.news-feed-control:hover {
+  background-color: white;
+  font-weight: bold;
+  border-color: #51B034;
+  color: #51B034;
+}
+
+button.news-feed-control:focus {
+  outline: none;
+}
+
+.news-feed-header {
+  width: 100%;
+  border-bottom: 2px solid gainsboro;
 }
 

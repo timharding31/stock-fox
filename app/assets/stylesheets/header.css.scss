@@ -12,13 +12,13 @@ div[class^="header-"] a {
 }
 
 .header-content {
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: baseline;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .header-links-container, 
@@ -68,7 +68,7 @@ div[class^="header-"] a {
   position: absolute;
   background-color: whitesmoke;
   min-width: 120px;
-  height: 180px;
+  height: 120px;
   list-style: none;
   top: 60px;
   right: 5px;
@@ -85,6 +85,7 @@ div[class^="header-"] a {
   font-weight: bold;
   font-size: 16px;
   cursor: default;
+  align-self: center;
 }
 
 .account-dropdown > li:first-child {
