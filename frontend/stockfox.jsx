@@ -5,9 +5,8 @@ import configureStore from './store/store.js';
 
 // window testing
 import * as SessionApiUtil from './util/session_api_util';
-import * as FinnhubApiUtil from './util/finnhub_api_util';
 import * as FmpApiUtil from './util/fmp_api_util';
-import { fetchSingleStock } from './actions/asset_actions';
+import { fetchSingleStock, fetchStockDetail } from './actions/asset_actions';
 import { fetchWatchlist } from './actions/watchlist_actions';
 import {
   fetchMaxStockPrices,
@@ -39,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // window testing
   window.getWatchlist = fetchWatchlist;
   window.getSingleStock = fetchSingleStock;
+  window.fetchStockDetail = fetchStockDetail;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = SessionApiUtil.login;
   window.signup = SessionApiUtil.signup;
   window.logout = SessionApiUtil.logout;
-  window.getStockNews = FinnhubApiUtil.getStockNews;
   window.fetchMaxStockPrices = fetchMaxStockPrices;
   window.fetch5YStockPrices = fetch5YStockPrices;
   window.fetch1YStockPrices = fetch1YStockPrices;

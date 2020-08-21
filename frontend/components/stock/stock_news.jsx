@@ -1,27 +1,29 @@
 import React from 'react';
-import moment from 'moment';
 import NewsStory from './news_story';
 
 class StockNews extends React.Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    this.props.fetchStockNews(this.props.stock);
+    this.state = { hidden: true, button: 'Show More' }
+    this.handleButton = this.handleButton.bind(this);
   }
 
+  handleButton(e) {
+    e.preventDefault();
+    this.setState({
+      hidden: !this.state.hidden,
+      button: this.state.hidden ? 'Show Less' : 'Show More'
+    });
+  }
+  
   render() {
-    if (typeof(this.props.news) !== 'Array' || this.props.news.length === 0) return null;
-    const newsStories = this.props.news.map(story => (
-      <NewsStory key={story.id}
-        date={new Date(story.datetime * 1000)}
-        headline={story.headline}
-        source={story.source}
-        summary={story.summary}
-        image={story.image} />
-      ));
-    return(
-      <ul className="newsfeed">{newsStories}</ul>
-    )
-  }
+    const newsStories = this.props.news.map((story, idx) => (<li className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory key={story.id} {...story} idx={idx} /></li>));
+    return (
+      <div className="news-feed-container">
+        <ul className="news-feed">{newsStories}</ul>
+        <button className="news-feed-control" onClick={this.handleButton}>{this.state.button}</button>
+      </div>)
+  };
 }
-
 export default StockNews;

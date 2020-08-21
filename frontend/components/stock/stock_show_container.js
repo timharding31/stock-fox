@@ -1,4 +1,4 @@
-import { fetchSingleStock, fetchStockPriceDetail } from '../../actions/asset_actions';
+import { fetchSingleStock, fetchStockDetail } from '../../actions/asset_actions';
 import { fetchStockNews } from '../../actions/news_actions';
 import { fetchWatchlist, addStockToWatchlist, removeStockFromWatchlist } from '../../actions/watchlist_actions';
 import {
@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import StockShow from './stock_show';
 
 const mapStateToProps = ({ entities: { prices, watchlist, stocks, news } }, { match: { params } }) => ({
-  stock: stocks[params.symbol],
+  stock: Object.assign({}, stocks[params.symbol], { symbol: params.symbol }),
   watchlist: watchlist.stocks,
   prices,
   news
@@ -23,6 +23,7 @@ const mapStateToProps = ({ entities: { prices, watchlist, stocks, news } }, { ma
 
 const mapDispatchToProps = dispatch => ({
   fetchSingleStock: symbol => dispatch(fetchSingleStock(symbol)),
+  fetchStockDetail: stock => dispatch(fetchStockDetail(stock)),
   fetchStockNews: stock => dispatch(fetchStockNews(stock)),
   fetchWatchlist: () => dispatch(fetchWatchlist()),
   addStockToWatchlist: stock => dispatch(addStockToWatchlist(stock)),

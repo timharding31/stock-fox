@@ -1,13 +1,11 @@
 import { RECEIVE_STOCK_NEWS } from '../../actions/news_actions';
 
-export default (state = {}, action) => {
+export default (state = null, action) => {
   Object.freeze(state);
 
   switch (action.type) {
     case RECEIVE_STOCK_NEWS:
-      return action.news;
-    // case RECEIVE_COLLECTION_NEWS:
-      
+      return action.news.slice(0,12);
     default:
       return state;
   }

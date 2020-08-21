@@ -42,3 +42,8 @@ export const get1DStockPrices = stock => (
     url: `https://financialmodelingprep.com/api/v3/historical-chart/5min/${[stock.symbol]}?from=${oneDayAgo}?serietype=line&apikey=${window.fmpAPIKey}`
   })
 );
+export const getStockProfile = stock => (
+  $.ajax({
+    url: `https://financialmodelingprep.com/api/v3/profile/${[stock.symbol]}?apikey=${window.fmpAPIKey}`
+  })
+)

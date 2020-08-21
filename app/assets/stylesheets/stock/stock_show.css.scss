@@ -19,6 +19,12 @@ div.price-chart {
   margin-left: 50px;
 }
 
+.stock-show-page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .price-chart-component {
   display: flex;
   flex-direction: column;

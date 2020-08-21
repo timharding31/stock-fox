@@ -17,3 +17,16 @@ export const patchStockPrice = (stock, price) => (
     data: { price }
   })
 );
+
+export const patchStockInfo = (stock, detail) => (
+  $.ajax({
+    url: `api/stocks/${stock.symbol}`,
+    method: 'PATCH',
+    data: {
+      name: detail.companyName,
+      price: detail.price * 100,
+      sector: detail.sector,
+      industry: detail.industry
+    }
+  })
+);
