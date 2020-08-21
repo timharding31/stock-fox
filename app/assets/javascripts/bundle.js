@@ -520,12 +520,12 @@ var Content = function Content() {
     className: "application-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "content-main"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_content_route_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/stocks/:symbol",
     component: _stock_stock_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     className: "content-sidebar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_content_route_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/stocks/:symbol",
     component: _stock_stock_sidebar_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   })));
@@ -534,10 +534,10 @@ var Content = function Content() {
 var Auth = function Auth() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "user-auth-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/signup",
     component: _auth_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/login",
     component: _auth_login_form_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }));
@@ -550,7 +550,19 @@ var Auth = function Auth() {
     className: "application-header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    exact: true,
+    path: "/login",
+    component: _header_logo__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    exact: true,
+    path: "/signup",
+    component: _header_logo__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    exact: true,
+    path: "/",
+    component: _header_logo__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_content_route_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
     path: "/",
     component: _header_logo__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -567,12 +579,22 @@ var Auth = function Auth() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_content_route_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
     path: "/",
     component: _header_account_nav__WEBPACK_IMPORTED_MODULE_12__["default"]
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_content_route_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    component: Content
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    exact: true,
+    path: "/login",
+    component: Auth
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    exact: true,
+    path: "/signup",
+    component: Auth
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_auth_route_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    exact: true,
     path: "/",
     component: Auth
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_content_route_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    path: "/",
+    component: Content
+  })));
 });
 
 /***/ }),
