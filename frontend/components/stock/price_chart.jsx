@@ -5,8 +5,7 @@ import {
 import numeral from 'numeral';
 import PriceChartTooltip from './price_chart_tooltip';
 import Loading from '../loading';
-
-const formatPrice = price => (typeof(price) === 'number') ? price.toFixed(2) : price;
+import { formatPrice } from '../../util/data_handling_util';
 
 class PriceChart extends React.Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class PriceChart extends React.Component {
 
   handleMouseMove({ isTooltipActive, activePayload }) {
     if (isTooltipActive) {
-      this.setState({ price: activePayload[0].payload.price.toFixed(2) });
+      this.setState({ price: formatPrice(activePayload[0].payload.price) });
     }
   }
 

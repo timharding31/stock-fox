@@ -1,13 +1,14 @@
 import React from 'react';
-import { Sparklines } from 'react-sparklines';
-import PriceChartTiny from './price_chart_tiny';
+import MiniStockContainer from './mini_stock_container';
 import Loading from '../loading';
+import { compareArrays, formatPrice } from '../../util/data_handling_util';
+
 
 class WatchlistModule extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { loadingPrices: true };
+    this.state = { loadingPrices: true, fetchCalled: false };
   }
 
   componentDidMount() {
@@ -15,16 +16,17 @@ class WatchlistModule extends React.Component {
       this.props.fetchWatchlist();
     }
   }
-  componentDidUpdate() {
-    for (let symb in this.props.watchlist.stocks) {
-      if (!this.props.watchlist.prices[symb]) {
-        this.setState({ loadingPrices: true });
-        this.props.fetchPrices(symb);
-      }
-    }
-    if (!this.props.loading.watchlist) {
-      if (Object.keys(this.props.watchlist.stocks) === Object.keys(this.props.watchlist.prices)) {
-        this.setState({ loadingPrices: false });
+  componentDidUpdate(prevProps) {
+    if (!this.props.loading.watchlist && this.state.loadingPrices) {
+      if (!this.state.fetchCalled) {
+        for (let symb of this.props.watchlist.stocks) {
+          this.props.fetchPrices(symb);
+        }
+        this.setState({ fetchCalled: true });
+      } else if (this.state.fetchCalled) {
+        if (compareArrays(this.props.watchlist.stocks, Object.keys(this.props.watchlist.prices))) {
+          this.setState({ loadingPrices: false });
+        }
       }
     }
   }
@@ -34,11 +36,33 @@ class WatchlistModule extends React.Component {
     if (this.state.loadingPrices) {
       return (<Loading loading={this.state.loadingPrices} compName={"watchlist-module"} />)
     }
-    let sparkLines;
-    for (let symb in this.props.watchlist.prices) {
-      sparkLines[symb] = <PriceChartTiny symbol={symbol} data={this.props.watchlist.prices[symb]} />
+    let modulesList = [];
+    for (let symb of this.props.watchlist.stocks) {
+      let color = (this.props.watchlist.prices[symb][0].price > this.props.watchlist.prices[symb][78].price) ? '#ED5D2A' : '#5bc43b';
+      modulesList.push(
+        <MiniStockContainer
+          symbol={symb}
+          data={this.props.watchlist.prices[symb]}
+          price={formatPrice(this.props.stocks[symb].price)}
+          color={color}
+        />
+        // <li className="mini-stock-container" key={`mini-${symb}`}>
+        //   <Link to={`/stocks/${symb}`}>
+        //     <div className="mini-symbol"><p>{symb}</p></div>
+        //     <PriceChartMini data={this.props.watchlist.prices[symb]} color={color} />
+        //     <div className="mini-price"><p>{formatPrice(this.props.stocks[symb].price)}</p></div>
+        //   </Link>
+        // </li>
+      )
     }
-    return null;
+    return (
+      <div className="watchlist-module">
+      <h4>Watchlist</h4>
+      <ul className="watchlist-charts">
+        {modulesList}
+      </ul>
+      </div>
+    );
   }
 }
 

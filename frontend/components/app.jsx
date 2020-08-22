@@ -51,8 +51,8 @@ export default () => (
     <Switch>
       <AuthRoute exact path="/login" component={Auth} />
       <AuthRoute exact path="/signup" component={Auth} />
-      <AuthRoute exact path="/" component={Auth} />
       <ContentRoute path="/" component={Content} />
+      <AuthRoute exact path="/" component={Auth} />
     </Switch>
   </div>
 );

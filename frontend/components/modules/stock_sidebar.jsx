@@ -35,7 +35,8 @@ class StockSidebar extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.watchlist !== prevProps.watchlist) {
+    if ((this.props.watchlist !== prevProps.watchlist) || 
+      (this.props.match.params.symbol !== prevProps.match.params.symbol)) {
       this.checkButtonState();
     }
   }

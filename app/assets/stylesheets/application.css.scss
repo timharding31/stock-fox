@@ -30,7 +30,7 @@ header.application-header {
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+  box-shadow: 0 4px 8px -2px rgba(0,0,0,.2);
 }
 
 
@@ -38,7 +38,7 @@ div.application-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
+  width: 95%;
   margin-top: 100px;
   margin-left: 5%;
   margin-right: 5%;
@@ -56,12 +56,15 @@ div.application-content {
 .application-content > aside {
   flex-grow: 1;
   padding-left: 5%;
+  margin-right: 5%;
   width: 35%;
   min-width: 200px;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  align-items: center;
+  justify-content: stretch;
   clear: both;
   z-index: 1;
 }
