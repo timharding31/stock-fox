@@ -4,8 +4,9 @@ import AuthRoute from '../util/auth_route_util';
 import ContentRoute from '../util/content_route_util';
 import SignupFormContainer from './auth/signup_form_container';
 import LoginFormContainer from './auth/login_form_container';
-import StockShowContainer from './stock/stock_show_container'
-import StockSidebarContainer from './stock/stock_sidebar_container'
+import StockShowContainer from './stock/stock_show_container';
+import StockSidebarContainer from './modules/stock_sidebar_container'
+import WatchlistModuleContainer from './modules/watchlist_module_container';
 
 import HeaderLogo from './header/logo';
 import HeaderLinks from './header/links';
@@ -20,6 +21,7 @@ const Content = () => (
     </section>
     <aside className="content-sidebar">
       <Route path="/stocks/:symbol" component={StockSidebarContainer} />
+      <Route path="/" component={WatchlistModuleContainer} />
     </aside>
   </div>
 )

@@ -4,18 +4,22 @@ import Loading from '../loading';
 
 class StockAboutSection extends React.Component {
 
-  componentDidUpdate(prevProps) {
-    if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
-      this.props.reload('stockDetails');
-      this.props.fetchStockDetail(this.props.stock);
-    }
-    if (this.props.loading) {
-      this.props.fetchStockDetail(this.props.stock);
-    }
+  componentDidMount() {
+    this.props.fetchStockDetail(this.props.stock);
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.stock.symbol !== prevProps.stock.symbol) {
+  //     this.props.fetchStockDetail(this.props.stock);
+  //   }
+  //   if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
+  //     this.props.reload('stockDetail');
+  //     this.props.fetchStockDetail(this.props.stock);
+  //   }
+  // }
+
   render() {
-    if (this.props.loading || !this.props.stock.ceo) {
+    if (this.props.loading) {
       return (<Loading loading={this.props.loading} compName={"stock-detail"} />);
     }
     const { stock } = this.props;

@@ -22,7 +22,7 @@ class StockNews extends React.Component {
     if (this.props.loading) {
       return (<Loading loading={this.props.loading} compName={"stock-news"} />);
     }
-    const newsStories = this.props.news.map((story, idx) => (<li key={`li-${story.idx}`} className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory {...story} idx={idx} /></li>));
+    const newsStories = this.props.news.map((story, idx) => (<li key={`li-${idx}`} className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory {...story} idx={idx} /></li>));
     return (
       <div className="news-feed-container">
         <div className="news-feed-header"><h3>Company News</h3></div>

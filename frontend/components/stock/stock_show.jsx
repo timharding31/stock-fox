@@ -10,24 +10,23 @@ class StockShow extends React.Component {
     this.props.fetchSingleStock(this.props.match.params.symbol);
     this.props.fetchStockPrices['1D'](this.props.stock);
     this.props.fetchStockNews(this.props.stock);
-    this.props.fetchStockDetail(this.props.stock);
+    // this.props.fetchStockDetail(this.props.stock);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.stock.symbol !== prevProps.stock.symbol) {
       this.props.fetchStockPrices['1D'](this.props.stock);
       this.props.fetchStockNews(this.props.stock);
-      this.props.fetchStockDetail(this.props.stock);
     }
     if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
-      this.props.reload();
+      this.props.reload('singleStock');
       this.props.fetchSingleStock(this.props.match.params.symbol);
       this.props.deleteStockPrices();
     }
   }
 
   componentWillUnmount() {
-    this.props.reload();
+    this.props.reload('singleStock');
     this.props.deleteStockPrices();
   }
 
@@ -36,7 +35,7 @@ class StockShow extends React.Component {
       stock,
       watchlist,
       news } = this.props;
-    if (this.props.loading.singleStock) {
+    if (this.props.loading.singleStock || this.props.loading.watchlist) {
       return (<Loading compName={'stock-show'} loading={this.props.loading.singleStock} />)
     };
     return (
@@ -45,7 +44,7 @@ class StockShow extends React.Component {
         <StockAboutSection
           stock={stock}
           match={this.props.match}
-          fetchStockDetail={fetchStockDetail}
+          fetchStockDetail={this.props.fetchStockDetail}
           loading={this.props.loading.stockDetails}
         />
         <StockNews news={news} loading={this.props.loading.news} />
