@@ -20,10 +20,9 @@ class StockAboutSection extends React.Component {
   // }
 
   render() {
-    if (this.props.loading) {
+    if (this.props.loading || !this.props.stock.ceo) {
       return (<Loading loading={this.props.loading} compName={"stock-detail"} />);
     }
-    sleep(1000);
     const { stock } = this.props;
     return (
       <div className="company-profile">
