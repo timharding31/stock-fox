@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparklines } from 'react-sparklines';
 import PriceChartTiny from './price_chart_tiny';
+import Loading from '../loading';
 
 class WatchlistModule extends React.Component {
   constructor(props) {
