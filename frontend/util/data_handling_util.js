@@ -15,3 +15,5 @@ export const compareArrays = (array1, array2) => {
 }
 
 export const formatPrice = price => (price) ? numeral(Number(price)).format('$0.00') : price;
+
+export const sleep = ms => (new Promise(resolve => setTimeout(resolve, ms)));

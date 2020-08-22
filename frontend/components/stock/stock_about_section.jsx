@@ -1,6 +1,7 @@
 import React from 'react';
 import numeral from 'numeral';
 import Loading from '../loading';
+import { sleep } from '../../util/data_handling_util';
 
 class StockAboutSection extends React.Component {
 
@@ -22,6 +23,7 @@ class StockAboutSection extends React.Component {
     if (this.props.loading) {
       return (<Loading loading={this.props.loading} compName={"stock-detail"} />);
     }
+    sleep(1000);
     const { stock } = this.props;
     return (
       <div className="company-profile">
