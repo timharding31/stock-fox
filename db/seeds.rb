@@ -21,13 +21,13 @@ nasdaq = nasdaq.to_a.map {|row| row.to_hash.select{ |k, v| [:symbol, :name, :pri
 nasdaq = nasdaq.reject{ |obj| obj[:price].nil? }
 
 nyse.each do |stock|
-  next if Stock.find_by(symbol: stock[:symbol])
+  next if Stock.find_by(symbol: stock[:symbol]) || stock[:symbol] =~ (/([^A-Z])/)
   stock[:exchange] = 'NYSE'
   Stock.create!(stock)
 end
 
 nasdaq.each do |stock|
-  next if Stock.find_by(symbol: stock[:symbol])
+  next if Stock.find_by(symbol: stock[:symbol]) || stock[:symbol] =~ (/([^A-Z])/)
   stock[:exchange] = 'NASDAQ'
   Stock.create!(stock)
 end

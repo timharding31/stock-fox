@@ -129,7 +129,7 @@ div[class^="header-"] a {
   position: relative;
   display: inline-block;
   width: 300px;
-  margin-left: 10%;
+  margin-left: 50px;
   height: 80%;
 }
 
@@ -140,7 +140,7 @@ div[class^="header-"] a {
   height: 40%;
   background-color: whitesmoke;
   width: 100%;
-  padding-inline-start: 5px;
+  padding-inline-start: 10px;
   border: 2px solid silver;
   border-radius: 5px;
 }
@@ -202,14 +202,10 @@ div[class^="header-"] a {
 .search-result-symbol {
   width: 25%;
   height: 100%;
-  // padding-top: 5%;
-  // padding-bottom: 5%;
 }
 
 .search-result-name {
   width: 75%;
   height: 100%;
-  // padding-top: 5%;
-  // padding-bottom: 5%;
   overflow: hidden;
 }
