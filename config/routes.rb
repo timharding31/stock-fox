@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:create]
     resource :session, only: [:create, :destroy]
-    resources :stocks, param: :symbol, only: [:show, :update]
-    resources :cryptos, param: :symbol, only: [:show, :update]
+    resources :stocks, param: :symbol, only: [:show, :update, :index]
+    resources :cryptos, param: :symbol, only: [:show, :update, :index]
     resources :watchlists, only: [:index]
     resources :stocks, :cryptos, param: :symbol, only: [] do 
       resources :watchlists, only: [:create]

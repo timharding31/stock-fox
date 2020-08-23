@@ -3,6 +3,7 @@ import { RECEIVE_STOCK_DETAILS, RECEIVE_SINGLE_STOCK } from '../actions/asset_ac
 import { RECEIVE_WATCHLIST } from '../actions/watchlist_actions';
 import { RECEIVE_STOCK_PRICES, CLEAR_STOCK_PRICES, CLEAR_ALL_STOCK_PRICES } from '../actions/chart_actions';
 import { RELOAD_ALL, RELOAD_ONE } from '../actions/ui_actions';
+import { RECEIVE_STOCK_SEARCH_RESULTS } from '../actions/search_actions';
 
 const _priceBaseState = {
   '1D': true,
@@ -18,12 +19,15 @@ const _defaultLoadingState = {
   prices: _priceBaseState,
   stockDetails: true,
   watchlist: true,
+  searchResults: true,
 }
 
 export default (state=_defaultLoadingState, action) => {
   Object.freeze(state);
 
   switch(action.type) {
+    case RECEIVE_STOCK_SEARCH_RESULTS:
+      return Object.assign({}, state, { searchResults: false });
     case RECEIVE_SINGLE_STOCK:
       return Object.assign({}, state, { singleStock: false });
     case RECEIVE_STOCK_NEWS:

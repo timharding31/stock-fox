@@ -8,6 +8,7 @@ import * as SessionApiUtil from './util/session_api_util';
 import * as FmpApiUtil from './util/fmp_api_util';
 import { fetchSingleStock, fetchStockDetail } from './actions/asset_actions';
 import { fetchWatchlist, fetchWatchlistPrices } from './actions/watchlist_actions';
+import { fetchStockSearchResults } from './actions/search_actions';
 import {
   fetchMaxStockPrices,
   fetch5YStockPrices,
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.getSingleStock = fetchSingleStock;
   window.fetchStockDetail = fetchStockDetail;
   window.fetchWatchlistPrices = fetchWatchlistPrices;
+  window.fetchStockSearchResults = fetchStockSearchResults;
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.login = SessionApiUtil.login;

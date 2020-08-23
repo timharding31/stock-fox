@@ -5,6 +5,7 @@ import NewsReducer from './entities/news_reducer';
 import StockDetailsReducer from './entities/stock_details_reducer';
 import CryptoDetailsReducer from './entities/crypto_details_reducer';
 import PricesReducer from './entities/prices_reducer';
+import SearchReducer from './entities/search_reducer';
 
 export default combineReducers({
   users: UsersReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   crypto: CryptoDetailsReducer,
   news: NewsReducer,
   prices: PricesReducer,
+  search: SearchReducer,
 });
