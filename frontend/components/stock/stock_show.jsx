@@ -9,7 +9,7 @@ class StockShow extends React.Component {
     this.props.fetchWatchlist();
     this.props.fetchSingleStock(this.props.match.params.symbol);
     this.props.fetchStockPrices['1D'](this.props.stock);
-    this.props.fetchStockNews(this.props.stock);
+    // this.props.fetchStockNews(this.props.stock);
     // this.props.fetchStockDetail(this.props.stock);
   }
 
@@ -31,10 +31,7 @@ class StockShow extends React.Component {
   }
 
   render() {
-    const {
-      stock,
-      watchlist,
-      news } = this.props;
+    const { stock, news } = this.props;
     if (this.props.loading.singleStock || this.props.loading.watchlist) {
       return (<Loading compName={'stock-show'} loading={this.props.loading.singleStock} />)
     };
@@ -47,7 +44,11 @@ class StockShow extends React.Component {
           fetchStockDetail={this.props.fetchStockDetail}
           loading={this.props.loading.stockDetails}
         />
-        <StockNews news={news} loading={this.props.loading.news} />
+        <StockNews
+          stock={stock}
+          fetchStockNews={this.props.fetchStockNews}
+          news={news}
+          loading={this.props.loading.news} />
       </div>
     )
   }

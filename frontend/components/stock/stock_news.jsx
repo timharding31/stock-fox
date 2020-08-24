@@ -10,6 +10,10 @@ class StockNews extends React.Component {
     this.handleButton = this.handleButton.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchStockNews(this.props.stock);
+  }
+
   handleButton(e) {
     e.preventDefault();
     this.setState({

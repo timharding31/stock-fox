@@ -1,5 +1,7 @@
 import numeral from 'numeral';
 
+export const queryFromStock = stock => stock.name.substring(0, stock.name.search(/[^a-zA-Z]/));
+
 export const arrayToAssetObj = array => array.reduce((obj, item) => {
   obj[item['symbol']] = item
   return obj
