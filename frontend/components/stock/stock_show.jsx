@@ -9,6 +9,7 @@ class StockShow extends React.Component {
     this.props.fetchWatchlist();
     this.props.fetchSingleStock(this.props.match.params.symbol);
     this.props.fetchStockPrices['1D'](this.props.stock);
+    this.props.fetchStockDetail(this.props.stock)
   }
 
   componentDidUpdate(prevProps) {
@@ -19,6 +20,7 @@ class StockShow extends React.Component {
       this.props.reload('singleStock');
       this.props.fetchSingleStock(this.props.match.params.symbol);
       this.props.deleteStockPrices();
+      this.props.fetchStockDetail(this.props.stock)
     }
   }
 

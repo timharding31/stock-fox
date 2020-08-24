@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :username, :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_session_token, :add_buying_power
   after_create :create_default_watchlist
   attr_reader :password
 
@@ -39,6 +39,10 @@ class User < ApplicationRecord
       watchable_id: asset.id
     )
     self.watchlist
+  end
+
+  def add_buying_power
+    self.buying_power = 10000.00
   end
 
   def remove_asset_from_watchlist(asset)
