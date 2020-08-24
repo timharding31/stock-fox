@@ -1,24 +1,15 @@
 import { RECEIVE_STOCK_PRICES, CLEAR_STOCK_PRICES, CLEAR_ALL_STOCK_PRICES } from '../../actions/chart_actions';
 import { RELOAD_ALL } from '../../actions/ui_actions';
+import { stockPriceSelector } from '../../selectors/stock_price_selector';
 
-export default (state = {}, action) => {
+export default (state = {}, { prices, type, range }) => {
   Object.freeze(state);
 
-  switch (action.type) {
+  switch (type) {
     case RECEIVE_STOCK_PRICES:
-      let prices;
-      if (action.prices.historical) {
-        prices = action.prices.historical
-          .map(obj => ({ date: new Date(obj.date), price: obj.close }))
-          .sort(obj => -obj.date);
-      } else {
-        prices = action.prices
-          .map(obj => ({ date: new Date(obj.date), price: obj.close }))
-          .sort(obj => -obj.date);
-      }
-      return Object.assign({}, state, { [action.range]: prices });
+      return Object.assign({}, state, { [range]: stockPriceSelector(prices) });
     case CLEAR_STOCK_PRICES:
-      return Object.assign({}, state, { [action.range]: null });
+      return Object.assign({}, state, { [range]: null });
     case RELOAD_ALL:
     case CLEAR_ALL_STOCK_PRICES:
       return {};
