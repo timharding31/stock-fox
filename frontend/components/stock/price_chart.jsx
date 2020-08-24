@@ -58,6 +58,7 @@ class PriceChart extends React.Component {
     } else if (this.props.range === '1D') {
       offset += 30;
     }
+    let color = (priceData[0].price > priceData[priceData.length - 1].price) ? '#ED5D2A' : '#5bc43b';
     return (
       <div id="price-chart-container">
         <div className="price-chart-header">
@@ -82,7 +83,7 @@ class PriceChart extends React.Component {
                 position={{ y: -30 }}
                 offset={offset}
                 cursor={true} />
-              <Line type="monotone" dataKey="price" strokeWidth="3" stroke="#5bc43b" dot={false} isAnimationActive={true} />
+              <Line type="monotone" dataKey="price" strokeWidth="3" stroke={color} dot={false} isAnimationActive={true} />
             </LineChart>
           </ResponsiveContainer>
         </div>

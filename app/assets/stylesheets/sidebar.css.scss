@@ -40,6 +40,9 @@ button.add-to-watchlist:focus {
   align-items: center;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  overflow: hidden;
+  border: 2px solid white;
+  border-radius: 5px;
 }
 
 .watchlist-charts {
@@ -52,14 +55,26 @@ button.add-to-watchlist:focus {
   align-items: center;
   padding: 0px;
   margin-bottom: 0px;
+  margin-top: 0px;
   overflow: hidden;
   overflow-y: scroll;
+}
+
+.watchlist-module > h4 {
+  border-bottom: 1px solid white;
+  width: 100%;
+  height: 36px;
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 0;
+  padding-left: 10%;
+  box-shadow: 0 4px 8px -2px rgba(0,0,0,.1);
 }
 
 .mini-stock-container {
   width: 100%;
   margin: 0 5 5 5;
-  border-bottom: 1px solid gainsboro;
+  border-bottom: 1px solid white;
   cursor: pointer;
   display: block;
 }
@@ -107,4 +122,12 @@ button.add-to-watchlist:focus {
   font-weight: bold;
 }
 
-
+#watchlist-bottom {
+  width: 100%;
+  size: 0px;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  color: white;
+  box-shadow: 0px -10px 16px 0px rgba(0,0,0,0.5);
+}

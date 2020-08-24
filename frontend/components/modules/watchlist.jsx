@@ -38,7 +38,7 @@ class WatchlistModule extends React.Component {
     }
     let modulesList = [];
     for (let symb of this.props.watchlist.stocks) {
-      let color = (this.props.watchlist.prices[symb][0].price > this.props.watchlist.prices[symb][78].price) ? '#ED5D2A' : '#5bc43b';
+      let color = (this.props.watchlist.prices[symb][0].price > this.props.watchlist.prices[symb][this.props.watchlist.prices[symb].length - 1].price) ? '#ED5D2A' : '#5bc43b';
       modulesList.push(
         <MiniStockContainer
           symbol={symb}

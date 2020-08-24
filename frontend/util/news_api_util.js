@@ -3,6 +3,7 @@ const prevDate = moment().subtract(1, 'weeks').format('YYYY-MM-DD');
 
 export const getStockNews = stock => (
   $.ajax({
-    url: `https://newsapi.org/v2/everything?q=${[stock.symbol]}&from=${prevDate}&sortBy=popularity&apikey=${window.newsAPIKey}`
+    headers: { "Ocp-Apim-Subscription-Key": window.newsAPIKey },
+    url: `https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=${[stock.symbol]}&freshness=Week&category=Business`
   })
 );
