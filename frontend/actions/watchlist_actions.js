@@ -27,8 +27,10 @@ export const resetWatchlistErrors = () => dispatch => dispatch(clearWatchlistErr
 
 export const fetchWatchlist = () => dispatch => getWatchlist()
   .then(watchlist => {
-    watchlist.forEach(symbol => fetchSingleStock(symbol)(dispatch));
-    watchlist.forEach(symbol => fetch1DStockPrices(symbol)(dispatch));
+    if (watchlist) {
+      watchlist.forEach(symbol => fetchSingleStock(symbol)(dispatch));
+      watchlist.forEach(symbol => fetch1DStockPrices(symbol)(dispatch));
+    }
     return dispatch(receiveWatchlist(watchlist))
   }, err => dispatch(receiveWatchlistErrors(err.responseJSON)));
 

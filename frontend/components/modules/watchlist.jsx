@@ -5,14 +5,6 @@ import { compareArrays, formatPrice } from '../../util/data_handling_util';
 
 
 class WatchlistModule extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentWillUnmount() {
-    this.props.clearErrors();
-  }
-
   render() {
     if (this.props.loading) {
       return (<Loading loading={this.props.loading} compName={"watchlist-module"} />)
@@ -25,7 +17,7 @@ class WatchlistModule extends React.Component {
             key={`watchlist-chart-${symbol}`}
             symbol={symbol}
             prices={this.props.prices}
-            price={formatPrice(this.props.stocks[symbol].price)}
+            stock={formatPrice(this.props.stocks[symbol])}
           />)
         }
       } else {

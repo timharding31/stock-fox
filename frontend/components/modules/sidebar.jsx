@@ -37,17 +37,22 @@ class SidebarModule extends React.Component {
     return ((!this.props.loading.watchlist) && (!this.props.loading.portfolio))
   }
 
-  // componentWillUnmount() {
-  //   this.props.deleteStockPrices();
-  // }
+  componentWillUnmount() {
+    this.props.deleteStockPrices();
+    this.props.resetPortfolioErrors();
+    this.props.resetWatchlistErrors();
+  }
 
   componentDidUpdate(prevProps) {
     if (this.state.loadingStockSummaries) {
-      if (!this.state.loadingPortfolioPrices && !this.state.loadingPortfolioPrices) {
+      if (!this.state.loadingPortfolioPrices && !this.state.loadingWatchlistPrices) {
         if (compareSymbols(this.props.stocks.summary.allSymbols, this.props.watchlist.allSymbols.concat(this.props.portfolio.allSymbols))) {
           this.setState({ loadingStockSummaries: false });
         }
       }
+    }
+    if (this.state.loadingPortfolioPrices && this.props.errors.portfolio) {
+      this.setState({ loadingPortfolioPrices: false });
     }
   }
 
@@ -96,17 +101,14 @@ class SidebarModule extends React.Component {
       <div className="sidebar-modules">
         <PortfolioModule
           loading={this.state.loadingPortfolioPrices || this.state.loadingStockSummaries}
-          // fetchPortfolio={this.props.fetchPortfolio}
           portfolio={this.props.portfolio}
           stocks={this.props.stocks.summary.bySymbol}
           prices={this.props.prices['1D'].bySymbol}
           errors={this.props.errors.portfolio}
-          clearErrors={this.props.resetPortfilioErrors}
+          clearErrors={this.props.resetPortfolioErrors}
         />
         <WatchlistModule
           loading={this.state.loadingWatchlistPrices || this.state.loadingStockSummaries}
-          // fetchWatchlist={this.props.fetchWatchlist}
-          // fetchPrices={this.props.fetchWatchlistPrices}
           watchlist={this.props.watchlist.allSymbols}
           stocks={this.props.stocks.summary.bySymbol}
           prices={this.props.prices['1D'].bySymbol}

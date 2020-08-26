@@ -17,7 +17,7 @@ export default (state = _pricesBaseState, { type, symbol, prices, range }) => {
   switch (type) {
     case RECEIVE_STOCK_PRICES:
       nextState[range].bySymbol[symbol] = stockPriceSelector(prices);
-      nextState[range].allSymbols.push(symbol);
+      if (!nextState[range].allSymbols.includes(symbol)) nextState[range].allSymbols.push(symbol);
       return nextState;
     case CLEAR_STOCK_PRICES:
       nextState[range] = { bySymbol: {}, allSymbols: [] }

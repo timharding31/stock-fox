@@ -26,8 +26,10 @@ export const resetPortfolioErrors = () => dispatch => dispatch(clearPortfolioErr
 
 export const fetchPortfolio = () => dispatch => getPortfolio()
   .then(portfolio => {
-    Object.keys(portfolio).forEach(symbol => fetchSingleStock(symbol)(dispatch));
-    Object.keys(portfolio).forEach(symbol => fetch1DStockPrices(symbol)(dispatch));
+    if (portfolio) {
+      Object.keys(portfolio).forEach(symbol => fetchSingleStock(symbol)(dispatch));
+      Object.keys(portfolio).forEach(symbol => fetch1DStockPrices(symbol)(dispatch));
+    }
     return dispatch(receivePortfolio(portfolio))
   }, err => dispatch(receivePortfolioErrors(err.responseJSON)));
 

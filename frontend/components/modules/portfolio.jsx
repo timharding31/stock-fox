@@ -5,35 +5,28 @@ import { compareArrays, formatPrice } from '../../util/data_handling_util';
 
 
 class PortfolioModule extends React.Component {
-  constructor(props) {
-    super(props)
-
-    // this.state = { loadingPrices: true, fetchCalled: false };
-  }
-
-  componentWillUnmount() {
-    this.props.clearErrors();
-  }
-
 
   render() {
-    if (this.props.loading) {
+    if (this.props.loading && this.props.errors.length === 0) {
       return (<Loading loading={this.props.loading} compName={"portfolio-module"} />)
     }
+    // if (this.props.errors) {
+    //   return (<ul>{this.props.errors.map((error, idx) => (<li key={`error-${idx}`}>{error}</li>))}</ul>)
+    // }
     let portfolioCharts = [];
-    if (this.props.errors.length === 0) {
+    if (this.props.errors.length) {
+      portfolioCharts.push(this.props.errors.map((error, idx) => (<li className="portfolio-errors" key={`error-${idx}`}>{error}</li>)));
+    } else {
       for (let symbol of this.props.portfolio.allSymbols) {
         portfolioCharts.push(
           <MiniStockContainer
-            key={`portfolio-chart-${symbol}`}
-            symbol={symbol}
-            amt={this.props.portfolio.bySymbol[symbol].amt}
-            prices={this.props.prices}
-            price={formatPrice(this.props.stocks[symbol].price)}
+          key={`portfolio-chart-${symbol}`}
+          symbol={symbol}
+          amt={this.props.portfolio.bySymbol[symbol].amt}
+          prices={this.props.prices}
+          stock={formatPrice(this.props.stocks[symbol])}
           />)
       }
-    } else {
-      portfolioCharts = this.props.errors.map((error, idx) => (<li key={`error-${idx}`}>{error}</li>));
     }
     return (
       <div className="portfolio-module">
