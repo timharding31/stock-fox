@@ -17,25 +17,14 @@ class AddToWatchlist extends React.Component {
     this.state = { button: null };
 
     this.handleButton = this.handleButton.bind(this);
-    this.toggleButton = this.toggleButton.bind(this);
-  }
-
-  toggleButton() {
-    if (this.state.text === 'Remove from Watchlist') {
-      this.setState({ button: this.addState })
-    } else {
-      this.setState({ button: this.removeState })
-    }
   }
 
   checkButtonState() {
-    // if (!this.props.loading) {
-      if (this.props.watchlist.allSymbols.includes(this.props.params.symbol)) {
-        this.setState({ button: this.removeState });
-      } else {
-        this.setState({ button: this.addState });
-      }
-    // }
+    if (this.props.watchlist.allSymbols.includes(this.props.params.symbol)) {
+      this.setState({ button: this.removeState });
+    } else {
+      this.setState({ button: this.addState });
+    }
   }
 
   componentDidMount() {
@@ -45,8 +34,6 @@ class AddToWatchlist extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // (this.props.watchlist.allSymbols != prevProps.watchlist.allSymbols) ||
-    //   (prevProps.params && 
     if (this.props.params.symbol != prevProps.params.symbol) {
       this.checkButtonState();
     }

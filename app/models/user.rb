@@ -24,8 +24,7 @@ class User < ApplicationRecord
   end
 
   def portfolio
-    self.holdings
-    # Holding.select("holdings.*").where(user_id: self.id)
+    self.holdings.where('holdings.amt > 0')
   end
 
   def self.find_by_credentials(username, password)
