@@ -24,7 +24,7 @@ class PortfolioModule extends React.Component {
           symbol={symbol}
           amt={this.props.portfolio.bySymbol[symbol].amt}
           prices={this.props.prices}
-          stock={formatPrice(this.props.stocks[symbol])}
+          stock={this.props.stocks[symbol]}
           />)
       }
     }

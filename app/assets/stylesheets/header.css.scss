@@ -1,9 +1,50 @@
-.header-logo-container > a,
 div[class^="header-"] {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: baseline;
+}
+.header-logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.header-logo-container > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-container span.logo {
+  width: 37px;
+  height: 43.6px;
+  display: inline-block;
+  padding-top: 15%;
+}
+
+.wordmark {
+  padding-top: 15px;
+  margin: 0;
+}
+
+.header-logo-container:hover .wordmark {
+  color: #5bc43b;
+}
+
+
+.header-logo-container:hover span.logo > img.standard {
+  display: none;
+}
+.header-logo-container span.logo > img.hover {
+  display: none;
+}
+.header-logo-container:hover span.logo > img.hover {
+  display: inline-block;
+}
+.header-logo-container span.logo > img {
+  width: 25.5px;
+  height: 30px;
 }
 
 div[class^="header-"] a {
@@ -78,7 +119,7 @@ div[class^="header-"] a {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  height: 80%;
+  height: 50px;
 }
 
 .account-dropdown > li {

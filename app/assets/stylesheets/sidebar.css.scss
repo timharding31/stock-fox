@@ -214,8 +214,8 @@ button.add-to-watchlist:focus {
 .order-form-header > li:not(.selected) {
   cursor: pointer;
   border-top: 2px solid gainsboro;
-  border-left: 2px solid gainsboro;
-  border-right: 2px solid gainsboro;
+  border-left: 0px solid gainsboro;
+  border-right: 0px solid gainsboro;
   background-color: gainsboro;
 }
 
@@ -226,8 +226,8 @@ button.add-to-watchlist:focus {
 
 .order-form-header > li.selected {
   border-top: 2px solid white;
-  border-left: 2px solid white;
-  border-right: 2px solid white;
+  border-left: 0px solid white;
+  border-right: 0px solid white;
 }
 
 .order-form-header > li.selected > button {

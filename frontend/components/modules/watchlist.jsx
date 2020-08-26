@@ -17,7 +17,7 @@ class WatchlistModule extends React.Component {
             key={`watchlist-chart-${symbol}`}
             symbol={symbol}
             prices={this.props.prices}
-            stock={formatPrice(this.props.stocks[symbol])}
+            stock={this.props.stocks[symbol]}
           />)
         }
       } else {
