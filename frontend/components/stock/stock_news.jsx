@@ -18,16 +18,19 @@ class StockNews extends React.Component {
     if (!this.props.news[this.props.params.symbol]) this.props.fetchStockNews(this.props.stock);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.state.loading) {
       if (Boolean(this.props.news[this.props.params.symbol])) {
         this.setState({ loading: false });
       }
     }
+    if (this.props.params.symbol !== prevProps.params.symbol) {
+      if (!this.props.news[this.props.params.symbol]) this.props.fetchStockNews(this.props.stock);
+    }
   }
 
   shouldComponentUpdate() {
-    return Boolean(this.props.news);
+    return Boolean(this.props.news)
   }
 
   handleButton(e) {
