@@ -9,20 +9,27 @@ class WatchlistModule extends React.Component {
     super(props)
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   render() {
     if (this.props.loading) {
       return (<Loading loading={this.props.loading} compName={"watchlist-module"} />)
     }
     let watchlistCharts = [];
-    for (let symbol of this.props.watchlist) {
-      watchlistCharts.push(
-        <MiniStockContainer
-          key={`watchlist-chart-${symbol}`}
-          symbol={symbol}
-          prices={this.props.prices}
-          price={formatPrice(this.props.stocks[symbol].price)}
-        />)
+    if (this.props.errors.length === 0) {
+      for (let symbol of this.props.watchlist) {
+        watchlistCharts.push(
+          <MiniStockContainer
+            key={`watchlist-chart-${symbol}`}
+            symbol={symbol}
+            prices={this.props.prices}
+            price={formatPrice(this.props.stocks[symbol].price)}
+          />)
+        }
+      } else {
+      watchlistCharts = this.props.errors.map((error, idx) => (<li key={`error-${idx}`}>{error}</li>));
     }
     return (
       <div className="watchlist-module">

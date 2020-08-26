@@ -11,25 +11,9 @@ class PortfolioModule extends React.Component {
     // this.state = { loadingPrices: true, fetchCalled: false };
   }
 
-  // componentDidMount() {
-  //   if (this.props.loading.portfolio) {
-  //     this.props.fetchPortfolio();
-  //   }
-  // }
-  // componentDidUpdate(prevProps) {
-  //   if (!this.props.loading.portfolio && this.state.loadingPrices) {
-  //     if (!this.state.fetchCalled) {
-  //       for (let symbol in this.props.portfolio.stocks) {
-  //         this.props.fetchPrices(symbol);
-  //       }
-  //       this.setState({ fetchCalled: true });
-  //     } else if (this.state.fetchCalled) {
-  //       if (compareArrays(Object.keys(this.props.portfolio.stocks), Object.keys(this.props.portfolio.prices))) {
-  //         this.setState({ loadingPrices: false });
-  //       }
-  //     }
-  //   }
-  // }
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
 
   render() {
@@ -37,15 +21,20 @@ class PortfolioModule extends React.Component {
       return (<Loading loading={this.props.loading} compName={"portfolio-module"} />)
     }
     let portfolioCharts = [];
-    for (let symbol of this.props.portfolio.allSymbols) {
-      portfolioCharts.push(
-        <MiniStockContainer
-          key={`portfolio-chart-${symbol}`}
-          symbol={symbol}
-          amt={this.props.portfolio.bySymbol[symbol].amt}
-          prices={this.props.prices}
-          price={formatPrice(this.props.stocks[symbol].price)}
-        />)
+    if (this.props.errors.length === 0) {
+      for (let symbol of this.props.portfolio.allSymbols) {
+        portfolioCharts.push(
+          <MiniStockContainer
+            key={`portfolio-chart-${symbol}`}
+            symbol={symbol}
+            amt={this.props.portfolio.bySymbol[symbol].amt}
+            prices={this.props.prices}
+            price={formatPrice(this.props.stocks[symbol].price)}
+          />)
+      }
+    } else {
+      portfolioCharts = this.props.errors.map((error, idx) => (<li key={`error-${idx}`}>{error}</li>));
+      }
     }
     return (
       <div className="portfolio-module">

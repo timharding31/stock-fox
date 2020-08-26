@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
-import { fetchWatchlist } from '../../actions/watchlist_actions';
-import { fetchPortfolio } from '../../actions/portfolio_actions';
+import { fetchWatchlist, resetWatchlistErrors } from '../../actions/watchlist_actions';
+import { fetchPortfolio, resetPortfolioErrors } from '../../actions/portfolio_actions';
 import { fetch1DStockPrices, deleteStockPrices } from '../../actions/price_actions';
 import SidebarModule from './sidebar';
 
-const mapStateToProps = ({ entities: { watchlist, stocks, portfolio, prices }, ui: { loading } }) => ({
+const mapStateToProps = ({ entities: { watchlist, stocks, portfolio, prices }, ui: { loading, errors } }) => ({
   portfolio,
   watchlist,
   stocks,
   loading,
-  prices
+  prices,
+  errors
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,6 +20,8 @@ const mapDispatchToProps = dispatch => ({
   deleteStockPrices: () => dispatch(deleteStockPrices('1D')),
   reloadPortfolio: () => dispatch(clearLoadingState('portfolio')),
   reloadBuyingPower: () => dispatch(clearLoadingState('users')),
+  resetWatchlistErrors: () => dispatch(resetWatchlistErrors()),
+  resetPortfolioErrors: () => dispatch(resetPortfolioErrors()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarModule);

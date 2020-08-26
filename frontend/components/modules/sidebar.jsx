@@ -100,6 +100,8 @@ class SidebarModule extends React.Component {
           portfolio={this.props.portfolio}
           stocks={this.props.stocks.summary.bySymbol}
           prices={this.props.prices['1D'].bySymbol}
+          errors={this.props.errors.portfolio}
+          clearErrors={this.props.resetPortfilioErrors}
         />
         <WatchlistModule
           loading={this.state.loadingWatchlistPrices || this.state.loadingStockSummaries}
@@ -108,6 +110,8 @@ class SidebarModule extends React.Component {
           watchlist={this.props.watchlist.allSymbols}
           stocks={this.props.stocks.summary.bySymbol}
           prices={this.props.prices['1D'].bySymbol}
+          errors={this.props.errors.watchlist}
+          clearErrors={this.props.resetWatchlistErrors}
         />
       </div>
     );

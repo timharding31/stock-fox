@@ -1,11 +1,11 @@
 import { RECEIVE_SESSION_ERRORS, CLEAR_SESSION_ERRORS } from '../../actions/session_actions';
 
-export default (state = [], action) => {
+export default (state = [], { type, errors}) => {
   Object.freeze(state);
 
-  switch (action.type) {
+  switch (type) {
     case RECEIVE_SESSION_ERRORS:
-      return action.errors;
+      return errors;
     case CLEAR_SESSION_ERRORS:
       return [];
     default:
