@@ -4,23 +4,17 @@ export const getSingleStock = symbol => (
   })
 );
 
-export const getSingleCrypto = symbol => (
+export const patchStockPrice = (symbol, price) => (
   $.ajax({
-    url: `/api/cryptos/${symbol}`
-  })
-);
-
-export const patchStockPrice = (stock, price) => (
-  $.ajax({
-    url: `api/stocks/${stock.symbol}`,
+    url: `api/stocks/${symbol}`,
     method: 'PATCH',
     data: { price }
   })
 );
 
-export const patchStockInfo = (stock, detail) => (
+export const patchStockInfo = (symbol, detail) => (
   $.ajax({
-    url: `api/stocks/${stock.symbol}`,
+    url: `api/stocks/${symbol}`,
     method: 'PATCH',
     data: {
       name: detail.companyName,

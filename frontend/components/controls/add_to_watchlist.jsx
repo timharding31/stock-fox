@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from '../loading';
 
-class StockSidebar extends React.Component {
+class AddToWatchlist extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,42 +20,44 @@ class StockSidebar extends React.Component {
   }
 
   checkButtonState() {
-    if (!this.props.loading) {
-      if (this.props.watchlist.includes(this.props.stock.symbol)) {
+    // if (!this.props.loading) {
+      if (this.props.watchlist.allSymbols.includes(this.props.params.symbol)) {
         this.setState({ button: this.removeState });
       } else {
         this.setState({ button: this.addState });
       }
-    }
+    // }
   }
 
   componentDidMount() {
-    this.props.fetchSingleStock(this.props.stock.symbol);
-    this.props.fetchWatchlist();
+    if (!this.props.stocks.summary[this.props.params.symbol]) this.props.fetchSingleStock(this.props.params.symbol);
+    if (this.props.loading) this.props.fetchWatchlist();
+    this.checkButtonState();
   }
 
   componentDidUpdate(prevProps) {
-    if ((this.props.watchlist !== prevProps.watchlist) || 
-      (this.props.match.params.symbol !== prevProps.match.params.symbol)) {
+    // (this.props.watchlist.allSymbols != prevProps.watchlist.allSymbols) ||
+    //   (prevProps.params && 
+    if (this.props.params.symbol != prevProps.params.symbol) {
       this.checkButtonState();
     }
   }
 
   handleButton(e) {
     e.preventDefault();
-    this.state.button.action(this.props.stock);
+    this.state.button.action(this.props.params.symbol);
   }
 
   render() {
-    if (!this.state.button || this.props.loading) {
+    if (!this.state.button) {
       return (<Loading loading={this.props.loading} compName={"watchlist"} />)
     };
     return (
-      <div className="stock-show-page-sidebar">
+      <div className="watchlist-control">
         <button className="add-to-watchlist" onClick={this.handleButton}>{this.state.button.text}</button>
       </div>
     )
   }
 }
 
-export default StockSidebar;
+export default AddToWatchlist;

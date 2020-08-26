@@ -1,29 +1,39 @@
 import React from 'react';
 import numeral from 'numeral';
 import Loading from '../loading';
-import { sleep } from '../../util/data_handling_util';
 
 class StockAboutSection extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchStockDetail(this.props.stock);
+  constructor(props) {
+    super(props)
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.stock.symbol !== prevProps.stock.symbol) {
-  //     this.props.fetchStockDetail(this.props.stock);
-  //   }
-  //   if (this.props.match.params.symbol !== prevProps.match.params.symbol) {
-  //     this.props.reload('stockDetail');
-  //     this.props.fetchStockDetail(this.props.stock);
-  //   }
-  // }
+  componentDidMount() {
+    if (!this.props.stocks.detail.bySymbol[this.props.params.symbol]) this.props.fetchStockDetail(this.props.params.symbol);
+  }
+
+  componentDidUpdate(prevProps) {
+    // if (this.state.loading) {
+    //   if (!this.props.stocks.detail[this.props.params.symbol]) {
+    //     this.props.fetchStockDetail(this.props.params.symbol);
+    //   } else {
+    //     this.setState({ loading: false });
+    //   }
+    // }
+    // if (this.props.stock.symbol !== prevProps.stock.symbol) {
+    //   this.props.fetchStockDetail(this.props.stock);
+    // }
+    if (this.props.params.symbol !== prevProps.params.symbol) {
+      // this.props.reload('stockDetail');
+      this.props.fetchStockDetail(this.props.params.symbol);
+    }
+  }
 
   render() {
-    if (this.props.loading || !this.props.stock.ceo) {
-      return (<Loading loading={this.props.loading} compName={"stock-detail"} />);
+    if (this.props.loading || !this.props.stocks.detail.bySymbol[this.props.params.symbol]) {
+      return (<Loading loading={this.props.loading || !this.props.stocks.detail.bySymbol[this.props.params.symbol]} compName={"stock-detail"} />);
     }
-    const { stock } = this.props;
+    const stock = this.props.stocks.detail.bySymbol[this.props.params.symbol];
+    if (!stock) return null;
     return (
       <div className="company-profile">
         <div className="profile-header"><h3>About</h3></div>

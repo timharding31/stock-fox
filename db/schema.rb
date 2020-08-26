@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_171049) do
+ActiveRecord::Schema.define(version: 2020_08_25_171840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cryptos", force: :cascade do |t|
-    t.string "symbol", null: false
-    t.string "name", null: false
-    t.decimal "price", precision: 19, scale: 4, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["symbol"], name: "index_cryptos_on_symbol", unique: true
+  create_table "holdings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.decimal "amt", precision: 19, scale: 4, null: false
+    t.string "stock_symbol"
+    t.index ["stock_symbol"], name: "index_holdings_on_stock_symbol"
+    t.index ["user_id"], name: "index_holdings_on_user_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -57,10 +56,9 @@ ActiveRecord::Schema.define(version: 2020_08_24_171049) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "watchable_type"
-    t.bigint "watchable_id"
+    t.string "stock_symbol"
+    t.index ["stock_symbol"], name: "index_watches_on_stock_symbol"
     t.index ["user_id"], name: "index_watches_on_user_id"
-    t.index ["watchable_type", "watchable_id"], name: "index_watches_on_watchable_type_and_watchable_id"
   end
 
 end

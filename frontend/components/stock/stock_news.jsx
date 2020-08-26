@@ -6,12 +6,28 @@ class StockNews extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { hidden: true, button: 'Show More' }
+    this.state = {
+      hidden: true,
+      button: 'Show More',
+      loading: true
+    }
     this.handleButton = this.handleButton.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchStockNews(this.props.stock);
+    if (!this.props.news[this.props.params.symbol]) this.props.fetchStockNews(this.props.stock);
+  }
+
+  componentDidUpdate() {
+    if (this.state.loading) {
+      if (Boolean(this.props.news[this.props.params.symbol])) {
+        this.setState({ loading: false });
+      }
+    }
+  }
+
+  shouldComponentUpdate() {
+    return Boolean(this.props.news);
   }
 
   handleButton(e) {
@@ -23,8 +39,8 @@ class StockNews extends React.Component {
   }
   
   render() {
-    if (this.props.loading) {
-      return (<Loading loading={this.props.loading} compName={"stock-news"} />);
+    if (this.props.loading || !this.props.news) {
+      return (<Loading loading={this.props.loading || !this.props.news[this.props.params.symbol]} compName={"stock-news"} />);
     }
     const newsStories = this.props.news.map((story, idx) => (<li key={`li-${idx}`} className={`news-story${this.state.hidden && idx > 3 ? ' hidden' : ''}`}><NewsStory {...story} idx={idx} /></li>));
     return (

@@ -1,10 +1,13 @@
-import { combineReducers } from 'redux';
-import WatchedStocksReducer from './watchlist/watched_stocks_reducer';
-import WatchedCryptosReducer from './watchlist/watched_cryptos_reducer';
-import WatchedStockPricesReducer from './watchlist/watched_stock_prices_reducer';
+import { RECEIVE_WATCHLIST } from '../../actions/watchlist_actions';
 
-export default combineReducers({
-  stocks: WatchedStocksReducer,
-  crypto: WatchedCryptosReducer,
-  prices: WatchedStockPricesReducer,
-});
+export default (state = { allSymbols: [] }, { type, watchlist }) => {
+  Object.freeze(state);
+  let nextState = { ...state };
+
+  switch (type) {
+    case RECEIVE_WATCHLIST:
+      return { allSymbols: watchlist };
+    default:
+      return state;
+  }
+};

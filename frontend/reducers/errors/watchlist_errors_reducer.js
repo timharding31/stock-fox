@@ -1,4 +1,6 @@
-import { RECEIVE_WATCHLIST_ERRORS, CLEAR_WATCHLIST_ERRORS } from '../../actions/watchlist_actions';
+import { RECEIVE_WATCHLIST_ERRORS,
+  // CLEAR_WATCHLIST_ERRORS
+} from '../../actions/watchlist_actions';
 
 export default (state = [], action) => {
   Object.freeze(state);
@@ -6,8 +8,8 @@ export default (state = [], action) => {
   switch (action.type) {
     case RECEIVE_WATCHLIST_ERRORS:
       return action.errors;
-    case CLEAR_WATCHLIST_ERRORS:
-      return [];
+    // case CLEAR_WATCHLIST_ERRORS:
+    //   return [];
     default:
       return state;
   }

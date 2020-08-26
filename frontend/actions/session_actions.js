@@ -1,5 +1,6 @@
-import { signup, login, logout, demoLogin } from '../util/session_api_util';
+import { signup, login, logout, demoLogin, getUser } from '../util/session_api_util';
 import { fetchWatchlist } from './watchlist_actions';
+import { fetchPortfolio } from './portfolio_actions';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
@@ -25,20 +26,25 @@ const clearSessionErrors = () => ({
   type: CLEAR_SESSION_ERRORS
 });
 
+export const updateUserParams = () => dispatch => getUser()
+  .then(user => dispatch(receiveCurrentUser(user)));
+
 export const resetSessionErrors = () => dispatch => dispatch(clearSessionErrors());
 
 export const loginDemoUser = () => dispatch => demoLogin()
   .then(user => {
     fetchWatchlist()(dispatch)
+    fetchPortfolio()(dispatch)
     return dispatch(receiveCurrentUser(user))
   });
 
 export const signupUser = user => dispatch => signup(user)
-  .then(user => (dispatch(receiveCurrentUser(user))), err => dispatch(receiveErrors(err.responseJSON)));
+  .then(user => dispatch(receiveCurrentUser(user)), err => dispatch(receiveErrors(err.responseJSON)));
 
 export const loginUser = user => dispatch => login(user)
   .then(user => {
     fetchWatchlist()(dispatch)
+    fetchPortfolio()(dispatch)
     return dispatch(receiveCurrentUser(user))
   }, err => dispatch(receiveErrors(err.responseJSON)));
 

@@ -6,24 +6,26 @@ class User < ApplicationRecord
   validates :username, :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
-  after_initialize :ensure_session_token, :add_buying_power
+  after_initialize :ensure_session_token
+  after_create :add_buying_power
   after_create :create_default_watchlist
   attr_reader :password
 
-  has_many :watches
+  has_many :watches, foreign_key: :user_id, class_name: :Watch
 
-  has_many :watched_stocks,
-    through: :watches,
-    source: :watchable,
-    source_type: 'Stock'
+  has_many :watched_stocks, through: :watches, source: :stock
 
-  has_many :watched_cryptos,
-    through: :watches,
-    source: :watchable,
-    source_type: 'Crypto'
+  has_many :holdings, foreign_key: :user_id, class_name: :Holding
+
+  has_many :held_stocks, through: :holdings, source: :stock
 
   def watchlist
-    self.watched_stocks + self.watched_cryptos
+    self.watched_stocks.pluck(:symbol)
+  end
+
+  def portfolio
+    self.holdings
+    # Holding.select("holdings.*").where(user_id: self.id)
   end
 
   def self.find_by_credentials(username, password)
@@ -33,25 +35,43 @@ class User < ApplicationRecord
     user
   end
 
-  def add_asset_to_watchlist(asset)
-    Watch.create!(user_id: self.id,
-      watchable_type: asset.class.name,
-      watchable_id: asset.id
-    )
+  def add_stock_to_watchlist(stock)
+    return false if Watch.find_by(user_id: self.id, stock_symbol: stock.symbol)
+    Watch.create!(user_id: self.id, stock_symbol: stock.symbol)
     self.watchlist
   end
-
-  def add_buying_power
-    self.buying_power = 10000.00
-  end
-
-  def remove_asset_from_watchlist(asset)
-    watch = Watch.find_by(user_id: self.id,
-      watchable_type: asset.class.name,
-      watchable_id: asset.id
-    )
+  
+  def remove_stock_from_watchlist(stock)
+    watch = Watch.find_by(user_id: self.id, stock_symbol: stock.symbol)
+    return false unless watch
     watch.destroy!
     self.watchlist
+  end
+
+  def buy_stock(stock, order)
+    portfolio_row = Holding.find_by(user_id: self.id, stock_symbol: stock.symbol)
+    if self.buying_power >= (order.to_f * stock.price)
+      if portfolio_row
+        portfolio_row.update(amt: portfolio_row.amt += order.to_f)
+      else
+        Holding.create!(user_id: self.id, stock_symbol: stock.symbol, amt: order.to_f)
+      end
+      self.update(buying_power: self.buying_power.to_f - (order.to_f * stock.price.to_f))
+    else
+      return false
+    end
+    self.portfolio
+  end
+
+  def sell_stock(stock, order)
+    portfolio_row = Holding.find_by(user_id: self.id, stock_symbol: stock.symbol)
+    if portfolio_row && (portfolio_row.amt - order.to_f) >= 0
+      portfolio_row.update(amt: portfolio_row.amt -= order.to_f)
+      self.update(buying_power: self.buying_power.to_f + (order.to_f * stock.price.to_f))
+    else
+      return false
+    end
+    self.portfolio
   end
 
   def password=(password)
@@ -73,19 +93,17 @@ class User < ApplicationRecord
     self.session_token ||= SecureRandom.urlsafe_base64
   end
 
-  def create_default_watchlist
+  def add_buying_power
+    self.buying_power = 10000.00
+  end
 
+  def create_default_watchlist
     default_stocks = [ 'TWTR', 'TSLA', 'NFLX', 'FB', 'MSFT', 'DIS', 'GPRO',
       'SBUX', 'F', 'BABA', 'BAC', 'FIT', 'GE', 'SNAP', 'AAPL']
 
     default_stocks.each do |symbol|
-      asset = Stock.find_by(symbol: symbol)
-      Watch.create!(user_id: self.id, watchable_type: 'Stock', watchable_id: asset.id)
+      Watch.create!(user_id: self.id, stock_symbol: symbol)
     end
-
-    btc = Crypto.find_by(symbol: 'BTC')
-    Watch.create!(user_id: self.id, watchable_type: 'Crypto', watchable_id: btc.id)
-
   end
 
 end

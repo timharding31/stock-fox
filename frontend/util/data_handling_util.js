@@ -16,6 +16,14 @@ export const compareArrays = (array1, array2) => {
   return true;
 }
 
-export const formatPrice = price => (price) ? numeral(Number(price)).format('$0.00') : price;
+export const compareSymbols = (array1, array2) => {
+  for (let el of array2) {
+    if (array1.indexOf(el) === -1) return false
+  }
+  return true;
+}
+
+export const formatPrice = price => numeral(Number(price)).format('$0.00');
+// export const formatPrice = price => (price) ? numeral(Number(price)).format('$0.00') : price;
 
 export const sleep = ms => (new Promise(resolve => setTimeout(resolve, ms)));

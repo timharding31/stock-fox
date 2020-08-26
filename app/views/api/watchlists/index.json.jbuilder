@@ -1,1 +1,1 @@
-json.partial! 'api/watchlists/asset_summary', collection: @watchlist, as: :asset
+json.array! @watchlist

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import SearchBar from './search_bar';
 import { fetchStockSearchResults } from '../../actions/search_actions';
-import { fetchSingleStock } from '../../actions/asset_actions';
+import { fetchSingleStock } from '../../actions/stock_actions';
 
 const mapStateToProps = ({ entities: { search }, ui: { loading } }, { match }) => ({
   search,

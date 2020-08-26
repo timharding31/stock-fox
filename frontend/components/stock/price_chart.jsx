@@ -10,23 +10,30 @@ import { formatPrice } from '../../util/data_handling_util';
 class PriceChart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { price: formatPrice(props.stock.price) };
+    this.state = { price: null };
     this.baseState = { ...this.state };
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ price: formatPrice(this.props.stock.price) });
-  }
+  // componentDidMount() {
+  //   this.setState({ price: formatPrice(this.props.stocks.summary.bySymbol[this.props.params.symbol]) });
+  // }
 
   componentDidUpdate(prevProps) {
     if (this.props.range) {
       if (this.props.range !== prevProps.range) {
-        this.props.fetchStockPrices[this.props.range](this.props.stock);
+        this.props.fetchStockPrices[this.props.range](this.props.params.symbol);
       }
     }
-    if (this.props.stock != prevProps.stock) {
+    if (this.props.stocks.summary.bySymbol[this.props.params.symbol] !== prevProps.stocks.summary.bySymbol[prevProps.params.symbol]) {
+      this.setState({ price: formatPrice(this.props.stocks.summary.bySymbol[this.props.params.symbol]) });
+    }
+    if (this.props.params.symbol !== prevProps.params.symbol) {
+      this.props.fetchStockPrices[this.props.range](this.props.params.symbol)
+      this.setState({ price: formatPrice(this.props.stocks.summary.bySymbol[this.props.params.symbol]) });
+    }
+    if (!this.state.price) {
       this.setState({ price: formatPrice(this.props.stock.price) });
     }
   }
@@ -42,15 +49,19 @@ class PriceChart extends React.Component {
   }
 
   render() {
-    if (this.props.loading.prices[this.props.range] || this.props.loading.singleStock) {
-      return (<Loading loading={this.props.loading.prices[this.props.range]} compName={"price-chart"} />);
+    if (!this.state.price || !this.props.stocks.summary.bySymbol[this.props.params.symbol] || !this.props.prices[this.props.range].bySymbol[this.props.params.symbol]) {
+      return (<Loading loading={(!this.state.price ||
+          !this.props.stocks[this.props.params.symbol] ||
+          !this.props.prices[this.props.range].bySymbol[this.props.params.symbol])}
+        compName={"price-chart"}
+        />);
     };
-    const { prices, range } = this.props;
-    if (!prices[range]) return null;
-    const priceData = prices[range];
+    const { range } = this.props;
+    const prices = this.props.prices[range].bySymbol[this.props.params.symbol];
+    // if (!prices) return null;
     const yDomain = [
-      Math.min.apply(Math, priceData.map(obj => obj.price)),
-      Math.max.apply(Math, priceData.map(obj => obj.price))
+      Math.min.apply(Math, prices.map(obj => obj.price)),
+      Math.max.apply(Math, prices.map(obj => obj.price))
     ]
     let offset = -60;
     if (this.props.range === '1Y' || this.props.range === '5Y') {
@@ -58,7 +69,7 @@ class PriceChart extends React.Component {
     } else if (this.props.range === '1D') {
       offset += 30;
     }
-    let color = (priceData[0].price > priceData[priceData.length - 1].price) ? '#ED5D2A' : '#5bc43b';
+    let color = (prices[0].price > prices[prices.length - 1].price) ? '#ED5D2A' : '#5bc43b';
     return (
       <div id="price-chart-container">
         <div className="price-chart-header">
@@ -70,7 +81,7 @@ class PriceChart extends React.Component {
             <LineChart
               onMouseMove={this.handleMouseMove}
               onMouseLeave={this.handleMouseLeave}
-              data={priceData}
+              data={prices}
               margin={{ top: 5, bottom: 5 }}
             >
               <CartesianGrid vertical={false} horizontal={false} />

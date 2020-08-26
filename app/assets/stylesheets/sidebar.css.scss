@@ -1,10 +1,34 @@
-.stock-show-page-sidebar {
+.stock-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.sidebar-modules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: whitesmoke;
+  z-index: 1;
+  overflow: hidden;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.watchlist-control {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   width: 80%;
-  margin-bottom: 10px;
 }
 
 button.add-to-watchlist {
@@ -31,26 +55,21 @@ button.add-to-watchlist:focus {
   outline: none;
 }
 
-.watchlist-module {
+.watchlist-module, .portfolio-module {
   display: flex;
   flex-direction: column;
   background-color: whitesmoke;
-  width: 90%;
+  width: 100%;
   justify-content: stretch;
-  align-items: center;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
   overflow: hidden;
-  border: 2px solid white;
-  border-radius: 5px;
 }
 
-.watchlist-charts {
+.watchlist-charts, .portfolio-charts {
   list-style: none;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 400px;
+  max-height: 400px;
   justify-content: stretch;
   align-items: center;
   padding: 0px;
@@ -60,27 +79,27 @@ button.add-to-watchlist:focus {
   overflow-y: scroll;
 }
 
-.watchlist-module > h4 {
+.watchlist-module > h4, .portfolio-module > h4 {
   border-bottom: 1px solid white;
   width: 100%;
   height: 36px;
   font-size: 16px;
   text-align: left;
   margin-bottom: 0;
-  padding-left: 10%;
+  padding-left: 5%;
   box-shadow: 0 4px 8px -2px rgba(0,0,0,.1);
 }
 
 .mini-stock-container {
   width: 100%;
-  margin: 0 5 5 5;
   border-bottom: 1px solid white;
   cursor: pointer;
   display: block;
+  min-height: 50px;
 }
 
 .mini-stock-container:last-child {
-  padding-bottom: 5%;
+  padding-bottom: 0;
   margin-bottom: 0;
 }
 
@@ -92,14 +111,21 @@ button.add-to-watchlist:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   width: 100%;
   height: 100%;
   text-decoration: none;
   color: black;
+  // margin: 5% 0% 5% 0%;
 }
-.mini-stock-container > a > div {
-  margin: 5% 0% 5% 0%;
+.mini-symbol > .share-amt {
+  font-size: 10px;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+.mini-symbol > p:first-child {
+  margin-bottom: 5%;
 }
 
 #mini-chart {
@@ -111,7 +137,7 @@ button.add-to-watchlist:focus {
 .mini-symbol, 
 .mini-price {
   display: block;
-  width: 30%;
+  width: 40%;
   padding-left: 5%;
   padding-right: 5%;
 }
@@ -122,12 +148,162 @@ button.add-to-watchlist:focus {
   font-weight: bold;
 }
 
-#watchlist-bottom {
+.stock-controls *.invisible {
+  display: none;
+}
+
+.order-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
-  size: 0px;
-  padding: 0;
-  margin: 0;
+  min-height: 300px;
+  max-height: 400px;
+  margin-bottom: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: whitesmoke;
   z-index: 1;
-  color: white;
-  box-shadow: 0px -10px 16px 0px rgba(0,0,0,0.5);
+  overflow: hidden;
+  border: 2px solid white;
+  border-top: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.order-form-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  list-style: none;
+  padding-left: 0px;
+  align-content: stretch;
+  margin-top: 0;
+}
+
+.order-form-header > li {
+  width: 100%;
+  border-bottom: none;
+  border-radius: 5px;
+}
+.order-form-header > li > button {
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
+
+.order-form-header > li:not(.selected) {
+  cursor: pointer;
+  border-top: 2px solid gainsboro;
+  border-left: 2px solid gainsboro;
+  border-right: 2px solid gainsboro;
+  background-color: gainsboro;
+}
+
+.order-form-header > li:not(.selected) > button:hover {
+  color: #5bc43b;
+  cursor: pointer;
+}
+
+.order-form-header > li.selected {
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+}
+
+.order-form-header > li.selected > button {
+  color: #5bc43b;
+}
+
+#buy-form.visible, #sell-form.visible, .order-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.order-form-row {
+  width: 90%;
+  align-self: center;
+}
+
+.order-form-row:nth-of-type(2) > label > *:first-child {
+  color: #5bc43b;
+}
+
+.order-form-row > label {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: none;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.order-form-row > label > * {
+  margin: 0px;
+  padding: 0px;
+}
+.order-form-row input:focus {
+  outline: none;
+  background-color: white;
+  border: 2px solid #5bc43b;
+}
+.order-form-row input:hover {
+  background-color: white;
+}
+.order-form-row input {
+  display: inline-block;
+  background-color: whitesmoke;
+  width: 100%;
+  padding-inline-end: 5px;
+  border: 2px solid silver;
+  border-radius: 5px;
+}
+
+.order-form-row > label > *:first-child {
+  flex-grow: 3;
+  max-width: 70%;
+}
+.order-form-row > label > *:last-child {
+  flex-grow: 1;
+  max-width: 30%;
+  font-weight: bold;
+  text-align: right;
+}
+
+.order-form button {
+  background-color: #5bc43b;
+  width: 90%;
+  margin: 5%;
+  cursor: pointer;
+  outline: none;
+  border: 2px solid #5bc43b;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.order-form-footer {
+  width: 90%;
+  margin: 5%;
+  text-align: center;
+  color: #5bc43b;
+  font-weight: bold;
+}
+
+.order-form button:hover {
+  background-color: #51B034;
+  border-color: #51B034;
+}
+
+.order-control hr {
+  display: block;
+  border: 1px solid silver;
+  width: 90%;
 }

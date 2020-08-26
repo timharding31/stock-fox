@@ -4,30 +4,16 @@ export const getWatchlist = () => (
   })
 );
 
-export const postStockToWatchlist = stock => (
+export const postStockToWatchlist = symbol => (
   $.ajax({
-    url: `/api/stocks/${stock.symbol}/watchlists`,
+    url: `/api/stocks/${symbol}/watchlists`,
     method: 'POST'
   })
 );
 
-export const postCryptoToWatchlist = crypto => (
+export const deleteStockFromWatchlist = symbol => (
   $.ajax({
-    url: `/api/cryptos/${crypto.symbol}/watchlists`,
-    method: 'POST'
-  })
-);
-
-export const deleteStockFromWatchlist = stock => (
-  $.ajax({
-    url: `/api/stocks/${stock.symbol}/watchlists/`,
-    method: 'DELETE'
-  })
-);
-
-export const deleteCryptoFromWatchlist = crypto => (
-  $.ajax({
-    url: `/api/cryptos/${crypto.symbol}/watchlists/`,
+    url: `/api/stocks/${symbol}/watchlists/`,
     method: 'DELETE'
   })
 );

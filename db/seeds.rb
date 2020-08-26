@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Stock.destroy_all ; Crypto.destroy_all ; User.destroy_all
+Stock.destroy_all ; User.destroy_all ; Watch.destroy_all ; Holding.destroy_all
 
 CSV::Converters[:blank_to_nil] = lambda do |field|
   field && (field.empty? || field == 'n/a') ? nil : field
@@ -32,7 +32,7 @@ nasdaq.each do |stock|
   Stock.create!(stock)
 end
 
-Crypto.create!(symbol: 'BTC', name: 'Bitcoin', price: 11826.00)
+user = User.create!(username: 'DemoUser', password: 'DemoPassword09182020', email: 'user@demo.com', first_name: 'Demo', last_name: 'User')
 
-User.create!(username: 'DemoUser', password: 'DemoPassword09182020', email: 'user@demo.com', first_name: 'Demo', last_name: 'User')
+Holding.create!(user_id: user.id, stock_symbol: 'AAPL', amt: 10.0)
 

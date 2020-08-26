@@ -47,3 +47,9 @@ export const logout = () => (
     url: 'api/session'
   })
 );
+
+export const getUser = () => (
+  $.ajax({
+    url: 'api/users/'
+  })
+)

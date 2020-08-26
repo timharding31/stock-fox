@@ -6,7 +6,9 @@ import configureStore from './store/store.js';
 // window testing
 import * as SessionApiUtil from './util/session_api_util';
 import * as FmpApiUtil from './util/fmp_api_util';
-import { fetchSingleStock, fetchStockDetail } from './actions/asset_actions';
+import { patchPortfolio, getPortfolio } from './util/portfolio_util';
+import { getWatchlist } from './util/watchlist_util';
+import { fetchSingleStock, fetchStockDetail } from './actions/stock_actions';
 import { fetchWatchlist, fetchWatchlistPrices } from './actions/watchlist_actions';
 import { fetchStockSearchResults } from './actions/search_actions';
 import {
@@ -17,7 +19,7 @@ import {
   fetch1MStockPrices,
   fetch1WStockPrices,
   fetch1DStockPrices
-} from './actions/chart_actions';
+} from './actions/price_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.currentUser) {
     const preloadedState = {
       entities: {
-        users: { [window.currentUser.id]: window.currentUser }
+        currentUser: window.currentUser
       },
       session: { id: window.currentUser.id }
     };
@@ -37,10 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Root store={store} />, root);
 
   // window testing
-  window.getWatchlist = fetchWatchlist;
+  window.getWatchlist = getWatchlist;
+  // window.patchPortfolio = patchPortfolio;
+  window.getPortfolio = getPortfolio;
   window.getSingleStock = fetchSingleStock;
   window.fetchStockDetail = fetchStockDetail;
-  window.fetchWatchlistPrices = fetchWatchlistPrices;
+  // window.fetchWatchlistPrices = fetchWatchlistPrices;
   window.fetchStockSearchResults = fetchStockSearchResults;
   window.dispatch = store.dispatch;
   window.getState = store.getState;

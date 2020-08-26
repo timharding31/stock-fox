@@ -1,6 +1,6 @@
 
 import { arrayToAssetObj } from '../../util/data_handling_util';
-import { RECEIVE_SINGLE_CRYPTO } from '../../actions/asset_actions';
+import { RECEIVE_SINGLE_CRYPTO } from '../../actions/stock_actions';
 import { RECEIVE_WATCHLIST } from '../../actions/watchlist_actions';
 
 export default (state = {}, action) => {

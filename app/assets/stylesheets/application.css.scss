@@ -74,4 +74,15 @@ div.application-content {
 [class^="loading-"] {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // position: relative;
+}
+
+[class^="loading-"] > .css-0 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

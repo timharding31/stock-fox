@@ -1,6 +1,6 @@
-import { fetchSingleStock, fetchStockDetail } from '../../actions/asset_actions';
+import { fetchSingleStock, fetchStockDetail } from '../../actions/stock_actions';
 import { fetchStockNews } from '../../actions/news_actions';
-import { fetchWatchlist, addStockToWatchlist, removeStockFromWatchlist } from '../../actions/watchlist_actions';
+// import { fetchWatchlist, addStockToWatchlist, removeStockFromWatchlist } from '../../actions/watchlist_actions';
 import {
   fetch1YStockPrices,
   fetch3MStockPrices,
@@ -8,34 +8,35 @@ import {
   fetch1WStockPrices,
   fetch1DStockPrices,
   deleteStockPrices
-} from '../../actions/chart_actions';
+} from '../../actions/price_actions';
 import { clearLoadingState } from '../../actions/ui_actions';
 import { connect } from 'react-redux';
 import StockShow from './stock_show';
 
 const mapStateToProps = ({ entities: { prices, watchlist, stocks, news }, ui: { loading } }, { match: { params } }) => ({
-  stock: Object.assign({}, stocks[params.symbol], { symbol: params.symbol }),
-  watchlist: watchlist.stocks,
+  params,
+  watchlist,
   prices,
   news,
-  loading
+  loading,
+  stocks
 });
 
 const mapDispatchToProps = dispatch => ({
   reload: component => dispatch(clearLoadingState(component)),
   fetchSingleStock: symbol => dispatch(fetchSingleStock(symbol)),
-  fetchStockDetail: stock => dispatch(fetchStockDetail(stock)),
+  fetchStockDetail: symbol => dispatch(fetchStockDetail(symbol)),
   fetchStockNews: stock => dispatch(fetchStockNews(stock)),
-  fetchWatchlist: () => dispatch(fetchWatchlist()),
-  addStockToWatchlist: stock => dispatch(addStockToWatchlist(stock)),
-  removeStockFromWatchlist: stock => dispatch(removeStockFromWatchlist(stock)),
+  // fetchWatchlist: () => dispatch(fetchWatchlist()),
+  // addStockToWatchlist: symbol => dispatch(addStockToWatchlist(symbol)),
+  // removeStockFromWatchlist: symbol => dispatch(removeStockFromWatchlist(symbol)),
   deleteStockPrices: range => dispatch(deleteStockPrices(range)),
   fetchStockPrices: {
-    '1Y': stock => dispatch(fetch1YStockPrices(stock)),
-    '3M': stock => dispatch(fetch3MStockPrices(stock)),
-    '1M': stock => dispatch(fetch1MStockPrices(stock)),
-    '1W': stock => dispatch(fetch1WStockPrices(stock)),
-    '1D': stock => dispatch(fetch1DStockPrices(stock)),
+    '1Y': symbol => dispatch(fetch1YStockPrices(symbol)),
+    '3M': symbol => dispatch(fetch3MStockPrices(symbol)),
+    '1M': symbol => dispatch(fetch1MStockPrices(symbol)),
+    '1W': symbol => dispatch(fetch1WStockPrices(symbol)),
+    '1D': symbol => dispatch(fetch1DStockPrices(symbol)),
   },
 });
 
