@@ -34,7 +34,6 @@ class PortfolioModule extends React.Component {
       }
     } else {
       portfolioCharts = this.props.errors.map((error, idx) => (<li key={`error-${idx}`}>{error}</li>));
-      }
     }
     return (
       <div className="portfolio-module">
