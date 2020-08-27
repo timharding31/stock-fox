@@ -7,7 +7,7 @@ export default () => {
   <div className="home-page">
     <div className="home-page-text">
         <h1>"Investing" for Everyone</h1>
-        <p>StockFox, a completely derivative player in the world commission-free investing, gives you very few ways to make your money work harder.</p>
+        <p>StockFox, a completely derivative player in the world of commission-free investing, gives you very few ways to make your money work harder.</p>
         <button><Link to="/signup">Sign Up</Link></button>
     </div>
     <video autoPlay="autoPlay" loop="loop" muted="muted" className="home-page-video" src="/assets/homepage_video-8b8fd1f90e49bc4c08deb714da9fa18acf342dd2edf5819fc1bf6cb1235b4198.mp4"></video>
