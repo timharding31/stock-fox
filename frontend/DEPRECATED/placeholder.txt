@@ -1,0 +1,77 @@
+const mapDispatchToProps = dispatch => ({
+  fetchSingleStock: symbol => dispatch(fetchSingleStock(symbol)),
+  fetchStockNews: stock => dispatch(fetchStockNews(stock)),
+  fetchWatchlist: () => dispatch(fetchWatchlist()),
+  addToWatchlist: {
+    stock: stock => dispatch(addStockToWatchlist(stock)),
+    crypto: crypto => dispatch(addCryptoToWatchlist(crypto))
+  },
+  removeFromWatchlist: {
+    stock: stock => dispatch(removeStockFromWatchlist(stock)),
+    crypto: crypto => dispatch(removeCryptoFromWatchlist(crypto))
+  },
+  fetchPrices: {
+    stock: {
+      max: stock => dispatch(fetchMaxStockPrices(stock)),
+      fiveYear: stock => dispatch(fetch5YStockPrices(stock)),
+      oneYear: stock => dispatch(fetch1YStockPrices(stock)),
+      threeMonth: stock => dispatch(fetch3MStockPrices(stock)),
+      oneMonth: stock => dispatch(fetch1MStockPrices(stock)),
+      oneWeek: stock => dispatch(fetch1WStockPrices(stock)),
+      oneDay: stock => dispatch(fetch1DStockPrices(stock))
+    },
+    crypto: {
+      max: crypto => dispatch(fetchMaxCryptoPrices(crypto)),
+      fiveYear: crypto => dispatch(fetch5YCryptoPrices(crypto)),
+      oneYear: crypto => dispatch(fetch1YCryptoPrices(crypto)),
+      threeMonth: crypto => dispatch(fetch3MCryptoPrices(crypto)),
+      oneMonth: crypto => dispatch(fetch1MCryptoPrices(crypto)),
+      oneWeek: crypto => dispatch(fetch1WCryptoPrices(crypto)),
+      oneDay: crypto => dispatch(fetch1DCryptoPrices(crypto))
+    }
+  },
+});
+
+
+
+/// stocknews
+import React from 'react';
+import NewsStory from './news_story';
+
+class StockNews extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { news: props.news };
+    this.baseState = { ...this.state };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (typeof(prevProps.news) === 'Array') {
+      if (this.props.news !== prevProps.news) {
+        debugger
+        this.props.fetchStockNews(this.props.stock);
+      }
+    }
+    if (this.props.stock != prevProps.stock) {
+      this.setState({ news: this.props.news });
+    }
+  }
+
+  componentDidMount() {
+    this.props.fetchStockNews(this.props.stock);
+  }
+
+  render() {
+    // if (typeof(this.props.news) !== 'Array' || this.props.news.length === 0) return null;
+    const { news } = this.props;
+    if (!(typeof(news) === 'Array')) return null;
+    const newsStories = this.props.news.map(story => {
+      debugger
+      return (<li><NewsStory key={story.id} date={new Date(story.datetime * 1000)} headline={story.headline} source={story.source} summary={story.summary} image={story.image} /></li>)});
+    return(
+      <ul className="newsfeed">{newsStories}</ul>
+    )
+  }
+}
+
+export default StockNews;

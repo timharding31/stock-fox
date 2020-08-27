@@ -5,14 +5,14 @@ class Api::WatchlistsController < ApplicationController
   def index
     @watchlist = current_user.watchlist
     if @watchlist.empty? || !@watchlist
-      render json: ['Add some stocks to your watchlist before viewing this content!'], status: 404
+      render json: ['Your watchlist is empty, watch some stocks to view this content'], status: 401
     end
   end
 
   def create
     stock = Stock.find_by(symbol: params[:stock_symbol])
     @watchlist = current_user.add_stock_to_watchlist(stock)
-    if @watchlist && !@watchlist.emtpy?
+    if @watchlist
       render :index
     else
       render json: ["#{stock.symbol} is already in your watchlist"], status: 401
@@ -22,7 +22,7 @@ class Api::WatchlistsController < ApplicationController
   def destroy
     stock = Stock.find_by(symbol: params[:stock_symbol])
     @watchlist = current_user.remove_stock_from_watchlist(stock)
-    if @watchlist && !@watchlist.emtpy?
+    if @watchlist
       render :index
     else
       render json: ["#{stock.symbol} isn't in your watchlist"], status: 401

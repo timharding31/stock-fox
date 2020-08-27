@@ -17,8 +17,8 @@
  $sf-font-size-h1: 32px;
  $sf-font-size-h2: 24px;
  $sf-font-size-h3: 15px;
- $sf-font-weight-demi: 500;
- $sf-font-weight-bold: 700;
+ $sf-font-weight-demi: medium;
+ $sf-font-weight-bold: bold;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
 #root.light {
 
@@ -131,7 +131,7 @@ button.add-to-watchlist:focus {
   min-height: 50px;
 }
 
-.portfolio-errors {
+.portfolio-errors, .watchlist-errors {
   color: #ED5D2A;
   display: inline-block;
   text-align: center;
@@ -319,12 +319,12 @@ button.add-to-watchlist:focus {
 }
 
 .order-form button {
-  background-color: #5bc43b;
+  background-color: $sf-green;
   width: 90%;
   margin: 5%;
   cursor: pointer;
   outline: none;
-  border: 2px solid #5bc43b;
+  border: 2px solid $sf-green;
   padding: 10px 15px;
   border-radius: 5px;
   font-weight: $sf-font-weight-bold;
@@ -334,18 +334,18 @@ button.add-to-watchlist:focus {
   width: 90%;
   margin: 5%;
   text-align: center;
-  color: #5bc43b;
+  color: $sf-green;
   font-weight: $sf-font-weight-bold;
 }
 
 .order-form button:hover {
-  background-color: #51B034;
-  border-color: #51B034;
+  background-color: $sf-green-accent;
+  border-color: $sf-green-accent;
 }
 
 .order-control hr {
   display: block;
-  border: 1px solid silver;
+  border: 1px solid $sf-ivory-hover;
   width: 90%;
 }
 }

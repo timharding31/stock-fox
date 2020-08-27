@@ -51,7 +51,7 @@ class User < ApplicationRecord
     portfolio_row = Holding.find_by(user_id: self.id, stock_symbol: stock.symbol)
     if self.buying_power >= (order.to_f * stock.price)
       if portfolio_row
-        portfolio_row.update(amt: portfolio_row.amt += order.to_f)
+        portfolio_row.update(amt: (portfolio_row.amt + order.to_f))
       else
         Holding.create!(user_id: self.id, stock_symbol: stock.symbol, amt: order.to_f)
       end
@@ -65,7 +65,7 @@ class User < ApplicationRecord
   def sell_stock(stock, order)
     portfolio_row = Holding.find_by(user_id: self.id, stock_symbol: stock.symbol)
     if portfolio_row && (portfolio_row.amt - order.to_f) >= 0
-      portfolio_row.update(amt: portfolio_row.amt -= order.to_f)
+      portfolio_row.update(amt: (portfolio_row.amt - order.to_f))
       self.update(buying_power: self.buying_power.to_f + (order.to_f * stock.price.to_f))
     else
       return false

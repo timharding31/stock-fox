@@ -58,7 +58,6 @@ class PriceChart extends React.Component {
     };
     const { range } = this.props;
     const prices = this.props.prices[range].bySymbol[this.props.params.symbol];
-    // if (!prices) return null;
     const yDomain = [
       Math.min.apply(Math, prices.map(obj => obj.price)),
       Math.max.apply(Math, prices.map(obj => obj.price))
@@ -74,20 +73,17 @@ class PriceChart extends React.Component {
       <div id="price-chart-container">
         <div className="price-chart-header">
           <h3>{this.props.stock.name}</h3>
-          <h3>{this.state.price}</h3>
+          <h3>{this.state.price ? this.state.price : ''}</h3>
         </div>
-        <div className="price-chart">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="price-chart" >
+            <ResponsiveContainer height="100%" width="100%" >
             <LineChart
               onMouseMove={this.handleMouseMove}
               onMouseLeave={this.handleMouseLeave}
               data={prices}
-              margin={{ top: 5, bottom: 5 }}
+              margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
             >
-              <CartesianGrid vertical={false} horizontal={false} />
-              <XAxis dataKey="date"
-                // domain={xDomain}
-                axisLine={false}/>
+              <XAxis dataKey="date" axisLine={false} tick={false}/>
               <YAxis dataKey="price" domain={yDomain} axisLine={false} tick={false}/>
               <Tooltip
                 content={<PriceChartTooltip range={this.props.range} />}
@@ -96,7 +92,7 @@ class PriceChart extends React.Component {
                 cursor={true} />
               <Line type="monotone" dataKey="price" strokeWidth="3" stroke={color} dot={false} isAnimationActive={true} />
             </LineChart>
-          </ResponsiveContainer>
+            </ResponsiveContainer>
         </div>
       </div>
       )

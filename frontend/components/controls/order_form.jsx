@@ -16,7 +16,9 @@ class OrderForm extends React.Component {
       sellOption: false,
       sellForm: 'invisible',
     }
+    this.baseState={ ...this.state };
     this.changeSelection = this.changeSelection.bind(this);
+    this.refreshOrderForm = this.refreshOrderForm.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +54,10 @@ class OrderForm extends React.Component {
     }
   }
 
+  refreshOrderForm() {
+    this.setState(this.baseState);
+  }
+
   render() {
     if (!Boolean(this.props.stocks.summary.bySymbol[this.props.params.symbol])) {
       return (<Loading loading={!Boolean(this.props.stocks.summary.bySymbol[this.props.params.symbol])} compName={"order-form"} />)
@@ -78,6 +84,7 @@ class OrderForm extends React.Component {
               buyingPower={this.props.currentUser.buying_power}
               action={this.props.buyStock}
               updateUserParams={this.props.updateUserParams}
+              refreshOrderForm={this.refreshOrderForm}
             />
           </div>
           <div id="sell-form" className={this.state.sellForm}>
@@ -87,6 +94,7 @@ class OrderForm extends React.Component {
               portfolio={this.props.portfolio}
               action={this.props.sellStock}
               updateUserParams={this.props.updateUserParams}
+              refreshOrderForm={this.refreshOrderForm}
             />
           </div>
       </div>

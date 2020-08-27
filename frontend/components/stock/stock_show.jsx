@@ -69,7 +69,7 @@ class StockShow extends React.Component {
   render() {
     // const { stock, news } = this.props;
     if (this.state.summaryLoading || !this.props.news.byTopic[this.props.params.symbol]) {
-      return (<Loading compName={'stock-show'} loading={this.state.summaryLoading || !this.props.news[this.props.params.symbol]} />)
+      return (<Loading compName={'stock-show'} loading={this.state.summaryLoading || !this.props.news.byTopic[this.props.params.symbol]} />)
     };
     return (
       <div className="stock-show-page">

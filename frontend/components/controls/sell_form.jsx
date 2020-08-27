@@ -19,6 +19,7 @@ class SellForm extends React.Component {
     e.preventDefault();
     this.props.action(this.props.symbol, this.state.order).then(() => this.props.updateUserParams());
     this.setState(this.baseState);
+    this.props.refreshOrderForm();
   }
 
   render() {

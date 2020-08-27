@@ -1,0 +1,131 @@
+ $sf-green: #5BC43B;
+ $sf-green-accent: #51B034;
+ 
+ $sf-red: #ED5D2A;
+ $sf-red-accent: #D55425;
+ 
+ $sf-ink: #060C13;
+ $sf-ink-focus: #1F2124;
+ $sf-ink-hover: #31363A;
+ 
+ $sf-ivory: white;
+ $sf-ivory-focus: white;
+ $sf-ivory-hover: #F6F8FA;
+ 
+ $sf-font-spacing: -0.1px;
+ $sf-font-size-std: 13px;
+ $sf-font-size-h1: 32px;
+ $sf-font-size-h2: 24px;
+ $sf-font-size-h3: 15px;
+ $sf-font-weight-demi: medium;
+ $sf-font-weight-bold: bold;
+ $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+#root.light {
+
+.news-feed-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.news-story > a {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.news-feed {
+  list-style: none;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.news-feed * {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.news-feed > li:hover {
+  background-color: $sf-ivory-hover;
+}
+
+.news-story-img {
+  width: 20%;
+  margin-left: auto;
+  align-self: center;
+}
+
+.news-story-img > img {
+  margin-left: auto;
+  width: 100%;
+}
+
+.news-story-text {
+  display: flex;
+  flex-direction: column;
+  align-items: initial;
+  width: 80%;
+}
+
+.news-story > a {
+  text-decoration: none;
+  color: black;
+}
+
+.news-date {
+  font-size: 9px;
+  padding-left: 5px;
+}
+
+.news-source {
+  font-size: $sf-font-size-h3;
+}
+
+.news-top-line {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 0px;
+}
+
+.news-story-text > * {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.news-story.hidden {
+  display: none;
+}
+
+button.news-feed-control {
+  width: 80%;
+  align-self: center; 
+  color: #5bc43b; 
+  height: 36px;
+  border: 2px solid #5bc43b;
+  background-color: $sf-ivory;
+  border-radius: 5px;
+  font-size: $sf-font-size-std;
+  font-weight: $sf-font-weight-bold;
+  cursor: pointer;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+button.news-feed-control:hover {
+  background-color: $sf-ivory-hover;
+  font-weight: $sf-font-weight-bold;
+  border-color: #51B034;
+  color: #51B034;
+}
+
+button.news-feed-control:focus {
+  outline: none;
+}
+
+.news-feed-header {
+  width: 100%;
+  border-bottom: 2px solid gainsboro;
+}
+
+}

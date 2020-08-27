@@ -17,8 +17,8 @@
  $sf-font-size-h1: 32px;
  $sf-font-size-h2: 24px;
  $sf-font-size-h3: 15px;
- $sf-font-weight-demi: 500;
- $sf-font-weight-bold: 700;
+ $sf-font-weight-demi: medium;
+ $sf-font-weight-bold: bold;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
 #root.light {
 
@@ -41,29 +41,24 @@
 #price-chart-container {
   width: 100%;
   min-height: 400px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
+  position: relative;
 }
 
 .price-chart {
-  width: 100%;
+  width: 105%;
   height: 75%;
-  margin-left: -5%;
   position: absolute;
   top: 20%;
   bottom: 5%;
-  left: 2%;
-  right: 2%;
+  left: -5%;
+  right: 0;
 }
 
 .price-chart-header {
   margin-top: 0px;
   width: 100%;
-  // margin-bottom: auto;
 }
+  
 
 .price-chart-header > h3 {
   font-size: $sf-font-size-h1;
@@ -85,7 +80,6 @@ ul.range-options {
   flex-direction: row;
   justify-content: flex-start;
   position: absolute;
-  overflow: hidden;
   white-space: nowrap;
   padding-bottom: 2px;
   bottom: 0;
@@ -100,6 +94,7 @@ ul.range-options > li {
   height: 20px;
   cursor: pointer;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 ul.range-options > li:first-child {
@@ -107,8 +102,8 @@ ul.range-options > li:first-child {
 }
 
 ul.range-options > li > button {
-  background: none;
-  padding-bottom: 5px;
+  padding-bottom: 30px;
+  background-color: transparent;
   border: none;
   outline: none;
   width: 60%;
@@ -118,12 +113,11 @@ ul.range-options > li > button {
 }
 
 ul.range-options > li:hover {
-  background: whitesmoke;
+  background-color: $sf-ivory-hover;
 }
 
 ul.range-options > li > button.selected {
-  box-sizing: border-box;
-  border-bottom: 8px solid #5bc43b;
+  border-bottom: 5px solid $sf-green;
 }
 
 .company-description {

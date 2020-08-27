@@ -19,10 +19,6 @@ class PriceChartWrapper extends React.Component {
     e.currentTarget.classList.add('selected');
   }
 
-  // componentWillUnmount() {
-  //   this.props.deleteStockPrices();
-  // }
-
   render() {
     return(
       <div className="price-chart-component">
@@ -34,7 +30,6 @@ class PriceChartWrapper extends React.Component {
           <li><button className="range-button" onClick={this.updateRange} value="1M">1M</button></li>
           <li><button className="range-button" onClick={this.updateRange} value="3M">3M</button></li>
           <li><button className="range-button" onClick={this.updateRange} value="1Y">1Y</button></li>
-          {/* <button className="range-button" onClick={this.updateRange} value="5Y">5Y</button> */}
         </ul>
       </div>
     )
