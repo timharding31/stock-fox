@@ -7,7 +7,11 @@ const mapStateToProps = ({ entities: { currentUser }, session }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logoutUser()),
+  logout: () => {
+    const root = document.getElementById("root");
+    root.className = "light";
+    return dispatch(logoutUser());
+  },
 });
 
 const HeaderAccountNav = ({ currentUser, logout }) => (

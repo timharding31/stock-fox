@@ -18,7 +18,7 @@ class DisplayModeToggle extends React.Component {
       darkBtn.classList.add("invisible");
       lightBtn.classList.remove("invisible");
       darkBtn.classList.remove("visible");
-      root.classList = "light";
+      root.className = "light";
     }
   }
 

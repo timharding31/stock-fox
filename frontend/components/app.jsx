@@ -14,6 +14,7 @@ import HeaderLinks from './header/links';
 import HeaderAuthNav from './header/auth_nav';
 import SearchBarContainer from './header/search_bar_container';
 import HeaderAccountNav from './header/account_nav';
+import Splash from './splash';
 
 const Content = () => (
   <div className="application-content">
@@ -31,7 +32,7 @@ const Auth = () => (
   <div className="user-auth-content">
     <Route path="/signup" component={SignupFormContainer} />
     <Route path="/login" component={LoginFormContainer} />
-    {/* <AuthRoute exact path="/" component={Spash} /> */}
+    <Route exact path="/" component={Splash} />
   </div>
 )
 
@@ -50,11 +51,9 @@ export default () => (
         <ContentRoute path="/" component={DisplayModeToggle} />
       </div>
     </header>
-    <Switch>
       <AuthRoute exact path="/login" component={Auth} />
       <AuthRoute exact path="/signup" component={Auth} />
+      <AuthRoute path="/" component={Auth} />
       <ContentRoute path="/" component={Content} />
-      <AuthRoute exact path="/" component={Auth} />
-    </Switch>
   </div>
 );
