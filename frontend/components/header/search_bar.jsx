@@ -52,11 +52,14 @@ class SearchBar extends React.Component {
     // return (<div className="search-bar-contiainer">SearchBarPlaceHolder</div>)
     return (
       <div className="search-bar-container">
-        <input type="text"
+        <div className="search-bar">
+          <img className="search-bar-icon" src="/assets/search_icon-2a50cd33dfb651650091f7349579aee373bc8bc348aadb89a3356acfe15541f5.png"></img>
+          <input type="text"
+          className="search-bar-input"
           placeholder="Search"
           value={this.state.query}
           onChange={this.handleInput}
-          />
+          /></div>
         <ul className={`search-results ${listClassName}`}>
           {searchResults}
         </ul>

@@ -7,6 +7,7 @@ import LoginFormContainer from './auth/login_form_container';
 import StockShowContainer from './stock/stock_show_container';
 import StockControlsContainer from './controls/stock_controls_container'
 import SidebarModuleContainer from './modules/sidebar_module_container';
+import DisplayModeToggle from './header/display_mode_toggle';
 
 import HeaderLogo from './header/logo';
 import HeaderLinks from './header/links';
@@ -46,6 +47,7 @@ export default () => (
         <AuthRoute exact path="/" component={HeaderAuthNav} />
         <ContentRoute path="/" component={SearchBarContainer} />
         <ContentRoute path="/" component={HeaderAccountNav} />
+        <ContentRoute path="/" component={DisplayModeToggle} />
       </div>
     </header>
     <Switch>

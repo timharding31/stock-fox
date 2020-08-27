@@ -1,3 +1,26 @@
+ $sf-green: #5BC43B;
+ $sf-green-accent: #51B034;
+ 
+ $sf-red: #ED5D2A;
+ $sf-red-accent: #D55425;
+ 
+ $sf-ink: #060C13;
+ $sf-ink-focus: #1F2124;
+ $sf-ink-hover: #31363A;
+ 
+ $sf-ivory: white;
+ $sf-ivory-focus: white;
+ $sf-ivory-hover: #F6F8FA;
+ 
+ $sf-font-spacing: -0.1px;
+ $sf-font-size-std: 13px;
+ $sf-font-size-h1: 32px;
+ $sf-font-size-h2: 24px;
+ $sf-font-size-h3: 15px;
+ $sf-font-weight-demi: 500;
+ $sf-font-weight-bold: 700;
+ $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+
 .stock-controls {
   width: 100%;
   display: flex;
@@ -41,15 +64,15 @@ button.add-to-watchlist {
   border: 3px solid #5bc43b;
   background-color: whitesmoke;
   border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: $sf-font-size-std;
+  font-weight: $sf-font-weight-bold;
   cursor: pointer;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 button.add-to-watchlist:hover {
   background-color: white;
-  font-weight: bold;
+  font-weight: $sf-font-weight-bold;
   border-color: #51B034;
   color: #51B034;
 }
@@ -80,6 +103,7 @@ button.add-to-watchlist:focus {
   margin-top: 0px;
   overflow: hidden;
   overflow-y: scroll;
+  box-shadow: inset 0 20px 30px -20px rgba(0, 0, 0, 0.1);
 }
 
 .watchlist-module > h4, .portfolio-module > h4 {
@@ -89,14 +113,13 @@ button.add-to-watchlist:focus {
   height: 48px;
   line-height: 36px;
   vertical-align: middle;
-  font-size: 16px;
+  font-size: $sf-font-size-h3;
   text-align: left;
   margin-bottom: 0;
   margin-top: 0;
   padding-left: 5%;
   padding-top: 12px;
   z-index: 1;
-  box-shadow: 0 4px 8px -2px rgba(0,0,0,.1);
 }
 
 .mini-stock-container {
@@ -112,7 +135,7 @@ button.add-to-watchlist:focus {
   display: inline-block;
   text-align: center;
   padding: 5%;
-  font-size: 12x;
+  font-size: $sf-font-size-std;
 }
 
 .mini-stock-container:last-child {
@@ -133,10 +156,9 @@ button.add-to-watchlist:focus {
   height: 100%;
   text-decoration: none;
   color: black;
-  // margin: 5% 0% 5% 0%;
 }
 .mini-symbol > .share-amt {
-  font-size: 10px;
+  font-size: $sf-font-size-std;
   font-weight: normal;
   margin-top: 0;
 }
@@ -155,14 +177,13 @@ button.add-to-watchlist:focus {
 .mini-price {
   display: block;
   width: 40%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 10%;
 }
 
 .mini-symbol, 
 .mini-price p {
-  font-size: 12px;
-  font-weight: bold;
+  font-size: $sf-font-size-std;
+  font-weight: $sf-font-weight-bold;
 }
 
 .stock-controls *.invisible {
@@ -185,7 +206,7 @@ button.add-to-watchlist:focus {
   border: 2px solid white;
   border-top: none;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: $sf-font-size-h3;
 }
 
 .order-form-header {
@@ -210,7 +231,7 @@ button.add-to-watchlist:focus {
   outline: none;
   background-color: transparent;
   border: none;
-  font-weight: bold;
+  font-weight: $sf-font-weight-bold;
 }
 
 .order-form-header > li:not(.selected) {
@@ -292,7 +313,7 @@ button.add-to-watchlist:focus {
 .order-form-row > label > *:last-child {
   flex-grow: 1;
   max-width: 30%;
-  font-weight: bold;
+  font-weight: $sf-font-weight-bold;
   text-align: right;
 }
 
@@ -305,7 +326,7 @@ button.add-to-watchlist:focus {
   border: 2px solid #5bc43b;
   padding: 10px 15px;
   border-radius: 5px;
-  font-weight: bold;
+  font-weight: $sf-font-weight-bold;
 }
 
 .order-form-footer {
@@ -313,7 +334,7 @@ button.add-to-watchlist:focus {
   margin: 5%;
   text-align: center;
   color: #5bc43b;
-  font-weight: bold;
+  font-weight: $sf-font-weight-bold;
 }
 
 .order-form button:hover {
