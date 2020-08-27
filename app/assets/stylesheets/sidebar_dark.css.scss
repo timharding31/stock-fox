@@ -19,7 +19,7 @@
  $sf-font-size-h3: 15px;
  $sf-font-weight-demi: medium;
  $sf-font-weight-bold: bold;
- $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+ $sf-box-shadow: 0px 0px 20px 0px rgba(255,255,255,0.2);
 #root.dark {
 
 .stock-controls {
@@ -39,8 +39,8 @@
   margin-bottom: 10px;
   align-items: center;
   width: 100%;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  background-color: $sf-ink;
+  box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+  background-color: $sf-ink-focus;
   z-index: 1;
   overflow: hidden;
   border: 2px solid white;
@@ -69,7 +69,7 @@ button.add-to-watchlist {
   font-size: $sf-font-size-std;
   font-weight: $sf-font-weight-bold;
   cursor: pointer;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
 }
 
 button.add-to-watchlist:hover {
@@ -86,7 +86,7 @@ button.add-to-watchlist:focus {
 .watchlist-module, .portfolio-module {
   display: flex;
   flex-direction: column;
-  background-color: $sf-ink;
+  background-color: $sf-ink-focus;
   width: 100%;
   justify-content: stretch;
   overflow: hidden;
@@ -106,7 +106,7 @@ button.add-to-watchlist:focus {
   margin-top: 0px;
   overflow: hidden;
   overflow-y: scroll;
-  box-shadow: inset 0 20px 30px -20px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 20px 30px -20px rgba(255, 255, 255, 0.1);
   color: $sf-ivory-hover;
 }
 
@@ -204,8 +204,8 @@ button.add-to-watchlist:focus {
   min-height: 300px;
   max-height: 400px;
   margin-bottom: 10px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  background-color: $sf-ink;
+  box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+  background-color: $sf-ink-focus;
   z-index: 1;
   overflow: hidden;
   border: 2px solid white;
@@ -256,9 +256,9 @@ button.add-to-watchlist:focus {
 }
 
 .order-form-header > li.selected {
-  border-top: 2px solid $sf-ink;
-  border-left: 0px solid $sf-ink;
-  border-right: 0px solid $sf-ink;
+  border-top: 2px solid $sf-ink-focus;
+  border-left: 0px solid $sf-ink-focus;
+  border-right: 0px solid $sf-ink-focus;
 }
 
 .order-form-header > li.selected > button {
@@ -326,12 +326,12 @@ button.add-to-watchlist:focus {
 }
 
 .order-form button {
-  background-color: $sf-red;
+  background-color: $sf-green;
   width: 90%;
   margin: 5%;
   cursor: pointer;
   outline: none;
-  border: 2px solid $sf-red;
+  border: 2px solid $sf-green;
   padding: 10px 15px;
   border-radius: 5px;
   font-weight: $sf-font-weight-bold;
@@ -341,13 +341,13 @@ button.add-to-watchlist:focus {
   width: 90%;
   margin: 5%;
   text-align: center;
-  color: $sf-red;
+  color: $sf-green;
   font-weight: $sf-font-weight-bold;
 }
 
 .order-form button:hover {
-  background-color: $sf-red-accent;
-  border-color: $sf-red-accent;
+  background-color: $sf-green-accent;
+  border-color: $sf-green-accent;
 }
 
 .order-control hr {

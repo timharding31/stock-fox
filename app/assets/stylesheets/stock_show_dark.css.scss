@@ -117,7 +117,7 @@ ul.range-options > li:hover {
 }
 
 ul.range-options > li > button.selected {
-  border-bottom: 5px solid $sf-red;
+  border-bottom: 5px solid $sf-green;
 }
 
 .company-description {
@@ -172,6 +172,11 @@ div[class^="profile-row-"] {
 .company-profile strong, .company-profile p {
   font-size: $sf-font-size-std;
   color: $sf-ivory;
+}
+
+.tooltip-time {
+  background-color: transparent;
+  padding-top: 5px;
 }
 
 }

@@ -10,6 +10,26 @@ class SearchBar extends React.Component {
     this.baseState = { ...this.state }
     this.getSearchResults = this.getSearchResults.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleEsc = this.handleEsc.bind(this);
+  }
+
+  handleEsc(e) {
+    if (e.key === "Escape") {
+      this.setState(this.baseState);
+    } else if (e.key === "Enter") {
+      const firstListItem = document.querySelector(".search-result-link");
+      firstListItem.click();
+    }
+    // if (e.key === "Enter") {
+    //   debugger
+    //   const firstListItem = document.querySelector(".single-search-result");
+    //   firstListItem.click();
+    // }
+  }
+
+  handleMouseLeave() {
+    this.setState(this.baseState);
   }
 
   handleInput(e) {
@@ -26,6 +46,14 @@ class SearchBar extends React.Component {
     if (this.props.match != prevProps.match) {
       this.setState(this.baseState);
     }
+  }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleEsc, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleEsc, false);
   }
 
   getSearchResults() {
@@ -45,11 +73,10 @@ class SearchBar extends React.Component {
         searchResults = <li><Loading loading={this.props.loading} compName={"search-results"} /></li>
         listClassName = 'loading';
       } else {
-        searchResults = this.props.search.map(result => (<SingleSearchResult symbol={result.symbol} name={result.name} />))
+        searchResults = this.props.search.map(result => (<SingleSearchResult symbol={result.symbol} name={result.name} key={`result-${result.symbol}-outer`} />))
         listClassName = 'results';
       }
     }
-    // return (<div className="search-bar-contiainer">SearchBarPlaceHolder</div>)
     return (
       <div className="search-bar-container">
         <div className="search-bar">

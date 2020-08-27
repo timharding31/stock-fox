@@ -20,7 +20,7 @@
  $sf-font-weight-demi: medium;
  $sf-font-weight-bold: bold;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-#root.light {
+#root.light, #root {
 
 div[class^="header-"] {
   display: flex;
@@ -168,18 +168,18 @@ div[class^="header-"] a {
 }
 
 .account-dropdown button {
-  background-color: $sf-green;
+  background-color: $sf-red;
   cursor: pointer;
   outline: none;
-  border: 2px solid $sf-green;
+  border: 2px solid $sf-red;
   padding: 10px 15px;
   border-radius: 20px;
   font-weight: $sf-font-weight-bold;
 }
 
 .account-dropdown button:hover {
-  background-color: $sf-green-accent;
-  border-color: $sf-green-accent;
+  background-color: $sf-red-accent;
+  border-color: $sf-red-accent;
 }
 
 .account-dropdown-trigger {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  LineChart, Line, XAxis, YAxis, ReferenceLine, Tooltip, ResponsiveContainer,
 } from 'recharts';
 import numeral from 'numeral';
 import PriceChartTooltip from './price_chart_tooltip';
@@ -66,7 +66,7 @@ class PriceChart extends React.Component {
     if (this.props.range === '1Y' || this.props.range === '5Y') {
       offset += 10;
     } else if (this.props.range === '1D') {
-      offset += 30;
+      offset += 40;
     }
     let color = (prices[0].price > prices[prices.length - 1].price) ? '#ED5D2A' : '#5bc43b';
     return (
@@ -90,7 +90,7 @@ class PriceChart extends React.Component {
                 position={{ y: -30 }}
                 offset={offset}
                 cursor={true} />
-              <Line type="monotone" dataKey="price" strokeWidth="3" stroke={color} dot={false} isAnimationActive={true} />
+              <Line type="monotone" dataKey="price" strokeWidth="3" stroke={color} dot={false} isAnimationActive={true}/>
             </LineChart>
             </ResponsiveContainer>
         </div>

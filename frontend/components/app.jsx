@@ -32,7 +32,7 @@ const Auth = () => (
   <div className="user-auth-content">
     <Route path="/signup" component={SignupFormContainer} />
     <Route path="/login" component={LoginFormContainer} />
-    <Route exact path="/" component={Splash} />
+    {/* <Route exact path="/" component={Splash} /> */}
   </div>
 )
 
@@ -53,7 +53,7 @@ export default () => (
     </header>
       <AuthRoute exact path="/login" component={Auth} />
       <AuthRoute exact path="/signup" component={Auth} />
-      <AuthRoute path="/" component={Auth} />
       <ContentRoute path="/" component={Content} />
+      <AuthRoute exact path="/" component={Splash} />
   </div>
 );
