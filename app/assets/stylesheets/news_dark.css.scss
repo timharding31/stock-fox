@@ -24,9 +24,11 @@
 
 .news-feed-container {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  margin-bottom: 100px;
 }
 
 .news-story > a {
@@ -39,6 +41,8 @@
   list-style: none;
   padding-left: 5%;
   padding-right: 5%;
+  width: 100%;
+  margin-left: -5%;
 }
 
 .news-feed * {
@@ -69,8 +73,10 @@
 }
 
 .news-story > a {
+  padding-left: 5%;
+  padding-right: 5%;
   text-decoration: none;
-  color: black;
+  color: $sf-ivory;
 }
 
 .news-date {
