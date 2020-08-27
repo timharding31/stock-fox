@@ -20,6 +20,7 @@
  $sf-font-weight-demi: 500;
  $sf-font-weight-bold: 700;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+#root.light {
 
 .stock-show-page {
   display: flex;
@@ -58,15 +59,25 @@
   right: 2%;
 }
 
+.price-chart-header {
+  margin-top: 0px;
+  width: 100%;
+  // margin-bottom: auto;
+}
+
 .price-chart-header > h3 {
   font-size: $sf-font-size-h1;
-  margin-left: 5%;
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
   clear: both;
   z-index: 1;
 }
 
 .price-chart-header > h3:last-child {
-  margin-bottom: -10%;
+  // margin-bottom: -10%;
+  font-size: $sf-font-size-h2;
+  margin-top: 0;
 }
 
 ul.range-options {
@@ -133,6 +144,10 @@ div[class^="profile-row-"] {
   width: 100%;
 }
 
+.profile-header > h3, .news-feed-header > h3 {
+  font-size: $sf-font-size-h2;
+}
+
 .profile-header {
   width: 100%;
   border-bottom: 2px solid gainsboro;
@@ -161,3 +176,4 @@ div[class^="profile-row-"] {
   font-size: $sf-font-size-std;
 }
 
+}

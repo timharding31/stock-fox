@@ -36,6 +36,7 @@
  $sf-font-weight-demi: 500;
  $sf-font-weight-bold: 700;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+#root.light {
 
 * {
   font-family: "DM Sans",sans-serif;
@@ -111,4 +112,5 @@ div.application-content {
   display: flex;
   justify-content: center;
   align-items: center;
+}
 }

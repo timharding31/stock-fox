@@ -20,6 +20,7 @@
  $sf-font-weight-demi: 500;
  $sf-font-weight-bold: 700;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+#root.light {
 
 .stock-controls {
   width: 100%;
@@ -39,7 +40,7 @@
   align-items: center;
   width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  background-color: whitesmoke;
+  background-color: $sf-ivory;
   z-index: 1;
   overflow: hidden;
   border: 2px solid white;
@@ -62,7 +63,7 @@ button.add-to-watchlist {
   color: #5bc43b; 
   height: 36px;
   border: 3px solid #5bc43b;
-  background-color: whitesmoke;
+  background-color: $sf-ivory;
   border-radius: 5px;
   font-size: $sf-font-size-std;
   font-weight: $sf-font-weight-bold;
@@ -71,7 +72,7 @@ button.add-to-watchlist {
 }
 
 button.add-to-watchlist:hover {
-  background-color: white;
+  background-color: $sf-ivory-hover;
   font-weight: $sf-font-weight-bold;
   border-color: #51B034;
   color: #51B034;
@@ -84,7 +85,7 @@ button.add-to-watchlist:focus {
 .watchlist-module, .portfolio-module {
   display: flex;
   flex-direction: column;
-  background-color: whitesmoke;
+  background-color: $sf-ivory;
   width: 100%;
   justify-content: stretch;
   overflow: hidden;
@@ -144,7 +145,7 @@ button.add-to-watchlist:focus {
 }
 
 .mini-stock-container:hover {
-  background-color: gainsboro;
+  background-color: $sf-ivory-hover;
 }
 
 .mini-stock-container > a {
@@ -158,7 +159,7 @@ button.add-to-watchlist:focus {
   color: black;
 }
 .mini-symbol > .share-amt {
-  font-size: $sf-font-size-std;
+  font-size: 10px;
   font-weight: normal;
   margin-top: 0;
 }
@@ -200,7 +201,7 @@ button.add-to-watchlist:focus {
   max-height: 400px;
   margin-bottom: 10px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  background-color: whitesmoke;
+  background-color: $sf-ivory;
   z-index: 1;
   overflow: hidden;
   border: 2px solid white;
@@ -236,10 +237,10 @@ button.add-to-watchlist:focus {
 
 .order-form-header > li:not(.selected) {
   cursor: pointer;
-  border-top: 2px solid gainsboro;
-  border-left: 0px solid gainsboro;
-  border-right: 0px solid gainsboro;
-  background-color: gainsboro;
+  border-top: 2px solid $sf-ivory-hover;
+  border-left: 0px solid $sf-ivory-hover;
+  border-right: 0px solid $sf-ivory-hover;
+  background-color: $sf-ivory-hover;
 }
 
 .order-form-header > li:not(.selected) > button:hover {
@@ -248,9 +249,9 @@ button.add-to-watchlist:focus {
 }
 
 .order-form-header > li.selected {
-  border-top: 2px solid white;
-  border-left: 0px solid white;
-  border-right: 0px solid white;
+  border-top: 2px solid $sf-ivory;
+  border-left: 0px solid $sf-ivory;
+  border-right: 0px solid $sf-ivory;
 }
 
 .order-form-header > li.selected > button {
@@ -291,15 +292,15 @@ button.add-to-watchlist:focus {
 }
 .order-form-row input:focus {
   outline: none;
-  background-color: white;
+  background-color: $sf-ivory;
   border: 2px solid #5bc43b;
 }
 .order-form-row input:hover {
-  background-color: white;
+  background-color: $sf-ivory;
 }
 .order-form-row input {
   display: inline-block;
-  background-color: whitesmoke;
+  background-color: $sf-ivory-hover;
   width: 100%;
   padding-inline-end: 5px;
   border: 2px solid silver;
@@ -346,4 +347,5 @@ button.add-to-watchlist:focus {
   display: block;
   border: 1px solid silver;
   width: 90%;
+}
 }

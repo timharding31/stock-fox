@@ -20,6 +20,7 @@
  $sf-font-weight-demi: 500;
  $sf-font-weight-bold: 700;
  $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+#root.light {
 
 .news-feed-container {
   display: flex;
@@ -103,7 +104,7 @@ button.news-feed-control {
   color: #5bc43b; 
   height: 36px;
   border: 2px solid #5bc43b;
-  background-color: whitesmoke;
+  background-color: $sf-ivory-hover;
   border-radius: 5px;
   font-size: $sf-font-size-std;
   font-weight: $sf-font-weight-bold;
@@ -111,7 +112,7 @@ button.news-feed-control {
 }
 
 button.news-feed-control:hover {
-  background-color: white;
+  background-color: $sf-ivory;
   font-weight: $sf-font-weight-bold;
   border-color: #51B034;
   color: #51B034;
@@ -126,3 +127,4 @@ button.news-feed-control:focus {
   border-bottom: 2px solid gainsboro;
 }
 
+}
