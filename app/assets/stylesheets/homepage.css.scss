@@ -42,15 +42,20 @@
   .home-page-text > h1 {
     font-size: 52px;
   }
-  .home-page-text > p, .home-page-text > button {
+  .home-page-text > p {
     font-size: 18px;
+  }
+
+  .home-page-text > button:hover {
+    background-color: $sf-ink-hover;
+    border: 2px solid $sf-ink-hover;
   }
 
   .home-page-text > button {
     margin-top: 10px;
     background-color: $sf-ink;
     width: 144px;
-    height: 54px;
+    height: 48px;
     cursor: pointer;
     outline: none;
     border: 2px solid $sf-ink;
@@ -59,11 +64,16 @@
     align-items: center;
     justify-content: center;
   }
-
+  .home-page-text > button > a:hover {
+    color: $sf-ink-focus;
+  }
   .home-page-text > button > a {
     color: $sf-ivory;
     text-decoration: none;
+    font-size: 18px;
     font-weight: $sf-font-weight-bold;
+    margin: 0;
+    padding: 0;
   }
 
   .home-page-video {
@@ -78,8 +88,47 @@
     width: 712px;
     // height: 610.4px;
     height: 617.3px;
-    top: 80px;
+    top: 64px;
     right: -16px;
     bottom: 0;
+  }
+
+  .about-creator {
+    position: absolute;
+    top: 664px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding-top: 5%;
+    padding-left: 5%;
+    height: 250px;
+    background: $sf-ink;
+    z-index: 1;
+    overflow: hidden;
+    color: $sf-ivory;
+  }
+  .about-creator a {
+    color: $sf-ivory;
+    font-size: $sf-font-size-h3;
+  }
+  .about-creator a:hover {
+    color: $sf-ivory-focus;
+  }
+  .links-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+  }
+  .links-list strong {
+    padding-left: 0.75%;
+    font-size: $sf-font-size-h2;
+  }
+  .links-list li {
+    font-size: $sf-font-size-h3;
+  }
+  .links-list li:not(:first-child) {
+    margin-top: 1%;
+    margin-left: 2.5%;
   }
 }

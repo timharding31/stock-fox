@@ -44,12 +44,12 @@ div[class^="header-"] {
   width: 37px;
   height: 43.6px;
   display: inline-block;
-  padding-top: 15%;
+  padding-top: 12px;
 }
 
 .wordmark {
   font-size: $sf-font-size-h1;
-  padding-top: 15px;
+  padding-top: 0px;
   margin: 0;
 }
 
@@ -80,6 +80,7 @@ div[class^="header-"] a {
 .header-content {
   width: 90%;
   display: flex;
+  height: 64px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: baseline;
@@ -116,6 +117,7 @@ div[class^="header-"] a {
 
 .header-auth.button {
   background-color: $sf-green;
+  width: 120px;
   cursor: pointer;
   outline: none;
   border: 2px solid $sf-green;
