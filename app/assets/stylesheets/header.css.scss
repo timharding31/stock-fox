@@ -118,12 +118,14 @@ div[class^="header-"] a {
 .header-auth.button {
   background-color: $sf-green;
   width: 120px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   outline: none;
   border: 2px solid $sf-green;
-  padding: 10px 15px;
   border-radius: 20px;
-}
+}    
 
 .header-auth.button:hover {
   background-color: $sf-green-accent;

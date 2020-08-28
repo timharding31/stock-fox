@@ -119,10 +119,13 @@ div[class^="header-"] a {
 
 .header-auth.button {
   background-color: $sf-red;
+  width: 120px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   outline: none;
   border: 2px solid $sf-red;
-  padding: 10px 15px;
   border-radius: 20px;
 }
 
