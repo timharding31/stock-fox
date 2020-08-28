@@ -5,7 +5,7 @@ import { formatPrice } from '../../util/data_handling_util';
 class UpdateBuyingPower extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { customAmt: 'Custom' };
+    this.state = { customAmt: '' };
     this.baseState = { ...this.state };
     this.updatePower = this.updatePower.bind(this);
     this.setCustom = this.setCustom.bind(this);
@@ -29,8 +29,10 @@ class UpdateBuyingPower extends React.Component {
           <li><button className="funding-option" onClick={this.updatePower} value="1000">$1,000</button></li>
           <li><button className="funding-option" onClick={this.updatePower} value="10000">$10,000</button></li>
           <li>
-            <input className="custom-amt" type="text" onChange={this.setCustom} />
-            <button className="funding-option" onClick={this.updatePower} value={this.state.customAmt}>{formatPrice(this.state.customAmt)}</button>
+            <div className="custom-amt">
+              <input className="custom-amt-input" type="text" onChange={this.setCustom} placeholder="Custom" />
+            <button className="custom-amt-button" onClick={this.updatePower} value={this.state.customAmt}>{`Add ${formatPrice(this.state.customAmt)}`}</button>
+            </div>
           </li>
         </ul>
         <span>Your current Buying Power is: <p className="power-amt">{formatPrice(this.props.buyingPower)}</p></span>

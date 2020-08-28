@@ -1,8 +1,8 @@
  $sf-green: #5BC43B;
  $sf-green-accent: #51B034;
  
- $sf-red: #ED5D2A;
- $sf-red-accent: #D55425;
+ $sf-red: #ed5d2a;
+ $sf-red-accent: #d55425;
  
  $sf-ink: #060C13;
  $sf-ink-focus: #1F2124;
@@ -76,13 +76,16 @@
 
 .buying-power > ul > li {
   width: 15%;
+  margin-right: 2.5%;
 }
 .buying-power > ul > li:last-child {
   display: flex;
-  width: 30%;
+  width: 40%;
+  margin-right: 0;
 }
 .buying-power > ul > li > button {
   width: 100%;
+  height: 24px;
   padding: 0;
   color: $sf-ivory;
   background-color: $sf-green;
@@ -91,13 +94,43 @@
   border-radius: 20px;
 }
 .custom-amt {
-  background-color: $sf-ivory-focus;
+  background-color: $sf-green;
   border-radius: 5px;
-  border: 2px solid silver;
+  border: 2px solid $sf-green;
+  border-radius: 20px;
   outline: none;
-  width: 40px;
-  text-align: right;
+  width: 240px;
+  height: 24px;
+  text-align: left;
   padding-right: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.custom-amt > input, .custom-amt > button {
+  width: 40%;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.custom-amt > button {
+  outline: none;
+  background-color: $sf-green;
+  color: $sf-ivory;
+}
+
+.custom-amt > input:focus {
+  outline: none;
+  border: none;
+}
+
+.custom-amt > input {
+  background-color: $sf-ivory-focus;
 }
 
 .explore-stocks {
@@ -110,6 +143,7 @@
   border: 2px solid $sf-ivory-focus;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   border-radius: 5px;
+  margin-bottom: 500px;
 }
 
 .explore-stocks > h2 {
@@ -147,6 +181,7 @@
   background-color: $sf-red-accent;
   border-color: $sf-red-accent;
   color: $sf-ivory;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .sector-view {
@@ -156,48 +191,49 @@
   padding-left: 5%;
 }
 
-.sector-view-header {
-  display: flex;
-  flex-direction: row;
-  padding-left: 2%;
-  overflow: hidden;
-}
-.sector-view-header > p {
-  font-weight: $sf-font-weight-bold;
-  font-size: $sf-font-size-h3;
-}
-.sector-view > ol {
-  padding-left: 5%;
-  margin-right: 5%;
-}
-.sector-view > ol > li {
-  width: 100%;
-  padding-left: 0;
+.sector-view-stock-table {
+  border-collapse: collapse;
 }
 
-.sector-view > ol > li > a:hover {
+.sector-view .header-row {
+  text-align: left;
+  height: 50px;
+}
+.body-row {
+  height: 50px;
+}
+
+.body-row > td {
+  border: none;
+}
+
+.body-row:hover {
+  background-color: $sf-ivory-hover;
+  cursor: pointer;
+}
+
+.sort-button {
+  background-color: $sf-ivory-focus;
+  outline: none;
+  border: 2px solid $sf-ivory-focus;
+  text-decoration: none;
+  color: $sf-red;
+  border-radius: 10px;
+  height: 32px;
+  width: 80%;
+  box-sizing: border-box;
+  padding: 0;
+  cursor: pointer;
+}
+
+.sort-button:hover {
   background-color: $sf-ivory-hover;
 }
 
-.sector-view > ol > li > a {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  width: 100%;
-  text-decoration: none;
-  font-weight: $sf-font-weight-demi;
-  color: $sf-ink;
+.sort-button.sorted {
+  font-weight: $sf-font-weight-bold;
+  color: $sf-red-accent;
+  background-color: $sf-ivory-hover;
+  border-color: $sf-ivory-hover;
 }
-
-.sector-view > ol > li > a > p, .sector-view-header > p {
-  width: 45%;
-}
-
-.sector-view > ol > li > a > p:first-child, .sector-view-header > p:first-child {
-  margin-left: 5%;
-  width: 20%;
-}
-
-
-
 }

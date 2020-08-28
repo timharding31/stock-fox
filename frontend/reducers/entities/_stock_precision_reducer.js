@@ -44,8 +44,8 @@ export const sectorsReducer = (state=_sectorBaseState, { type, stocks, sector })
 
   switch(type) {
     case RECEIVE_STOCKS:
-      nextState.bySector = Object.assign({}, nextState.bySector, { [sector]: stocksSelector(stocks)});
-      nextState.allSectors = mergeArrays(nextState.allSectors, Object.keys(nextState.bySector));
+      nextState.bySector = Object.assign({}, nextState.bySector, { [sector]: stocksSelector(stocks) });
+      if (!nextState.allSectors.includes(sector)) nextState.allSectors.push(sector);
       return nextState;
     default:
       return state;

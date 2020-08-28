@@ -10,7 +10,7 @@ class ExploreStocks extends React.Component {
     this.updateSelection = this.updateSelection.bind(this);
   }
   componentDidMount() {
-    let allSectors = ["Technology", "Health Care", "Finance", "Energy", "Consumer Services", "Capital Goods", "Transportation", "Consumer Durables", "Consumer Non-Durables"]
+    let allSectors = ["Technology", "Health Care", "Finance", "Energy", "Consumer Services", "Transportation", "Consumer Durables", "Consumer Non-Durables"]
     for (let sector of allSectors) {
       this.props.fetchStocksBySector(sector);
     }
@@ -18,12 +18,20 @@ class ExploreStocks extends React.Component {
 
   updateSelection(e) {
     e.preventDefault();
-    this.setState({ sector: e.currentTarget.value });
-    const btnList = Array.from(document.getElementsByClassName('sector-link'));
-    btnList.forEach(btn => {
-      if (Array.from(btn.classList).includes('selected')) btn.classList.remove('selected');
-    });
-    e.currentTarget.classList.add('selected');
+    if (e.currentTarget.value === this.state.sector) {
+      this.setState({ sector: null });
+      const btnList = Array.from(document.getElementsByClassName('sector-link'));
+      btnList.forEach(btn => {
+        if (Array.from(btn.classList).includes('selected')) btn.classList.remove('selected');
+      });
+    } else {
+      this.setState({ sector: e.currentTarget.value });
+      const btnList = Array.from(document.getElementsByClassName('sector-link'));
+      btnList.forEach(btn => {
+        if (Array.from(btn.classList).includes('selected')) btn.classList.remove('selected');
+      });
+      e.currentTarget.classList.add('selected');
+    }
   }
 
   render() {
@@ -50,19 +58,16 @@ class ExploreStocks extends React.Component {
             <button className="sector-link" onClick={this.updateSelection} value="Energy">Energy</button>
           </li>
           <li className="sector-link">
-            <button className="sector-link" onClick={this.updateSelection} value="Consumer Services">Consumer Services</button>
-          </li>
-          <li className="sector-link">
-            <button className="sector-link" onClick={this.updateSelection} value="Capital Goods">Capital Goods</button>
+            <button className="sector-link" onClick={this.updateSelection} value="Consumer Services">Services</button>
           </li>
           <li className="sector-link">
             <button className="sector-link" onClick={this.updateSelection} value="Transportation">Transportation</button>
           </li>
           <li className="sector-link">
-            <button className="sector-link" onClick={this.updateSelection} value="Consumer Durables">Consumer Durables</button>
+            <button className="sector-link" onClick={this.updateSelection} value="Consumer Non-Durables">Consumer Goods</button>
           </li>
           <li className="sector-link">
-            <button className="sector-link" onClick={this.updateSelection} value="Consumer Non-Durables">Consumer Non-Durables</button>
+            <button className="sector-link" onClick={this.updateSelection} value="Consumer Durables">Consumer Durables</button>
           </li>
         </ul>
         <SectorView
