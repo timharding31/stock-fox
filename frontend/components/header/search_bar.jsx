@@ -21,11 +21,6 @@ class SearchBar extends React.Component {
       const firstListItem = document.querySelector(".search-result-link");
       firstListItem.click();
     }
-    // if (e.key === "Enter") {
-    //   debugger
-    //   const firstListItem = document.querySelector(".single-search-result");
-    //   firstListItem.click();
-    // }
   }
 
   handleMouseLeave() {
@@ -63,9 +58,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    // if (this.state.query.length >= 2 && (this.props.loading || this.props.search.length === 0)) {
-    //   return (<Loading loading={this.props.loading} compName={"search-results"} />)
-    // }
     let searchResults;
     let listClassName;
     if (this.state.query.length >= 2) {
