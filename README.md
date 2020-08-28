@@ -56,7 +56,8 @@ handleMouseLeave() {
       <p className="tooltip-time">{ttDate}</p>
     </div>
   );
-};```
+};
+```
 
 * Chart Render
 ```javascript
