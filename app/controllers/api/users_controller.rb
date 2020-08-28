@@ -1,3 +1,4 @@
+require 'byebug'
 class Api::UsersController < ApplicationController
 
   def create
@@ -15,8 +16,14 @@ class Api::UsersController < ApplicationController
     render :show
   end
 
+  def update
+    current_user.add_buying_power(params[:amt])
+    @user = current_user
+    render :show
+  end
+
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :amt)
   end
 end

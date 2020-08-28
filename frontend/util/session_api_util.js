@@ -52,4 +52,12 @@ export const getUser = () => (
   $.ajax({
     url: 'api/users/'
   })
+);
+
+export const patchBuyingPower = (userId, amt) => (
+  $.ajax({
+    url: `api/users/${userId}`,
+    method: 'PATCH',
+    data: { amt },
+  })
 )

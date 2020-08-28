@@ -1,1 +1,1 @@
-json.array! @stocks, :symbol, :name
+json.array! @stocks, :symbol, :name, :sector, :price

@@ -1,0 +1,203 @@
+ $sf-green: #5BC43B;
+ $sf-green-accent: #51B034;
+ 
+ $sf-red: #ED5D2A;
+ $sf-red-accent: #D55425;
+ 
+ $sf-ink: #060C13;
+ $sf-ink-focus: #1F2124;
+ $sf-ink-hover: #31363A;
+ 
+ $sf-ivory: white;
+ $sf-ivory-focus: white;
+ $sf-ivory-hover: #F6F8FA;
+ 
+ $sf-font-spacing: -0.1px;
+ $sf-font-size-std: 13px;
+ $sf-font-size-h1: 32px;
+ $sf-font-size-h2: 24px;
+ $sf-font-size-h3: 15px;
+ $sf-font-weight-demi: medium;
+ $sf-font-weight-bold: bold;
+ $sf-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+
+#root.light {
+
+.user-dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  width: 100%;
+  min-height: 500px;
+  margin-bottom: 200px;
+}
+
+.greeting {
+  width: 100%;
+  font-size: $sf-font-size-h2;
+}
+
+.buying-power {
+  padding: 20px;
+  padding-top: 10px;
+  background-color: $sf-ivory;
+  border: 2px solid $sf-ivory-focus;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.buying-power > h2 {
+  font-size: $sf-font-size-h3;
+}
+
+.buying-power > span {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.buying-power > span > p {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: $sf-green;
+  font-weight: $sf-font-weight-bold;
+  margin-left: 7.5px;
+}
+
+.buying-power > ul {
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.buying-power > ul > li {
+  width: 15%;
+}
+.buying-power > ul > li:last-child {
+  display: flex;
+  width: 30%;
+}
+.buying-power > ul > li > button {
+  width: 100%;
+  padding: 0;
+  color: $sf-ivory;
+  background-color: $sf-green;
+  border: 2px solid $sf-green;
+  outline: none;
+  border-radius: 20px;
+}
+.custom-amt {
+  background-color: $sf-ivory-focus;
+  border-radius: 5px;
+  border: 2px solid silver;
+  outline: none;
+  width: 40px;
+  text-align: right;
+  padding-right: 5%;
+}
+
+.explore-stocks {
+  margin-top: 50px;
+  padding: 20px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: $sf-ivory;
+  border: 2px solid $sf-ivory-focus;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.explore-stocks > h2 {
+  font-size: $sf-font-size-h3;
+}
+
+.explore-stocks > ul {
+  display: flex;
+  padding: 0;
+  flex-direction: row;
+  list-style: none;
+  overflow: hidden;
+  overflow-x: scroll;
+  align-items: center;
+}
+
+.explore-stocks > ul > li {
+  width: 30%;
+  margin-right: 6px;
+  margin-bottom: 30px;
+}
+
+.explore-stocks > ul > li > button {
+  width: 120px;
+  height: 36px;
+  padding: 0;
+  color: $sf-ivory;
+  background-color: $sf-red;
+  border: 2px solid $sf-red;
+  outline: none;
+  border-radius: 20px;
+}
+
+.explore-stocks > ul > li > button.selected {
+  background-color: $sf-red-accent;
+  border-color: $sf-red-accent;
+  color: $sf-ivory;
+}
+
+.sector-view {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-left: 5%;
+}
+
+.sector-view-header {
+  display: flex;
+  flex-direction: row;
+  padding-left: 2%;
+  overflow: hidden;
+}
+.sector-view-header > p {
+  font-weight: $sf-font-weight-bold;
+  font-size: $sf-font-size-h3;
+}
+.sector-view > ol {
+  padding-left: 5%;
+  margin-right: 5%;
+}
+.sector-view > ol > li {
+  width: 100%;
+  padding-left: 0;
+}
+
+.sector-view > ol > li > a:hover {
+  background-color: $sf-ivory-hover;
+}
+
+.sector-view > ol > li > a {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  width: 100%;
+  text-decoration: none;
+  font-weight: $sf-font-weight-demi;
+  color: $sf-ink;
+}
+
+.sector-view > ol > li > a > p, .sector-view-header > p {
+  width: 45%;
+}
+
+.sector-view > ol > li > a > p:first-child, .sector-view-header > p:first-child {
+  margin-left: 5%;
+  width: 20%;
+}
+
+
+
+}

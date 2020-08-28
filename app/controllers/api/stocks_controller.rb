@@ -18,6 +18,8 @@ class Api::StocksController < ApplicationController
   def index
     if params[:search]
       @stocks = Stock.where("upper(symbol) like ? OR upper(name) like ?", "#{params[:search]}%", "%#{params[:search]}%")
+    elsif params[:sector]
+      @stocks = Stock.where(sector: params[:sector])
     else
       @stocks = Stock.all
     end

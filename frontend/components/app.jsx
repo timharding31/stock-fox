@@ -8,6 +8,7 @@ import StockShowContainer from './stock/stock_show_container';
 import StockControlsContainer from './controls/stock_controls_container'
 import SidebarModuleContainer from './modules/sidebar_module_container';
 import DisplayModeToggle from './header/display_mode_toggle';
+import UserDashboardContainer from './dashboard/user_dashboard_container';
 
 import HeaderLogo from './header/logo';
 import HeaderLinks from './header/links';
@@ -19,6 +20,7 @@ import Splash from './splash';
 const Content = () => (
   <div className="application-content">
     <section className="content-main">
+      <Route exact path="/" component={UserDashboardContainer} />
       <Route path="/stocks/:symbol" component={StockShowContainer} />
     </section>
     <aside className="content-sidebar">

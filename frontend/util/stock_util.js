@@ -24,3 +24,10 @@ export const patchStockInfo = (symbol, detail) => (
     }
   })
 );
+
+export const getStocksBySector = sector => (
+  $.ajax({
+    url: 'api/stocks',
+    data: { sector }
+  })
+);

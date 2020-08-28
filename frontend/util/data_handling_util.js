@@ -23,7 +23,21 @@ export const compareSymbols = (array1, array2) => {
   return true;
 }
 
-export const formatPrice = price => numeral(Number(price)).format('$0.00');
+export const mergeArrays = (array1, array2) => {
+  let combined = [...array1];
+  for (let el of array2) {
+    if (!combined.includes(el)) combined.push(el);
+  }
+  return combined;
+}
+
+export const formatPrice = price => price === 'Custom' ? price :  numeral(Number(price)).format('$0.00');
 // export const formatPrice = price => (price) ? numeral(Number(price)).format('$0.00') : price;
 
 export const sleep = ms => (new Promise(resolve => setTimeout(resolve, ms)));
+
+export const compareListItems = (a, b) => {
+  let priceA = parseInt(a.props.children.props.children[2].props.children.substring(1));
+  let priceB = parseInt(b.props.children.props.children[2].props.children.substring(1));
+  return Math.sign(priceB - priceA);
+}

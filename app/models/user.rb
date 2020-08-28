@@ -34,6 +34,11 @@ class User < ApplicationRecord
     user
   end
 
+  def add_buying_power(amount)
+    self.buying_power += amount.to_f
+    self.save!
+  end
+
   def add_stock_to_watchlist(stock)
     return false if Watch.find_by(user_id: self.id, stock_symbol: stock.symbol)
     Watch.create!(user_id: self.id, stock_symbol: stock.symbol)
@@ -90,10 +95,6 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
-  end
-
-  def add_buying_power
-    self.buying_power = 10000.00
   end
 
   def create_default_watchlist

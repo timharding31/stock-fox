@@ -7,8 +7,9 @@ import configureStore from './store/store.js';
 import * as SessionApiUtil from './util/session_api_util';
 import * as FmpApiUtil from './util/fmp_api_util';
 import { patchPortfolio, getPortfolio } from './util/portfolio_util';
+import { getStocksBySector } from './util/stock_util';
 import { getWatchlist } from './util/watchlist_util';
-import { fetchSingleStock, fetchStockDetail } from './actions/stock_actions';
+import { fetchSingleStock, fetchStockDetail, fetchStocksBySector } from './actions/stock_actions';
 import { fetchWatchlist, fetchWatchlistPrices } from './actions/watchlist_actions';
 import { fetchStockSearchResults } from './actions/search_actions';
 import {
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.getWatchlist = getWatchlist;
   // window.patchPortfolio = patchPortfolio;
   window.getPortfolio = getPortfolio;
+  window.fetchStocksBySector = fetchStocksBySector;
   window.getSingleStock = fetchSingleStock;
   window.fetchStockDetail = fetchStockDetail;
   // window.fetchWatchlistPrices = fetchWatchlistPrices;

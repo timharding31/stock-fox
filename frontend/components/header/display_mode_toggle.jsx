@@ -27,7 +27,7 @@ class DisplayModeToggle extends React.Component {
     return (
     <div className="display-mode-container">
         <button id="light-mode" onClick={this.toggleDisplayMode} className="visible" value="light">
-        <img src="/assets/light_mode-8616aae9195e7fe4e317cdfdaeca460b7058bbd98289384826098a58c503a458.png" alt=""/>
+          <img src="/assets/light_mode-07ab3b39947b1065504c2ee12a93fb36846d02c6fc0ca9bce9f74bfcb6fa84b9.png" alt=""/>
       </button>
         <button id="dark-mode" onClick={this.toggleDisplayMode} className="invisible" value="dark">
         <img src="/assets/dark_mode-e2eeca44b6a6f2678ba28cced8f8356dc784a2be23f3251ae8fa483c853f2f1f.png" alt=""/>

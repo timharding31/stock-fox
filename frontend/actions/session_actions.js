@@ -1,4 +1,4 @@
-import { signup, login, logout, demoLogin, getUser } from '../util/session_api_util';
+import { signup, login, logout, demoLogin, getUser, patchBuyingPower } from '../util/session_api_util';
 import { fetchWatchlist } from './watchlist_actions';
 import { fetchPortfolio } from './portfolio_actions';
 
@@ -25,6 +25,9 @@ const receiveErrors = errors => ({
 const clearSessionErrors = () => ({
   type: CLEAR_SESSION_ERRORS
 });
+
+export const addFunds = (userId, amt) => dispatch => patchBuyingPower(userId, amt)
+  .then(user => dispatch(receiveCurrentUser(user)));
 
 export const updateUserParams = () => dispatch => getUser()
   .then(user => dispatch(receiveCurrentUser(user)));
