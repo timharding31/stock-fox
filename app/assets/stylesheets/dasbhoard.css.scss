@@ -1,8 +1,10 @@
- $sf-green: #5BC43B;
+ $sf-green: #5bc43b;
  $sf-green-accent: #51B034;
+ $sf-green-transparent: rgba(91, 196, 59, 0.5);
  
  $sf-red: #ed5d2a;
  $sf-red-accent: #d55425;
+ $sf-red-transparent: rgba(237, 93, 42, 0.5);
  
  $sf-ink: #060C13;
  $sf-ink-focus: #1F2124;
@@ -89,6 +91,7 @@
   padding: 0;
   color: $sf-ivory;
   background-color: $sf-green;
+  font-weight: $sf-font-weight-bold;
   border: 2px solid $sf-green;
   outline: none;
   border-radius: 20px;
@@ -115,12 +118,14 @@
   padding: 0;
   border: none;
   border-radius: 10px;
+  font-weight: $sf-font-weight-bold;
   text-align: center;
 }
 
 .custom-amt > button {
   outline: none;
   background-color: $sf-green;
+  font-weight: $sf-font-weight-bold;
   color: $sf-ivory;
 }
 
@@ -131,6 +136,7 @@
 
 .custom-amt > input {
   background-color: $sf-ivory-focus;
+  color: $sf-green;
 }
 
 .explore-stocks {
@@ -172,6 +178,7 @@
   padding: 0;
   color: $sf-ivory;
   background-color: $sf-red;
+  font-weight: $sf-font-weight-bold;
   border: 2px solid $sf-red;
   outline: none;
   border-radius: 20px;

@@ -20,5 +20,4 @@ export default ({ symbol, stock, amt, prices }) => {
   } else {
     return (<Loading loading={Boolean(!prices[symbol])} />)
   }
-  
 }

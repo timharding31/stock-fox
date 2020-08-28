@@ -1,8 +1,10 @@
- $sf-green: #5BC43B;
+ $sf-green: #5bc43b;
  $sf-green-accent: #51B034;
+ $sf-green-transparent: rgba(91, 196, 59, 0.5);
  
- $sf-red: #ED5D2A;
- $sf-red-accent: #D55425;
+ $sf-red: #ed5d2a;
+ $sf-red-accent: #d55425;
+ $sf-red-transparent: rgba(237, 93, 42, 0.5);
  
  $sf-ink: #060C13;
  $sf-ink-focus: #1F2124;
@@ -87,15 +89,18 @@
   width: 100%;
   padding: 0;
   color: $sf-ivory;
-  background-color: $sf-green;
-  border: 2px solid $sf-green;
+  background-color: $sf-green-transparent;
+  border: 2px solid transparent;
   outline: none;
   border-radius: 20px;
+  font-weight: $sf-font-weight-bold;
+  color: $sf-green;
+  cursor: pointer;
 }
 .custom-amt {
-  background-color: $sf-green;
+  background-color: $sf-green-transparent;
   border-radius: 5px;
-  border: 2px solid $sf-green;
+  border: 2px transparent $sf-green-transparent;
   border-radius: 20px;
   outline: none;
   width: 240px;
@@ -106,6 +111,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
 }
 
 .custom-amt > input, .custom-amt > button {
@@ -115,12 +121,16 @@
   border: none;
   border-radius: 10px;
   text-align: center;
+  font-weight: $sf-font-weight-bold;
+  color: $sf-green;
 }
 
 .custom-amt > button {
   outline: none;
-  background-color: $sf-green;
-  color: $sf-ivory;
+  background-color: transparent;
+  font-weight: $sf-font-weight-bold;
+  color: $sf-green;
+  cursor: pointer;
 }
 
 .custom-amt > input:focus {
@@ -130,6 +140,7 @@
 
 .custom-amt > input {
   background-color: $sf-ink-focus;
+  color: $sf-green;
 }
 
 .explore-stocks {
@@ -169,10 +180,13 @@
   height: 36px;
   padding: 0;
   color: $sf-ivory;
-  background-color: $sf-red;
-  border: 2px solid $sf-red;
+  background-color: $sf-red-transparent;
+  border: 2px solid transparent;
+  font-weight: $sf-font-weight-bold;
+  cursor: pointer;
   outline: none;
   border-radius: 20px;
+  color: $sf-red;
 }
 
 .explore-stocks > ul > li > button.selected {
