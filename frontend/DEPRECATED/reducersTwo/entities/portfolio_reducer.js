@@ -8,7 +8,6 @@ export default (state=_portfolioBaseState, { type, portfolio }) => {
 
   switch(type) {
     case RECEIVE_PORTFOLIO:
-      debugger
       nextState[bySymbol] = portfolio;
       nextState[allSymbols] = Object.keys(portfolio);
       return nextState;
