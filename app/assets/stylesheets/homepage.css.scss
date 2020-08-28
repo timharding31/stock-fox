@@ -66,17 +66,16 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-  }
-  .home-page-text > button > a:hover {
-    color: $sf-ink-focus;
-  }
-  .home-page-text > button > a {
     color: $sf-ivory;
     text-decoration: none;
     font-size: 18px;
     font-weight: $sf-font-weight-bold;
     margin: 0;
     padding: 0;
+  }
+  .home-page-text > button:hover {
+    background-color: $sf-ink-focus;
+    color: $sf-ivory-focus;
   }
 
   .home-page-video {
