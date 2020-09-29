@@ -13,8 +13,10 @@ class SellForm extends React.Component {
   }
   updateOrder(e) {
     e.preventDefault();
-    this.setState({ order: e.currentTarget.value });
+    let value = (e.currentTarget.value >= 0) ? e.currentTarget.value : 0
+    this.setState({ order: value });
   }
+  
   handleSubmit(e) {
     e.preventDefault();
     this.props.action(this.props.symbol, this.state.order).then(() => this.props.updateUserParams());
