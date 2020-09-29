@@ -4,6 +4,11 @@
     <title>StockFox</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta property="og:title" content="StockFox" />
+    <meta property="og:image" content="<%= image_url('public_screenshot.png') %>" />
+    <meta property="og:description" content="StockFox is a stock-trading simulation application inspired by the popular website, Robinhood" />
+    <meta property="og:url" content="https://stock-fox.herokuapp.com/" />
+    <%= favicon_link_tag asset_path('logo_hover_2.png') %>
     <script type="text/javascript">
       window.finnhubAPIKey = "<%= Rails.application.credentials.finnhub[:api_key] %>"
       window.fmpAPIKey = "<%= Rails.application.credentials.financialmodelingprep[:api_key] %>"
