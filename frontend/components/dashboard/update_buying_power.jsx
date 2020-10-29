@@ -13,11 +13,15 @@ class UpdateBuyingPower extends React.Component {
   updatePower(e) {
     e.preventDefault();
     this.props.addFunds(e.currentTarget.value);
-    this.setState(this.baseState);
+    this.setState({ customAmt: '' });
   }
   setCustom(e) {
     e.preventDefault();
-    this.setState({ customAmt: e.currentTarget.value })
+    if (isNaN(e.currentTarget.value)) {
+        this.setState({ customAmt: '' });
+    } else {
+        this.setState({ customAmt: Number(e.currentTarget.value) });
+    }
   }
   render() {
     return(
@@ -30,7 +34,7 @@ class UpdateBuyingPower extends React.Component {
           <li><button className="funding-option" onClick={this.updatePower} value="10000">$10,000</button></li>
           <li>
             <div className="custom-amt">
-              <input className="custom-amt-input" type="text" onChange={this.setCustom} placeholder="Custom" />
+                        <input className="custom-amt-input" type="text" onChange={this.setCustom} value={this.state.customAmt} placeholder="Custom" />
             <button className="custom-amt-button" onClick={this.updatePower} value={this.state.customAmt}>{`Add ${formatPrice(this.state.customAmt)}`}</button>
             </div>
           </li>
