@@ -17,9 +17,9 @@ class UpdateBuyingPower extends React.Component {
   }
   setCustom(e) {
     e.preventDefault();
-    if (isNaN(e.currentTarget.value)) {
+    if (isNaN(e.currentTarget.value) || Number(e.currentTarget.value) == 0) {
         this.setState({ customAmt: '' });
-    } else {
+    } else if (Number(e.currentTarget.value) > 0) {
         this.setState({ customAmt: Number(e.currentTarget.value) });
     }
   }

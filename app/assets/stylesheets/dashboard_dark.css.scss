@@ -88,19 +88,21 @@
 .buying-power > ul > li > button {
   width: 100%;
   padding: 0;
-  color: $sf-ivory;
-  background-color: $sf-green-transparent;
+  background-color: $sf-green;
   border: 2px solid transparent;
   outline: none;
   border-radius: 20px;
   font-weight: $sf-font-weight-bold;
-  color: $sf-green;
+  color: $sf-ivory;
   cursor: pointer;
+  &:hover {
+      box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+  }
 }
 .custom-amt {
-  background-color: $sf-green-transparent;
+  background-color: $sf-green;
   border-radius: 5px;
-  border: 2px transparent $sf-green-transparent;
+  border: 2px transparent $sf-green;
   border-radius: 20px;
   outline: none;
   width: 240px;
@@ -112,6 +114,9 @@
   justify-content: space-evenly;
   align-items: center;
   cursor: pointer;
+  &:hover {
+      box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+  }
 }
 
 .custom-amt > input, .custom-amt > button {
@@ -122,14 +127,14 @@
   border-radius: 10px;
   text-align: center;
   font-weight: $sf-font-weight-bold;
-  color: $sf-green;
+  color: $sf-ivory;
 }
 
 .custom-amt > button {
   outline: none;
   background-color: transparent;
   font-weight: $sf-font-weight-bold;
-  color: $sf-green;
+  color: $sf-ivory;
   cursor: pointer;
 }
 
@@ -180,13 +185,15 @@
   height: 36px;
   padding: 0;
   color: $sf-ivory;
-  background-color: $sf-red-transparent;
+  background-color: $sf-red;
   border: 2px solid transparent;
   font-weight: $sf-font-weight-bold;
   cursor: pointer;
   outline: none;
   border-radius: 20px;
-  color: $sf-red;
+  &:hover {
+      box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+  }
 }
 
 .explore-stocks > ul > li > button.selected {
