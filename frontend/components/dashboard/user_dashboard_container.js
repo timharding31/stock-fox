@@ -1,5 +1,5 @@
 import { fetchStocksBySector } from '../../actions/stock_actions';
-import { updateUserParams, addFunds } from '../../actions/session_actions';
+import { updateUserParams, addFunds, resetFunds } from '../../actions/session_actions';
 import { fetchWatchlist, addStockToWatchlist, removeStockFromWatchlist } from '../../actions/watchlist_actions';
 import { fetchPortfolio, sellStock, buyStock } from '../../actions/portfolio_actions';
 import { connect } from 'react-redux';
@@ -15,6 +15,7 @@ const mapStateToProps = ({ entities: { currentUser, watchlist, stocks, portfolio
 });
 
 const mapDispatchToProps = dispatch => ({
+  resetFunds: (userId) => dispatch(resetFunds(userId)),
   addFunds: (userId, amt) => dispatch(addFunds(userId, amt)),
   fetchWatchlist: () => dispatch(fetchWatchlist()),
   removeStockFromWatchlist: symbol => dispatch(removeStockFromWatchlist(symbol)),

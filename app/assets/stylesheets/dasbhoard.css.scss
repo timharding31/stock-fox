@@ -95,6 +95,7 @@
   border: 2px solid $sf-green;
   outline: none;
   border-radius: 20px;
+  cursor: pointer;
 }
 .custom-amt {
   background-color: $sf-green;
@@ -127,6 +128,7 @@
   background-color: $sf-green;
   font-weight: $sf-font-weight-bold;
   color: $sf-ivory;
+  cursor: pointer;
 }
 
 .custom-amt > input:focus {
@@ -182,6 +184,7 @@
   border: 2px solid $sf-red;
   outline: none;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 .explore-stocks > ul > li > button.selected {
@@ -243,5 +246,9 @@
   color: $sf-red-accent;
   background-color: $sf-ivory-hover;
   border-color: $sf-ivory-hover;
+}
+
+.reset-power {
+    cursor: pointer;
 }
 }

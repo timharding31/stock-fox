@@ -61,3 +61,11 @@ export const patchBuyingPower = (userId, amt) => (
     data: { amt },
   })
 )
+
+export const resetBuyingPower = (userId) => (
+    $.ajax({
+        url: `api/users/${userId}`,
+        method: 'PATCH',
+        data: { amt: 10000.00, reset: true },
+    })
+)

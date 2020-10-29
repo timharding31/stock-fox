@@ -16,13 +16,17 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    current_user.add_buying_power(params[:amt])
+    if params[:reset]
+        current_user.update(buying_power: 10000.00)
+    else
+        current_user.add_buying_power(params[:amt])
+    end
     @user = current_user
     render :show
   end
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :amt)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :amt, :reset)
   end
 end

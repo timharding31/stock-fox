@@ -22,6 +22,7 @@ class UserDashboard extends React.Component {
       <UpdateBuyingPower
         buyingPower={this.props.currentUser.buying_power}
         addFunds={(amt) => this.props.addFunds(currentUser.id, amt)}
+        resetFunds={() => this.props.resetFunds(currentUser.id)}
         updateUserParams={this.props.updateUserParams}
       />
       <ExploreStocks

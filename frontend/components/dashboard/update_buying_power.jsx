@@ -9,6 +9,7 @@ class UpdateBuyingPower extends React.Component {
     this.baseState = { ...this.state };
     this.updatePower = this.updatePower.bind(this);
     this.setCustom = this.setCustom.bind(this);
+    this.resetPower = this.resetPower.bind(this);
   }
   updatePower(e) {
     e.preventDefault();
@@ -23,6 +24,13 @@ class UpdateBuyingPower extends React.Component {
         this.setState({ customAmt: Number(e.currentTarget.value) });
     }
   }
+
+  resetPower(e) {
+    e.preventDefault();
+    this.props.resetFunds();
+    this.setState({ customAmt: '' });
+  }
+
   render() {
     return(
       <div className="buying-power">
@@ -39,7 +47,7 @@ class UpdateBuyingPower extends React.Component {
             </div>
           </li>
         </ul>
-        <span>Your current Buying Power is: <p className="power-amt">{formatPrice(this.props.buyingPower)}</p></span>
+            <span>Your current Buying Power is: <p className="power-amt">{formatPrice(this.props.buyingPower)}</p>&nbsp;<p style={{ color: '#ed5d2a', fontWeight: 400 }} className="reset-power" onClick={this.resetPower}>(reset)</p></span>
       </div>
     )
   }

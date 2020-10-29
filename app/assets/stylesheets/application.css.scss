@@ -54,6 +54,8 @@ body, #root, #application {
   flex-direction: column;
   justify-content: stretch;
   margin: 0px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 header.application-header {
