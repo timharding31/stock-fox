@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   let store;
   if (window.currentUser) {
+    // let modePref = window.currentUser;
+    // console.log(modePref);
     const preloadedState = {
       entities: {
         currentUser: window.currentUser
