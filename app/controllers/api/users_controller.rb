@@ -18,6 +18,8 @@ class Api::UsersController < ApplicationController
   def update
     if params[:reset]
         current_user.update(buying_power: 10000.00)
+    elsif params[:light_mode]
+        current_user.toggle_light_mode()
     else
         current_user.add_buying_power(params[:amt])
     end
@@ -27,6 +29,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :amt, :reset)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :amt, :reset, :light_mode)
   end
 end

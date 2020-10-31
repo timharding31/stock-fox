@@ -38,7 +38,7 @@ const Auth = () => (
   </div>
 )
 
-export default () => (
+export default ({ userId }) => (
   <div id="application">
     <header className="application-header">
       <div className="header-content">

@@ -69,3 +69,11 @@ export const resetBuyingPower = (userId) => (
         data: { amt: 10000.00, reset: true },
     })
 )
+
+export const toggleLightMode = (userId) => (
+    $.ajax({
+        url: `api/users/${userId}`,
+        method: 'PATCH',
+        data: { light_mode: true },
+    })
+);

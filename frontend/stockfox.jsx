@@ -26,8 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   let store;
   if (window.currentUser) {
-    // let modePref = window.currentUser;
-    // console.log(modePref);
+    let lightPref = window.currentUser.light_mode;
+    if (lightPref) {
+        root.classList.remove('dark');
+        root.classList.add('light');
+    } else {
+        root.classList.remove('light');
+        root.classList.add('dark');
+    }
     const preloadedState = {
       entities: {
         currentUser: window.currentUser

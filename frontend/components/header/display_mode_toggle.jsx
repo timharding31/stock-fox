@@ -1,4 +1,5 @@
 import React from 'react';
+import { toggleLightMode } from '../../util/session_api_util';
 
 class DisplayModeToggle extends React.Component {
 
@@ -7,6 +8,7 @@ class DisplayModeToggle extends React.Component {
     const root = document.getElementById("root");
     const lightBtn = document.getElementById("light-mode");
     const darkBtn = document.getElementById("dark-mode");
+    console.log(this.props.userId);
     if (e.currentTarget.value === 'light') {
       darkBtn.classList.add("visible");
       lightBtn.classList.add("invisible");

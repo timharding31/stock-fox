@@ -101,6 +101,10 @@ class User < ApplicationRecord
     self.buying_power = 10000.00
   end
 
+  def toggle_light_mode
+    self.light_mode = self.light_mode ? false : true
+  end
+
   def create_default_watchlist
     default_stocks = [ 'TWTR', 'TSLA', 'NFLX', 'FB', 'MSFT', 'DIS', 'GPRO',
       'SBUX', 'F', 'BABA', 'BAC', 'FIT', 'GE', 'SNAP', 'AAPL']
