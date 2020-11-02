@@ -31,7 +31,7 @@ export const mergeArrays = (array1, array2) => {
   return combined;
 }
 
-export const formatPrice = price => price === '' ? price :  numeral(Number(price)).format('$0.00');
+export const formatPrice = price => price === '' ? price :  numeral(Number(price)).format('$0,0.00');
 // export const formatPrice = price => (price) ? numeral(Number(price)).format('$0.00') : price;
 
 export const sleep = ms => (new Promise(resolve => setTimeout(resolve, ms)));
