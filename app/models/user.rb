@@ -102,7 +102,7 @@ class User < ApplicationRecord
   end
 
   def toggle_light_mode
-    self.light_mode = self.light_mode ? false : true
+    self.update(light_mode: !!!self.light_mode)
   end
 
   def create_default_watchlist

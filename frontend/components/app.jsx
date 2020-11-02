@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import AuthRoute from '../util/auth_route_util';
 import ContentRoute from '../util/content_route_util';
 import SignupFormContainer from './auth/signup_form_container';
@@ -38,7 +39,7 @@ const Auth = () => (
   </div>
 )
 
-export default ({ userId }) => (
+export default () => (
   <div id="application">
     <header className="application-header">
       <div className="header-content">

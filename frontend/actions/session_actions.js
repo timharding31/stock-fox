@@ -1,4 +1,4 @@
-import { signup, login, logout, demoLogin, getUser, patchBuyingPower, resetBuyingPower } from '../util/session_api_util';
+import { signup, login, logout, demoLogin, getUser, patchBuyingPower, resetBuyingPower, toggleLightMode } from '../util/session_api_util';
 import { fetchWatchlist } from './watchlist_actions';
 import { fetchPortfolio } from './portfolio_actions';
 
@@ -30,6 +30,9 @@ export const addFunds = (userId, amt) => dispatch => patchBuyingPower(userId, am
   .then(user => dispatch(receiveCurrentUser(user)));
 
 export const resetFunds = (userId) => dispatch => resetBuyingPower(userId)
+  .then(user => dispatch(receiveCurrentUser(user)));
+
+export const toggleDisplay = (userId) => dispatch => toggleLightMode(userId)
   .then(user => dispatch(receiveCurrentUser(user)));
 
 export const updateUserParams = () => dispatch => getUser()
